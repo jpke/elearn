@@ -57,3 +57,10 @@ export function prevQuestion() {
     type: types.PREVIOUS_QUESTION
   };
 }
+
+export function submitQuiz(score) {
+  return {
+    type: types.SUBMIT_QUIZ,
+    score
+  };
+}

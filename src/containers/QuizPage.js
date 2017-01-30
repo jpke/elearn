@@ -11,9 +11,12 @@ export const QuizPage = (props) => {
       selectAnswer={props.actions.selectAnswer}
       nextQuestion={props.actions.nextQuestion}
       prevQuestion={props.actions.prevQuestion}
+      submitQuiz={props.actions.submitQuiz}
       question={props.question}
       answers={props.answers}
       currentQuestionIndex={props.currentQuestionIndex}
+      questionCount={props.questionCount}
+      score={props.score}
     />
   );
 };
@@ -25,7 +28,9 @@ function mapStateToProps(state) {
     {
       question: state.quizReducer.currentQuestion.question,
       answers: state.quizReducer.currentQuestion.answers,
-      currentQuestionIndex: state.quizReducer.currentQuestionIndex
+      currentQuestionIndex: state.quizReducer.currentQuestionIndex,
+      questionCount: state.quizReducer.questionCount,
+      score: state.quizReducer.score
     }
   :
   {}
