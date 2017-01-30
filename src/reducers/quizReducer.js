@@ -1,37 +1,47 @@
-import * from '../constants/actionTypes';
+import * as types from '../constants/actionTypes';
 
-export default function quizReducer(state = {}, action) {
+const initialState = {
+  quizData: [],
+  currentQuestion: undefined,
+  currentQuestionIndex: null,
+  score: 0
+};
+
+export default function quizReducer(state = initialState, action) {
+  let currentQuestionIndex, currentQuestion, score;
   switch(action.type) {
-    case START_QUIZ:
+    case types.START_QUIZ:
       return {
         ...state,
-        quizData,
-        currentQuestion: quizData[0]
+        quizData: action.quizData,
+        currentQuestion: action.quizData[0],
         currentQuestionIndex: 0,
         score: 0
       };
-    case SELECT_ANSWER:
-      let score;
+    case types.SELECT_ANSWER:
+      score;
       action.answerSelected === state.quizData[state.currentQuestionIndex].answer[0] ? score = state.score + 1 : state.score;
       return {
         ...state,
         score: score
       };
-    case NEXT_QUESTION:
-      let currentQuestionIndex = state.currentQuestionIndex + 1;
-      let currentQuestion = state.quizData[currentQuestionIndex];
+    case types.NEXT_QUESTION:
+      currentQuestionIndex = state.currentQuestionIndex + 1;
+      currentQuestion = state.quizData[currentQuestionIndex];
       return {
         ...state,
         currentQuestion: currentQuestion,
         currentQuestionIndex: currentQuestionIndex
       };
-    case PREVIOUS_QUESTION:
-      let currentQuestionIndex = state.currentQuestionIndex - 1;
-      let currentQuestion = state.quizData[currentQuestionIndex];
+    case types.PREVIOUS_QUESTION:
+      currentQuestionIndex = state.currentQuestionIndex - 1;
+      currentQuestion = state.quizData[currentQuestionIndex];
       return {
         ...state,
         currentQuestion: currentQuestion,
         currentQuestionIndex: currentQuestionIndex
       };
+    default:
+    return state;
   }
 }

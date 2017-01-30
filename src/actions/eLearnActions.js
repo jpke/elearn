@@ -14,7 +14,7 @@ export function startQuiz() {
         ]
       },
       {
-        question: "question 1",
+        question: "question 2",
         answers: [
           "correct answer",
           "wrong answer",
@@ -23,7 +23,7 @@ export function startQuiz() {
         ]
       },
       {
-        question: "question 1",
+        question: "question 3",
         answers: [
           "correct answer",
           "wrong answer",
@@ -33,29 +33,27 @@ export function startQuiz() {
       }
     ];
     return dispatch({
-      type: types.START_QUIZ
+      type: types.START_QUIZ,
       quizData
     });
   };
 }
 
 export function selectAnswer(answerSelected) {
-  return dispatch({
+  return {
     type: types.SELECT_ANSWER,
     answerSelected
-  });
+  };
 }
 
-export function nextQuestion(currentQuestionIndex) {
-  return dispatch({
-    type: types.NEXT_QUESTION,
-    currentQuestionIndex
-  });
+export function nextQuestion() {
+  return {
+    type: types.NEXT_QUESTION
+  };
 }
 
-export function prevQuestion(currentQuestionIndex) {
-  return dispatch({
-    type: types.PREVIOUS_QUESTION,
-    currentQuestionIndex
-  });
+export function prevQuestion() {
+  return {
+    type: types.PREVIOUS_QUESTION
+  };
 }
