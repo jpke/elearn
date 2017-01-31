@@ -58,9 +58,8 @@ export function prevQuestion() {
   };
 }
 
-export function submitQuiz(score) {
+export function submitQuiz() {
   return {
-    type: types.SUBMIT_QUIZ,
-    score
+    type: types.SUBMIT_QUIZ
   };
 }
