@@ -19,21 +19,8 @@ export default class Quiz extends Component {
     super(props, context);
   }
 
-  selectAnswer(event) {
-    console.log("event.target: ", event.target.id);
-    this.props.selectAnswer(event.target.textContent);
-  }
-
   render() {
-    // let answers = this.props.question ?
-    //   this.props.answers.map((answer, index) => {
-    //       // return (<li className="answerChoice" key={index} id={index} onClick={this.selectAnswer.bind(this)}>{answer}</li>);
-    //       return (
-    //         <ListItem index={index} key={index} selectAnswer={this.selectAnswer} answer={answer} />
-    //         );
-    //   })
-    //   : null;
-
+    console.log("quiz props: ", this.props);
       return (
         <div>
           <h2>Quiz</h2>
@@ -43,7 +30,8 @@ export default class Quiz extends Component {
               <p>{this.props.question}</p>
               <h3>Answers</h3>
               <ul>
-                <ListItems answers={this.props.answers} selectAnswer={this.props.selectAnswer} />
+                <ListItems answers={this.props.answers} selectAnswer={this.props.selectAnswer}
+                idSelected={this.props.idSelected} />
               </ul>
               {this.props.currentQuestionIndex > 0 ?
                 <button onClick={this.props.prevQuestion}>Previous Question</button> :
@@ -51,7 +39,11 @@ export default class Quiz extends Component {
               }
               {this.props.currentQuestionIndex != this.props.questionCount - 1 ?
               <button onClick={this.props.nextQuestion}>Next Question</button> :
-              <button onClick={this.props.submitQuiz}>Submit Quiz</button>}
+              <div>
+                <button onClick={this.props.submitQuiz}>Submit Quiz</button>
+                <p>Unanswered Questions</p>
+              </div>
+              }
 
             </div>
           :

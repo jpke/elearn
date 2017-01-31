@@ -3,15 +3,25 @@ import React, {Component} from 'react';
 export default class ListItems extends Component {
   constructor(props) {
     super(props);
-    let answerArray = this.props.answers.map((answer, index) => {
+    let answerArray = this.props.answers.map((answer) => {
       return "none";
     });
-    this.state = Object.assign({}, {answerClasses: answerArray}, {reset: answerArray});
+    let currentSelected = answerArray.slice();
+    this.props.idSelected ?
+    currentSelected[this.props.idSelected] = "highlight" : ""
+    console.log("props ", this.props);
+    console.log("currentSelected: ", currentSelected);
+    this.state = Object.assign({}, {answerClasses: currentSelected}, {reset: answerArray});
   }
 
   componentWillReceiveProps(nextProps) {
     if(this.props != nextProps) {
-      this.setState({answerClasses: this.state.reset});
+      console.log("new props:", this.props);
+      let currentSelected = this.state.reset.slice();
+      this.props.idSelected ?
+      currentSelected[this.props.idSelected] = "highlight" : ""
+      console.log("currentSelected: ", currentSelected);
+      this.setState({answerClasses: currentSelected});
     }
   }
 
@@ -20,7 +30,7 @@ export default class ListItems extends Component {
     let newState = this.state.reset.slice();
     newState[id] = "highlight";
     this.setState({answerClasses: newState});
-    this.props.selectAnswer(event.target.textContent);
+    this.props.selectAnswer(event.target.textContent, event.target.id);
   }
 
   render() {

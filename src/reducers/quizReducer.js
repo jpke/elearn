@@ -16,12 +16,14 @@ export default function quizReducer(state = initialState, action) {
   let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts;
   switch(action.type) {
     case types.START_QUIZ:
+      let quizIteration = quizQuestionRamdomizer(action.quizData.quiz);
       return {
         ...state,
-        quizData: quizQuestionRamdomizer(action.quizData),
-        currentQuestion: action.quizData[0],
+        quiz: action.quizData,
+        quizData: quizIteration,
+        currentQuestion: quizIteration[0],
         currentQuestionIndex: 0,
-        questionCount: action.quizData.length,
+        questionCount: quizIteration.length,
         score: 0,
         quizInProgress: true
       };
@@ -30,10 +32,12 @@ export default function quizReducer(state = initialState, action) {
       correct = action.answerSelected === state.currentQuestion.answers[0] ?  true : false;
       updatedCurrentQuestion = {...state.currentQuestion};
       updatedCurrentQuestion.correct = correct;
+      updatedCurrentQuestion.idSelected = action.idSelected;
+      console.log("updatedCurrentQuestion: ", updatedCurrentQuestion);
       updateQuizData = state.quizData.slice(0, index).concat(updatedCurrentQuestion).concat(state.quizData.slice(index + 1, state.quizData.length));
       return {
         ...state,
-        quizData: updateQuizData
+        quizData: updateQuizData,
       };
     case types.NEXT_QUESTION:
       currentQuestionIndex = state.currentQuestionIndex + 1;
