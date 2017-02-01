@@ -17,8 +17,15 @@ export function register(userName, email, password) {
       })
       .then(response => {
         if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
+          if(response.body.message === 'email already associated with an account') {
+            return dispatch({
+              type: types.EMAIL_USED,
+              email
+            });
+          } else {
+            let error = response;
+            throw error;
+          }
         }
         return response.json()
       })
@@ -33,6 +40,48 @@ export function register(userName, email, password) {
     } catch(error) {
       console.log("error response: ", error);
     }
+  };
+}
+
+export function logIn(email, password) {
+  return function (dispatch) {
+    try {
+      fetch('http://localhost:8080/elearn/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        }
+        return response.json()
+      })
+      .then(response => {
+        return dispatch({
+          type: types.LOG_IN,
+          userName: response.userName,
+          user_Id: response._id,
+          token: response.token
+        });
+      })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  };
+}
+
+export function logOut() {
+  //consider blacklisting token serverside in future
+  return {
+    type: types.LOG_OUT
   };
 }
 

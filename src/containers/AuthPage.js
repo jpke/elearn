@@ -10,6 +10,10 @@ export const AuthPage = (props) => {
         register={props.actions.register}
         logIn={props.actions.logIn}
         logOut={props.actions.logOut}
+        userName={props.userName}
+        _id={props._id}
+        token={props.token}
+        view={props.view}
       />
   );
 };
@@ -17,14 +21,12 @@ export const AuthPage = (props) => {
 // QuizPage.propTypes
 
 function mapStateToProps(state) {
-  return state.quizReducer.quizData.length > 0 ?
-    {
+  return {
       userName: state.authReducer.userName,
       _id: state.authReducer._id,
-      token: state.authReducer.token
-    }
-  :
-  {}
+      token: state.authReducer.token,
+      view: state.authReducer.view
+  };
 }
 
 function mapDispatchToProps(dispatch) {
