@@ -177,3 +177,35 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
     }
   }
 }
+
+export function getLessons(token) {
+  console.log("action token ", token);
+  return function (dispatch) {
+    //pull down quiz questions, then
+    try {
+      fetch('http://localhost:8080/elearn/lessons', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        }
+        return response.json()
+      })
+      .then(response => {
+        console.log("lessons retrieved: ", response);
+          return dispatch({
+            type: types.GET_LESSONS,
+            lessons: response
+          });
+        })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  };
+}

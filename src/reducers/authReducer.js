@@ -8,7 +8,7 @@ const initialState = {
   loggedIn: false
 };
 
-export default function quizReducer(state = initialState, action) {
+export default function authReducer(state = initialState, action) {
   switch(action.type) {
     case types.LOG_IN:
       return {

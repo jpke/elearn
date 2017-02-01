@@ -1,18 +1,33 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {getLessons} from '../actions/eLearnActions';
+import Lessons from '../components/Lessons';
 
 const LessonsPage = (props) => {
   return (
-    <div>
-      <h1>Lessons Page</h1>
-
-      <h2>Links to lessons will go here, intially pdfs.</h2>
-      {this.props.loggedIn ?
-        ""
-      :
-        <h3>You must be <Link to='/' className="redirect">logged in</Link> to access this content</h3>}
-    </div>
+    <Lessons getLessons={props.getLessons}
+      loggedIn={props.loggedIn}
+      token={props.token}
+      lessons={props.lessons}
+    />
   );
 };
 
-export default LessonsPage;
+function mapStateToProps(state) {
+  return {
+    loggedIn: state.authReducer.loggedIn,
+    token: state.authReducer.token,
+    lessons: state.lessonReducer.lessons,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getLessons: (token) => dispatch(getLessons(token))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LessonsPage);
