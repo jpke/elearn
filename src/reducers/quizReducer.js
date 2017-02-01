@@ -10,7 +10,6 @@ const initialState = {
   passed: false,
   quizInProgress: false,
   attempts: [],
-  _id: "58914efd76a5126ffb72b4b1"
 };
 
 export default function quizReducer(state = initialState, action) {

@@ -19,9 +19,13 @@ export default class Quiz extends Component {
     super(props, context);
   }
   submitClick() {
-    this.props.submitQuiz(this.props.quizData, this.props.quizTitle, this.props.quizId, this.props._id)
+    this.props.submitQuiz(this.props.quizData, this.props.quizTitle, this.props.quizId, this.props._id, this.props.token)
+  }
+  startQuiz() {
+    this.props.startQuiz(this.props.token);
   }
   render() {
+    console.log("quiz props: ", this.props);
       return (
         <div className="quizContainer">
           <h2>Quiz</h2>
@@ -51,7 +55,7 @@ export default class Quiz extends Component {
             </div>
           :
           <QuizLanding
-            startQuiz={this.props.startQuiz}
+            startQuiz={this.startQuiz.bind(this)}
             passed={this.props.passed}
             score={this.props.score}
             attempts={this.props.attempts}
