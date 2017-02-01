@@ -3,18 +3,30 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/eLearnActions';
 import Quiz from '../components/Quiz';
+// import QuizLanding from '../components/QuizLanding';
 
 export const QuizPage = (props) => {
   return (
-    <Quiz
-      startQuiz={props.actions.startQuiz}
-      selectAnswer={props.actions.selectAnswer}
-      nextQuestion={props.actions.nextQuestion}
-      prevQuestion={props.actions.prevQuestion}
-      question={props.question}
-      answers={props.answers}
-      currentQuestionIndex={props.currentQuestionIndex}
-    />
+      <Quiz
+        startQuiz={props.actions.startQuiz}
+        selectAnswer={props.actions.selectAnswer}
+        nextQuestion={props.actions.nextQuestion}
+        prevQuestion={props.actions.prevQuestion}
+        submitQuiz={props.actions.submitQuiz}
+        question={props.question}
+        answers={props.answers}
+        idSelected={props.idSelected}
+        currentQuestionIndex={props.currentQuestionIndex}
+        questionCount={props.questionCount}
+        score={props.score}
+        quizInProgress={props.quizInProgress}
+        passed={props.passed}
+        attempts={props.attempts}
+        quizTitle={props.quizTitle}
+        quizId={props.quizId}
+        quizData={props.quizData}
+        _id={props._id}
+      />
   );
 };
 
@@ -25,7 +37,17 @@ function mapStateToProps(state) {
     {
       question: state.quizReducer.currentQuestion.question,
       answers: state.quizReducer.currentQuestion.answers,
-      currentQuestionIndex: state.quizReducer.currentQuestionIndex
+      idSelected: state.quizReducer.currentQuestion.idSelected,
+      currentQuestionIndex: state.quizReducer.currentQuestionIndex,
+      questionCount: state.quizReducer.questionCount,
+      score: state.quizReducer.score,
+      quizInProgress: state.quizReducer.quizInProgress,
+      passed: state.quizReducer.passed,
+      attempts: state.quizReducer.attempts,
+      quizTitle: state.quizReducer.quiz.title,
+      quizId: state.quizReducer.quiz._id,
+      quizData: state.quizReducer.quizData,
+      _id: state.quizReducer._id
     }
   :
   {}

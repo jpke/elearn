@@ -1,4 +1,6 @@
 import React, {PropTypes, Component} from 'react';
+import ListItems from './ListItems';
+import QuizLanding from './QuizLanding';
 
 export default class Quiz extends Component {
   static propTypes = {
@@ -6,38 +8,54 @@ export default class Quiz extends Component {
     selectAnswer: PropTypes.func.isRequired,
     nextQuestion: PropTypes.func.isRequired,
     prevQuestion: PropTypes.func.isRequired,
+    submitQuiz: PropTypes.func.isRequired,
     question: PropTypes.string,
     answers: PropTypes.array,
-    currentQuestionIndex: PropTypes.number
+    currentQuestionIndex: PropTypes.number,
+    passed: PropTypes.bool
   }
 
   constructor(props, context) {
     super(props, context);
   }
-
+  submitClick() {
+    this.props.submitQuiz(this.props.quizData, this.props.quizTitle, this.props.quizId, this.props._id)
+  }
   render() {
-    let answers = this.props.question ?
-      this.props.answers.map((answer, index) => {
-          return <li key={index}>answer</li>;
-      })
-      : null;
-
       return (
-        <div>
+        <div className="quizContainer">
           <h2>Quiz</h2>
-          {this.props.question ?
-            <div>
+          {this.props.quizInProgress ?
+            <div className="quizInProgress">
               <h3>Question {this.props.currentQuestionIndex + 1}</h3>
               <p>{this.props.question}</p>
               <h3>Answers</h3>
               <ul>
-                {answers}
+                <ListItems
+                  idSelected={this.props.idSelected}
+                  answers={this.props.answers}
+                  selectAnswer={this.props.selectAnswer}/>
               </ul>
-              <button onClick={this.props.prevQuestion}>Previous Question</button>
-              <button onClick={this.props.nextQuestion}>Next Question</button>
+              {this.props.currentQuestionIndex > 0 ?
+                <button onClick={this.props.prevQuestion}>Previous Question</button> :
+                  ""
+              }
+              {this.props.currentQuestionIndex != this.props.questionCount - 1 ?
+              <button onClick={this.props.nextQuestion}>Next Question</button> :
+              <div>
+                <button onClick={this.submitClick.bind(this)}>Submit Quiz</button>
+                <p>Unanswered Questions</p>
+              </div>
+              }
+
             </div>
           :
-          <button onClick={this.props.startQuiz}>Start</button>
+          <QuizLanding
+            startQuiz={this.props.startQuiz}
+            passed={this.props.passed}
+            score={this.props.score}
+            attempts={this.props.attempts}
+          />
           }
         </div>
       );
