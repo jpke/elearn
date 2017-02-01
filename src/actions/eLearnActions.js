@@ -5,7 +5,6 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6
 export function startQuiz() {
   return function (dispatch) {
     //pull down quiz questions, then
-    console.log("startQuiz activated");
     try {
       fetch('http://localhost:8080/elearn/quiz', {
         method: 'GET',
@@ -19,7 +18,6 @@ export function startQuiz() {
           let error = response;
           throw error;
         }
-        console.log("response: ",response)
         return response.json()
       })
       .then(response => {
@@ -38,7 +36,7 @@ export function selectAnswer(answerSelected, idSelected) {
   return {
     type: types.SELECT_ANSWER,
     answerSelected,
-    idSelected
+    idSelected: parseInt(idSelected)
   };
 }
 

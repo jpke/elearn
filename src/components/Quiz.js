@@ -18,20 +18,20 @@ export default class Quiz extends Component {
   constructor(props, context) {
     super(props, context);
   }
-
   render() {
-    console.log("quiz props: ", this.props);
       return (
-        <div>
+        <div className="quizContainer">
           <h2>Quiz</h2>
           {this.props.quizInProgress ?
-            <div>
+            <div className="quizInProgress">
               <h3>Question {this.props.currentQuestionIndex + 1}</h3>
               <p>{this.props.question}</p>
               <h3>Answers</h3>
               <ul>
-                <ListItems answers={this.props.answers} selectAnswer={this.props.selectAnswer}
-                idSelected={this.props.idSelected} />
+                <ListItems
+                  idSelected={this.props.idSelected}
+                  answers={this.props.answers}
+                  selectAnswer={this.props.selectAnswer}/>
               </ul>
               {this.props.currentQuestionIndex > 0 ?
                 <button onClick={this.props.prevQuestion}>Previous Question</button> :

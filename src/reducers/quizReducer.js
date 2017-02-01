@@ -30,14 +30,15 @@ export default function quizReducer(state = initialState, action) {
     case types.SELECT_ANSWER:
       index = state.currentQuestionIndex;
       correct = action.answerSelected === state.currentQuestion.answers[0] ?  true : false;
-      updatedCurrentQuestion = {...state.currentQuestion};
+      updatedCurrentQuestion = JSON.parse(JSON.stringify(state.currentQuestion));
       updatedCurrentQuestion.correct = correct;
       updatedCurrentQuestion.idSelected = action.idSelected;
-      console.log("updatedCurrentQuestion: ", updatedCurrentQuestion);
       updateQuizData = state.quizData.slice(0, index).concat(updatedCurrentQuestion).concat(state.quizData.slice(index + 1, state.quizData.length));
       return {
         ...state,
         quizData: updateQuizData,
+        currentQuestion: updatedCurrentQuestion,
+        idSelected: action.idSelected
       };
     case types.NEXT_QUESTION:
       currentQuestionIndex = state.currentQuestionIndex + 1;
