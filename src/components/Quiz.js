@@ -18,6 +18,9 @@ export default class Quiz extends Component {
   constructor(props, context) {
     super(props, context);
   }
+  submitClick() {
+    this.props.submitQuiz(this.props.quizData, this.props.quizTitle, this.props.quizId, this.props._id)
+  }
   render() {
       return (
         <div className="quizContainer">
@@ -40,7 +43,7 @@ export default class Quiz extends Component {
               {this.props.currentQuestionIndex != this.props.questionCount - 1 ?
               <button onClick={this.props.nextQuestion}>Next Question</button> :
               <div>
-                <button onClick={this.props.submitQuiz}>Submit Quiz</button>
+                <button onClick={this.submitClick.bind(this)}>Submit Quiz</button>
                 <p>Unanswered Questions</p>
               </div>
               }

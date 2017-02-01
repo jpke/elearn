@@ -9,7 +9,8 @@ const initialState = {
   minimumScore: 2,
   passed: false,
   quizInProgress: false,
-  attempts: []
+  attempts: [],
+  _id: "58914efd76a5126ffb72b4b1"
 };
 
 export default function quizReducer(state = initialState, action) {
@@ -57,11 +58,7 @@ export default function quizReducer(state = initialState, action) {
         currentQuestionIndex: currentQuestionIndex
       };
     case types.SUBMIT_QUIZ:
-      score = state.quizData.map(question => {
-        return question.correct ? 1 : 0;
-      });
-      score = score.reduce((a,b) => {return a + b}, 0);
-      attempts = state.attempts.concat(score);
+      attempts = state.attempts.concat(action.score);
       Math.max(...attempts) >= state.minimumScore ? passed = true : passed = state.passed;
       return {
         ...state,

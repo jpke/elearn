@@ -52,8 +52,44 @@ export function prevQuestion() {
   };
 }
 
-export function submitQuiz() {
-  return {
-    type: types.SUBMIT_QUIZ
-  };
+export function submitQuiz(quizData, quizTitle, quizId, _id) {
+  console.log("submitQuiz called");
+  let score = quizData.map(question => {
+    return question.correct ? 1 : 0;
+  });
+  score = score.reduce((a,b) => {return a + b}, 0);
+  return function (dispatch) {
+    //pull down quiz questions, then
+
+    try {
+      fetch('http://localhost:8080/elearn/quiz/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          title: quizTitle,
+          quiz: quizData,
+          instanceOf: quizId,
+          user: _id,
+          score
+        })
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        }
+      })
+      .then(() => {
+          return dispatch({
+            type: types.SUBMIT_QUIZ,
+            score
+          });
+        })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  }
 }

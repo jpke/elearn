@@ -22,6 +22,10 @@ export const QuizPage = (props) => {
         quizInProgress={props.quizInProgress}
         passed={props.passed}
         attempts={props.attempts}
+        quizTitle={props.quizTitle}
+        quizId={props.quizId}
+        quizData={props.quizData}
+        _id={props._id}
       />
   );
 };
@@ -40,6 +44,10 @@ function mapStateToProps(state) {
       quizInProgress: state.quizReducer.quizInProgress,
       passed: state.quizReducer.passed,
       attempts: state.quizReducer.attempts,
+      quizTitle: state.quizReducer.quiz.title,
+      quizId: state.quizReducer.quiz._id,
+      quizData: state.quizReducer.quizData,
+      _id: state.quizReducer._id
     }
   :
   {}
