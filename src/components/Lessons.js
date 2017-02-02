@@ -7,11 +7,18 @@ export default class Lessons extends Component {
     if(this.props.token) this.props.getLessons(this.props.token);
   }
 
+  onClick(event) {
+    //get doc id
+    fetch doc shared Link
+    open shared link in new window
+  }
+
   render() {
+    console.log("lessons props: ", this.props.lessons);
     let lessons = this.props.lessons.map((lesson, index) => {
       return (
-        <li key={index} id={index}>
-          <p>{lesson.title}<span>{lesson.description}</span></p>
+        <li key={index} id={index} onClick={this.onclick.bind(this)}>
+          <p>{lesson.name}<span>{lesson.id}</span></p>
         </li>
       );
     });

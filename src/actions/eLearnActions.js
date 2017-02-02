@@ -179,7 +179,6 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
 }
 
 export function getLessons(token) {
-  console.log("action token ", token);
   return function (dispatch) {
     //pull down quiz questions, then
     try {
@@ -198,10 +197,9 @@ export function getLessons(token) {
         return response.json()
       })
       .then(response => {
-        console.log("lessons retrieved: ", response);
           return dispatch({
             type: types.GET_LESSONS,
-            lessons: response
+            lessons: response.entries
           });
         })
     } catch(error) {
