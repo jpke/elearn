@@ -6,7 +6,6 @@ import Lessons from '../components/Lessons';
 const LessonsPage = (props) => {
   return (
     <Lessons getLessons={props.getLessons}
-      loggedIn={props.loggedIn}
       token={props.token}
       lessons={props.lessons}
     />
@@ -15,7 +14,6 @@ const LessonsPage = (props) => {
 
 function mapStateToProps(state) {
   return {
-    loggedIn: state.authReducer.loggedIn,
     token: state.authReducer.token,
     lessons: state.lessonReducer.lessons,
   }

@@ -30,7 +30,7 @@ export default class Quiz extends Component {
       return (
         <div className="quizContainer">
           <h2>Quiz</h2>
-          {this.props.loggedIn ?
+          {this.props.token ?
             this.props.quizInProgress ?
               <div className="quizInProgress">
                 <h3>Question {this.props.currentQuestionIndex + 1}</h3>
