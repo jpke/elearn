@@ -1,12 +1,13 @@
 import * as types from '../constants/actionTypes';
 import quizQuestionRamdomizer from '../utils/quizDataRandomizer';
+import evaluateSelection from '../utils/evaluateSelection';
 
 const initialState = {
-  quizData: [],
+  quizData: 0,
   currentQuestion: undefined,
   currentQuestionIndex: null,
   score: 0,
-  minimumScore: 2,
+  minimumScore: 3,
   passed: false,
   quizInProgress: false,
   attempts: [],
@@ -16,7 +17,9 @@ export default function quizReducer(state = initialState, action) {
   let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts;
   switch(action.type) {
     case types.START_QUIZ:
-      let quizIteration = quizQuestionRamdomizer(action.quizData.quiz);
+    console.log("reducer: ", action.quizData);
+      let quizIteration = quizQuestionRamdomizer(action.quizData.items);
+      console.log("iteration: ", quizIteration);
       return {
         ...state,
         quiz: action.quizData,
@@ -25,14 +28,16 @@ export default function quizReducer(state = initialState, action) {
         currentQuestionIndex: 0,
         questionCount: quizIteration.length,
         score: 0,
+        minimumScore: action.quizData.minimumScore,
         quizInProgress: true
       };
     case types.SELECT_ANSWER:
       index = state.currentQuestionIndex;
-      correct = action.answerSelected === state.currentQuestion.answers[0] ?  true : false;
+      correct = evaluateSelection(action.idSelected, state.currentQuestion);
       updatedCurrentQuestion = JSON.parse(JSON.stringify(state.currentQuestion));
       updatedCurrentQuestion.correct = correct;
       updatedCurrentQuestion.idSelected = action.idSelected;
+      updatedCurrentQuestion.itemSelected = action.itemSelected;
       updateQuizData = state.quizData.slice(0, index).concat(updatedCurrentQuestion).concat(state.quizData.slice(index + 1, state.quizData.length));
       return {
         ...state,

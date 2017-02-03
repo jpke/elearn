@@ -16,6 +16,7 @@ export const QuizPage = (props) => {
         question={props.question}
         answers={props.answers}
         idSelected={props.idSelected}
+        itemSelected={props.itemSelected}
         currentQuestionIndex={props.currentQuestionIndex}
         questionCount={props.questionCount}
         score={props.score}
@@ -27,6 +28,7 @@ export const QuizPage = (props) => {
         quizData={props.quizData}
         _id={props._id}
         token={props.token}
+        course={props.course}
       />
   );
 };
@@ -34,12 +36,13 @@ export const QuizPage = (props) => {
 // QuizPage.propTypes
 
 function mapStateToProps(state) {
-  console.log("quiz props: ", state);
+  console.log('quizPage state ', state);
   return state.quizReducer.quizData.length > 0 ?
-  {
+    {
       question: state.quizReducer.currentQuestion.question,
       answers: state.quizReducer.currentQuestion.answers,
       idSelected: state.quizReducer.currentQuestion.idSelected,
+      itemSelected: state.quizReducer.currentQuestion.itemSelected,
       currentQuestionIndex: state.quizReducer.currentQuestionIndex,
       questionCount: state.quizReducer.questionCount,
       score: state.quizReducer.score,
@@ -50,12 +53,14 @@ function mapStateToProps(state) {
       quizId: state.quizReducer.quiz._id,
       quizData: state.quizReducer.quizData,
       _id: state.authReducer.user_Id,
-      token: state.authReducer.token
+      token: state.authReducer.token,
+      course: state.authReducer.course
     }
   :
   {
     _id: state.authReducer.user_Id,
-    token: state.authReducer.token
+    token: state.authReducer.token,
+    course: state.authReducer.course
   }
 }
 

@@ -8,26 +8,26 @@ export default class ListItems extends Component {
     });
     let currentSelected = answerArray.slice();
     this.props.idSelected ?
-    currentSelected[this.props.idSelected] = "highlight" : ""
+    currentSelected[this.props.itemSelected] = "highlight" : ""
     this.state = Object.assign({}, {answerClasses: currentSelected}, {reset: answerArray});
   }
 
   componentWillUpdate(nextProps, nextState) {
     if(this.props != nextProps) {
       let currentSelected = this.state.reset.slice();
-      currentSelected[nextProps.idSelected] = "highlight"
+      currentSelected[nextProps.itemSelected] = "highlight"
       this.setState({answerClasses: currentSelected});
     }
   }
 
-  click(event) {
-    this.props.selectAnswer(event.target.textContent, event.target.id);
+  click(event, index) {
+    this.props.selectAnswer(event.target.textContent, event.target.id, index);
   }
 
   render() {
     let answers = this.props.answers.map((answer, index) => {
       return (
-          <li className={this.state.answerClasses[index]} key={index} id={index} onClick={this.click.bind(this)}>{answer}</li>
+          <li className={this.state.answerClasses[index]} key={index} id={answer._id} onClick={(event) => this.click(event, index)}>{answer.answer}</li>
         );
     });
 

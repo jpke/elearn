@@ -4,7 +4,9 @@ const initialState = {
   view: 'login',
   userName: '',
   _id: '',
-  token: window.localStorage.getItem('token'),
+  course: "",
+  courses: [],
+  token: "",
   loggedIn: false,
   loading: false
 };
@@ -22,6 +24,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         userName: action.userName,
         user_Id: action.user_Id,
+        courses: action.courses,
         token: action.token,
         loggedIn: true
       };
@@ -38,6 +41,12 @@ export default function authReducer(state = initialState, action) {
         user_Id: "",
         token: "",
         loggedIn: false
+      };
+    case types.SELECT_COURSE:
+    console.log("action: ", action.courseName);
+      return {
+        ...state,
+        course: action.courseName
       };
     default:
     return state;

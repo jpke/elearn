@@ -23,10 +23,15 @@ export default class Quiz extends Component {
     this.props.submitQuiz(this.props.quizData, this.props.quizTitle, this.props.quizId, this.props._id, this.props.token)
   }
   startQuiz() {
-    this.props.startQuiz(this.props.token);
+    this.props.startQuiz(this.props.token, this.props.course);
   }
   render() {
-    console.log("quiz props: ", this.props);
+    console.log("quiz props ", this.props);
+    // let unansweredQuestions = this.props.quizData.length;
+    // this.props.quizData.forEach(question => {
+    //   if(question.idSelected != null) unansweredQuestions--
+    // });
+    // console.log("count: ", unansweredQuestions);
       return (
         <div className="quizContainer">
           <h2>Quiz</h2>
@@ -39,6 +44,7 @@ export default class Quiz extends Component {
                 <ul>
                   <ListItems
                     idSelected={this.props.idSelected}
+                    itemSelected={this.props.itemSelected}
                     answers={this.props.answers}
                     selectAnswer={this.props.selectAnswer}/>
                 </ul>

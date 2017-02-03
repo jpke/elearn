@@ -45,6 +45,7 @@ export function register(userName, email, password) {
           type: types.LOG_IN,
           userName,
           user_Id: response._id,
+          courses: response.courses,
           token: response.token
         });
       })
@@ -90,12 +91,21 @@ export function logIn(email, password) {
           type: types.LOG_IN,
           userName: response.userName,
           user_Id: response._id,
+          courses: response.courses,
           token: response.token
         });
       })
     } catch(error) {
       console.log("error response: ", error);
     }
+  };
+}
+
+export function selectCourse(courseName) {
+  console.log("courseName: ", courseName);
+  return {
+    type: types.SELECT_COURSE,
+    courseName
   };
 }
 
@@ -108,13 +118,12 @@ export function logOut() {
   };
 }
 
-export function startQuiz(token) {
-  console.log("action token ", token);
+export function startQuiz(token, course_Id) {
   return function (dispatch) {
     dispatch(loading('startQuiz'));
     //pull down quiz questions, then
     try {
-      fetch('http://localhost:8080/elearn/quiz', {
+      fetch('http://localhost:8080/elearn/quiz/'.concat(course_Id), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -130,6 +139,7 @@ export function startQuiz(token) {
       })
       .then(response => {
         dispatch(loading(''));
+        console.log("quiz actions: ", response);
         return dispatch({
           type: types.START_QUIZ,
           quizData: response
@@ -141,11 +151,12 @@ export function startQuiz(token) {
   };
 }
 
-export function selectAnswer(answerSelected, idSelected) {
+export function selectAnswer(answerSelected, idSelected, item) {
   return {
     type: types.SELECT_ANSWER,
     answerSelected,
-    idSelected: parseInt(idSelected)
+    idSelected,
+    itemSelected: parseInt(item)
   };
 }
 
@@ -162,11 +173,6 @@ export function prevQuestion() {
 }
 
 export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
-  console.log("submitQuiz called");
-  let score = quizData.map(question => {
-    return question.correct ? 1 : 0;
-  });
-  score = score.reduce((a,b) => {return a + b}, 0);
   return function (dispatch) {
     dispatch(loading('submitQuiz'));
     try {
@@ -178,23 +184,26 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
         },
         body: JSON.stringify({
           title: quizTitle,
-          quiz: quizData,
-          instanceOf: quizId,
-          user: _id,
-          score
+          quizData: quizData,
+          quiz_Id: quizId,
+          user_Id: _id
         })
       })
       .then(response => {
         if(response.status < 200 || response.status >= 300) {
           let error = response;
           throw error;
+        } else {
+          return response;
         }
       })
-      .then(() => {
+      .then(response => response.json())
+      .then((response) => {
+        console.log("action response: ", response);
         dispatch(loading(''));
         return dispatch({
           type: types.SUBMIT_QUIZ,
-          score
+          score: response.score
         });
         })
     } catch(error) {

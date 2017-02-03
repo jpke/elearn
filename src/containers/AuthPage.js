@@ -10,7 +10,10 @@ export const AuthPage = (props) => {
         register={props.actions.register}
         logIn={props.actions.logIn}
         logOut={props.actions.logOut}
+        selectCourse={props.actions.selectCourse}
         userName={props.userName}
+        courses={props.courses}
+        course={props.course}
         _id={props._id}
         token={props.token}
         view={props.view}
@@ -24,6 +27,8 @@ function mapStateToProps(state) {
   return {
       userName: state.authReducer.userName,
       _id: state.authReducer._id,
+      courses: state.authReducer.courses,
+      course: state.authReducer.course,
       token: state.authReducer.token,
       view: state.authReducer.view
   };

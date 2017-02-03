@@ -30,13 +30,26 @@ export default class Auth extends Component {
     this.props.logOut();
   }
   render() {
+    let courses;
+    if(this.props.courses) {
+      courses = this.props.courses.map((course, index) => {
+        let courseName = course.name;
+        return <li key={index} onClick={() => this.props.selectCourse(course.id)}>{courseName}</li>
+      })
+    }
+    console.log("course: ", this.props.course);
       return (
         <div className="authContainer">
           <h2>Welcome</h2>
           {this.props.token ?
             <div>
               <h3>Hi, {this.props.userName}</h3>
-              <p>Click on the <Link to="/quiz" className="redirect">Quiz</Link> or <Link to="/lessons" className="redirect">Lessons</Link> tabs to access course content</p>
+              <p>Select course</p>
+              {courses}
+              {this.props.course ?
+                <p>Click on the <Link to="/quiz" className="redirect">Quiz</Link> or <Link to="/lessons" className="redirect">Lessons</Link> tabs to access course content</p>
+              : ""
+              }
               <button onClick={this.props.logOut}>Logout</button>
             </div>
           :
