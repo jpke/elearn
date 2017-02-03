@@ -11,17 +11,18 @@ const LessonsPage = (props) => {
       lessons={props.lessons}
       loading={props.loading}
       preview={props.preview}
+      loggedIn={props.loggedIn}
     />
   );
 };
 
 function mapStateToProps(state) {
-  console.log("lessonpage state: ", state);
   return {
     token: state.authReducer.token,
     lessons: state.lessonReducer.lessons,
     loading: state.authReducer.loadingItem,
     preview: state.lessonReducer.selectedPdf.preview,
+    loggedIn: state.authReducer.loggedIn
   }
 }
 

@@ -1,3 +1,4 @@
+// import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
 
 export function loading(item) {
@@ -9,6 +10,7 @@ export function loading(item) {
 
 export function register(userName, email, password) {
   return function (dispatch) {
+    dispatch(loading('register'));
     try {
       fetch('http://localhost:8080/elearn/users', {
         method: 'POST',
@@ -37,6 +39,8 @@ export function register(userName, email, password) {
         return response.json()
       })
       .then(response => {
+        window.localStorage.loggedIn = true;
+        dispatch(loading(''));
         return dispatch({
           type: types.LOG_IN,
           userName,
@@ -52,6 +56,7 @@ export function register(userName, email, password) {
 
 export function logIn(email, password) {
   return function (dispatch) {
+    dispatch(loading('logIn'));
     try {
       fetch('http://localhost:8080/elearn/login', {
         method: 'POST',
@@ -59,20 +64,28 @@ export function logIn(email, password) {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
+        withCredentials: true,
         body: JSON.stringify({
           email: email,
           password: password
         })
       })
       .then(response => {
-        if(response.status < 200 || response.status >= 300) {
+        if(response.status != 302) {
           let error = response;
           throw error;
         }
         return response.json()
       })
       .then(response => {
-        window.localStorage.token = response.token;
+        window.localStorage.loggedIn = true;
+        // console.log("set-cookie: ", response)
+        // cookie.save("tokens",
+        //   response.token,
+        //   {
+        //     httpOnly: true
+        //   });
+        dispatch(loading(''));
         return dispatch({
           type: types.LOG_IN,
           userName: response.userName,
@@ -88,7 +101,8 @@ export function logIn(email, password) {
 
 export function logOut() {
   //consider blacklisting token serverside in future
-  window.localStorage.token = "";
+  window.localStorage.loggedIn = false;
+  // cookie.remove('token');
   return {
     type: types.LOG_OUT
   };
@@ -97,6 +111,7 @@ export function logOut() {
 export function startQuiz(token) {
   console.log("action token ", token);
   return function (dispatch) {
+    dispatch(loading('startQuiz'));
     //pull down quiz questions, then
     try {
       fetch('http://localhost:8080/elearn/quiz', {
@@ -114,10 +129,11 @@ export function startQuiz(token) {
         return response.json()
       })
       .then(response => {
-          return dispatch({
-            type: types.START_QUIZ,
-            quizData: response
-          });
+        dispatch(loading(''));
+        return dispatch({
+          type: types.START_QUIZ,
+          quizData: response
+        });
         })
     } catch(error) {
       console.log("error response: ", error);
@@ -152,6 +168,7 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
   });
   score = score.reduce((a,b) => {return a + b}, 0);
   return function (dispatch) {
+    dispatch(loading('submitQuiz'));
     try {
       fetch('http://localhost:8080/elearn/quiz/submit', {
         method: 'POST',
@@ -174,10 +191,11 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
         }
       })
       .then(() => {
-          return dispatch({
-            type: types.SUBMIT_QUIZ,
-            score
-          });
+        dispatch(loading(''));
+        return dispatch({
+          type: types.SUBMIT_QUIZ,
+          score
+        });
         })
     } catch(error) {
       console.log("error response: ", error);
@@ -187,6 +205,8 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
 
 export function getLessons(token) {
   return function (dispatch) {
+    // let cookieToken = cookie.load('token');
+    // console.log("cookieToken: ", cookieToken);
     dispatch(loading('lessons'));
     try {
       fetch('http://localhost:8080/elearn/lessons', {
@@ -194,7 +214,8 @@ export function getLessons(token) {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
-        }
+        },
+        // withCredentials: true,
       })
       .then(response => {
         if(response.status < 200 || response.status >= 300) {
@@ -204,10 +225,11 @@ export function getLessons(token) {
         return response.json()
       })
       .then(response => {
-          return dispatch({
-            type: types.GET_LESSONS,
-            lessons: response.entries
-          });
+        dispatch(loading(''));
+        return dispatch({
+          type: types.GET_LESSONS,
+          lessons: response.entries
+        });
         })
     } catch(error) {
       console.log("error response: ", error);
@@ -224,7 +246,8 @@ export function getPDF(pdfId, token) {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
-        }
+        },
+        // withCredentials: true,
       })
       .then(response => {
         if(response.status < 200 || response.status >= 300) {

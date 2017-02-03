@@ -33,7 +33,7 @@ export default class Auth extends Component {
       return (
         <div className="authContainer">
           <h2>Welcome</h2>
-          {this.props.userName ?
+          {this.props.token ?
             <div>
               <h3>Hi, {this.props.userName}</h3>
               <p>Click on the <Link to="/quiz" className="redirect">Quiz</Link> or <Link to="/lessons" className="redirect">Lessons</Link> tabs to access course content</p>
