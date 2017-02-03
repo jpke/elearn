@@ -1,5 +1,12 @@
 import * as types from '../constants/actionTypes';
 
+export function loading(item) {
+  return {
+    type: 'LOADING',
+    item
+  };
+}
+
 export function register(userName, email, password) {
   return function (dispatch) {
     try {
@@ -65,6 +72,7 @@ export function logIn(email, password) {
         return response.json()
       })
       .then(response => {
+        window.localStorage.token = response.token;
         return dispatch({
           type: types.LOG_IN,
           userName: response.userName,
@@ -80,6 +88,7 @@ export function logIn(email, password) {
 
 export function logOut() {
   //consider blacklisting token serverside in future
+  window.localStorage.token = "";
   return {
     type: types.LOG_OUT
   };
@@ -143,8 +152,6 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
   });
   score = score.reduce((a,b) => {return a + b}, 0);
   return function (dispatch) {
-    //pull down quiz questions, then
-
     try {
       fetch('http://localhost:8080/elearn/quiz/submit', {
         method: 'POST',
@@ -180,7 +187,7 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
 
 export function getLessons(token) {
   return function (dispatch) {
-    //pull down quiz questions, then
+    dispatch(loading('lessons'));
     try {
       fetch('http://localhost:8080/elearn/lessons', {
         method: 'GET',
@@ -200,6 +207,38 @@ export function getLessons(token) {
           return dispatch({
             type: types.GET_LESSONS,
             lessons: response.entries
+          });
+        })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  };
+}
+
+export function getPDF(pdfId, token) {
+  return function (dispatch) {
+    dispatch(loading("pdf"));
+    try {
+      fetch('http://localhost:8080/elearn/lessons/'.concat(pdfId), {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        }
+        return response.json()
+      })
+      .then(response => {
+        dispatch(loading(""));
+        console.log("response: ", response);
+          return dispatch({
+            type: types.GET_PDF,
+            response
           });
         })
     } catch(error) {

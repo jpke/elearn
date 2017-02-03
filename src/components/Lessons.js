@@ -7,18 +7,21 @@ export default class Lessons extends Component {
     if(this.props.token) this.props.getLessons(this.props.token);
   }
 
-  onClick(event) {
+  click(event) {
+    console.log("click props: ", this.props);
+    //download lesson, accessing by lesson id
+    this.props.getPDF(event.target.id, this.props.token);
     //get doc id
-    fetch doc shared Link
-    open shared link in new window
+    // fetch doc shared Link
+    // open shared link in new window
   }
 
   render() {
-    console.log("lessons props: ", this.props.lessons);
+    console.log("lessons props: ", this.props);
     let lessons = this.props.lessons.map((lesson, index) => {
       return (
-        <li key={index} id={index} onClick={this.onclick.bind(this)}>
-          <p>{lesson.name}<span>{lesson.id}</span></p>
+        <li key={index} id={lesson.id} onClick={this.click.bind(this)}>
+          {lesson.name}
         </li>
       );
     });
@@ -32,6 +35,11 @@ export default class Lessons extends Component {
             <ul>
               {lessons}
             </ul>
+            {this.props.preview ?
+              <div>
+                <a href={this.props.preview} target="_blank">Preview</a>
+              </div>
+            : ""}
           </div>
         :
           <h3>You must be <Link to='/' className="redirect">logged in</Link> to access this content</h3>}

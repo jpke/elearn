@@ -4,12 +4,19 @@ const initialState = {
   view: 'login',
   userName: '',
   _id: '',
-  token: '',
-  loggedIn: false
+  token: window.localStorage.getItem('token'),
+  loggedIn: false,
+  loading: false
 };
 
 export default function authReducer(state = initialState, action) {
   switch(action.type) {
+    case types.LOADING:
+      return {
+        ...state,
+        loading: !state.loading,
+        loadingItem: action.item
+      }
     case types.LOG_IN:
       return {
         ...state,

@@ -1,7 +1,8 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  lessons: []
+  lessons: [],
+  selectedPdf: {}
 };
 
 export default function lessonReducer(state = initialState, action) {
@@ -11,6 +12,12 @@ export default function lessonReducer(state = initialState, action) {
         ...state,
         lessons: action.lessons
       };
+    case types.GET_PDF:
+    console.log('reducer response: ',action.response);
+      return {
+        ...state,
+        selectedPdf: action.response.selectedPdf
+      }
     default:
     return state;
   }
