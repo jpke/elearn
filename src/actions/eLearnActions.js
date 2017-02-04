@@ -1,7 +1,16 @@
+// import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
+
+export function loading(item) {
+  return {
+    type: 'LOADING',
+    item
+  };
+}
 
 export function register(userName, email, password) {
   return function (dispatch) {
+    dispatch(loading('register'));
     try {
       fetch('http://localhost:8080/elearn/users', {
         method: 'POST',
@@ -17,16 +26,26 @@ export function register(userName, email, password) {
       })
       .then(response => {
         if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
+          if(response.body.message === 'email already associated with an account') {
+            return dispatch({
+              type: types.EMAIL_USED,
+              email
+            });
+          } else {
+            let error = response;
+            throw error;
+          }
         }
         return response.json()
       })
       .then(response => {
+        window.localStorage.loggedIn = true;
+        dispatch(loading(''));
         return dispatch({
           type: types.LOG_IN,
           userName,
           user_Id: response._id,
+          courses: response.courses,
           token: response.token
         });
       })
@@ -36,12 +55,75 @@ export function register(userName, email, password) {
   };
 }
 
-export function startQuiz(token) {
-  console.log("action token ", token);
+export function logIn(email, password) {
   return function (dispatch) {
+    dispatch(loading('logIn'));
+    try {
+      fetch('http://localhost:8080/elearn/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        withCredentials: true,
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      })
+      .then(response => {
+        if(response.status != 302) {
+          let error = response;
+          throw error;
+        }
+        return response.json()
+      })
+      .then(response => {
+        window.localStorage.loggedIn = true;
+        // console.log("set-cookie: ", response)
+        // cookie.save("tokens",
+        //   response.token,
+        //   {
+        //     httpOnly: true
+        //   });
+        dispatch(loading(''));
+        return dispatch({
+          type: types.LOG_IN,
+          userName: response.userName,
+          user_Id: response._id,
+          courses: response.courses,
+          token: response.token
+        });
+      })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  };
+}
+
+export function selectCourse(courseName) {
+  console.log("courseName: ", courseName);
+  return {
+    type: types.SELECT_COURSE,
+    courseName
+  };
+}
+
+export function logOut() {
+  //consider blacklisting token serverside in future
+  window.localStorage.loggedIn = false;
+  // cookie.remove('token');
+  return {
+    type: types.LOG_OUT
+  };
+}
+
+export function startQuiz(token, course_Id) {
+  return function (dispatch) {
+    dispatch(loading('startQuiz'));
     //pull down quiz questions, then
     try {
-      fetch('http://localhost:8080/elearn/quiz', {
+      fetch('http://localhost:8080/elearn/quiz/'.concat(course_Id), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -56,10 +138,12 @@ export function startQuiz(token) {
         return response.json()
       })
       .then(response => {
-          return dispatch({
-            type: types.START_QUIZ,
-            quizData: response
-          });
+        dispatch(loading(''));
+        console.log("quiz actions: ", response);
+        return dispatch({
+          type: types.START_QUIZ,
+          quizData: response
+        });
         })
     } catch(error) {
       console.log("error response: ", error);
@@ -67,11 +151,12 @@ export function startQuiz(token) {
   };
 }
 
-export function selectAnswer(answerSelected, idSelected) {
+export function selectAnswer(answerSelected, idSelected, item) {
   return {
     type: types.SELECT_ANSWER,
     answerSelected,
-    idSelected: parseInt(idSelected)
+    idSelected,
+    itemSelected: parseInt(item)
   };
 }
 
@@ -88,14 +173,8 @@ export function prevQuestion() {
 }
 
 export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
-  console.log("submitQuiz called");
-  let score = quizData.map(question => {
-    return question.correct ? 1 : 0;
-  });
-  score = score.reduce((a,b) => {return a + b}, 0);
   return function (dispatch) {
-    //pull down quiz questions, then
-
+    dispatch(loading('submitQuiz'));
     try {
       fetch('http://localhost:8080/elearn/quiz/submit', {
         method: 'POST',
@@ -105,26 +184,97 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
         },
         body: JSON.stringify({
           title: quizTitle,
-          quiz: quizData,
-          instanceOf: quizId,
-          user: _id,
-          score
+          quizData: quizData,
+          quiz_Id: quizId,
+          user_Id: _id
         })
       })
       .then(response => {
         if(response.status < 200 || response.status >= 300) {
           let error = response;
           throw error;
+        } else {
+          return response;
         }
       })
-      .then(() => {
-          return dispatch({
-            type: types.SUBMIT_QUIZ,
-            score
-          });
+      .then(response => response.json())
+      .then((response) => {
+        console.log("action response: ", response);
+        dispatch(loading(''));
+        return dispatch({
+          type: types.SUBMIT_QUIZ,
+          score: response.score
+        });
         })
     } catch(error) {
       console.log("error response: ", error);
     }
   }
+}
+
+export function getLessons(token) {
+  return function (dispatch) {
+    // let cookieToken = cookie.load('token');
+    // console.log("cookieToken: ", cookieToken);
+    dispatch(loading('lessons'));
+    try {
+      fetch('http://localhost:8080/elearn/lessons', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        // withCredentials: true,
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        }
+        return response.json()
+      })
+      .then(response => {
+        dispatch(loading(''));
+        return dispatch({
+          type: types.GET_LESSONS,
+          lessons: response.entries
+        });
+        })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  };
+}
+
+export function getPDF(pdfId, token) {
+  return function (dispatch) {
+    dispatch(loading("pdf"));
+    try {
+      fetch('http://localhost:8080/elearn/lessons/'.concat(pdfId), {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        // withCredentials: true,
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        }
+        return response.json()
+      })
+      .then(response => {
+        dispatch(loading(""));
+        console.log("response: ", response);
+          return dispatch({
+            type: types.GET_PDF,
+            response
+          });
+        })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  };
 }

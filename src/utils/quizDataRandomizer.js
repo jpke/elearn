@@ -1,5 +1,9 @@
 //shuffle question order
 export default function quizQuestionRamdomizer(quizData) {
+  console.log("quizData", quizData);
+  for(let question in quizData) {
+    quizData[question].answers = shuffle(quizData[question].answers)
+  }
   return shuffle(quizData);
 }
 

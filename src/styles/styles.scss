@@ -43,6 +43,10 @@ h1 {
   align-items: center;
 }
 
+.redirect {
+  text-decoration: none;
+}
+
 .quizInProgress {
   display: flex;
   flex-direction: column;

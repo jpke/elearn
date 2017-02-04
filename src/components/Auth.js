@@ -1,4 +1,7 @@
 import React, {PropTypes, Component} from 'react';
+import {Link} from 'react-router';
+import Register from '../components/Register';
+import Login from '../components/Login';
 
 export default class Auth extends Component {
   static propTypes = {
@@ -6,9 +9,12 @@ export default class Auth extends Component {
     logIn: PropTypes.func.isRequired,
     logOut: PropTypes.func.isRequired,
   }
-
   constructor(props, context) {
     super(props, context);
+    this.state = {login: true};
+  }
+  toggleView() {
+    this.setState({login: !this.state.login});
   }
   register(event) {
     event.preventDefault();
@@ -16,29 +22,48 @@ export default class Auth extends Component {
     this.props.register(form.userName.value, form.email.value, form.password.value);
   }
   logIn(event) {
-    console.log(event)
-    // this.props.logIn();
+    event.preventDefault();
+    const form = event.target.elements;
+    this.props.logIn(form.email.value, form.password.value);
   }
   logOut() {
     this.props.logOut();
   }
   render() {
+    let courses;
+    if(this.props.courses) {
+      courses = this.props.courses.map((course, index) => {
+        let courseName = course.name;
+        return <li key={index} onClick={() => this.props.selectCourse(course.id)}>{courseName}</li>
+      })
+    }
+    console.log("course: ", this.props.course);
       return (
         <div className="authContainer">
           <h2>Welcome</h2>
-          <div className="quizInProgress">
-            <p>You must login or register</p>
-            <h3 className="authTitle">Register</h3>
-            <form onSubmit={this.register.bind(this)} id="authRegister">
-              <input type="text" id="userName" className="auth" placeholder="name" />
-              <input type="email" id="email" className="auth" placeholder="email" />
-              <input type="password" id="password" className="auth" placeholder="password" />
-              <button type="submit">Register</button>
-            </form>
-            <button onClick={this.register.bind(this)}>Register</button>
-            <button onClick={this.logIn.bind(this)}>Login</button>
-            <button onClick={this.logOut.bind(this)}>Logout</button>
-          </div>
+          {this.props.token ?
+            <div>
+              <h3>Hi, {this.props.userName}</h3>
+              <p>Select course</p>
+              {courses}
+              {this.props.course ?
+                <p>Click on the <Link to="/quiz" className="redirect">Quiz</Link> or <Link to="/lessons" className="redirect">Lessons</Link> tabs to access course content</p>
+              : ""
+              }
+              <button onClick={this.props.logOut}>Logout</button>
+            </div>
+          :
+            this.state.login === true ?
+            <div>
+              <p>You must login or <button onClick={this.toggleView.bind(this)}>Register</button></p>
+              <Login logIn={this.logIn.bind(this)} />
+            </div>
+            :
+            <div>
+              <p>You must register or <button onClick={this.toggleView.bind(this)}>Login</button></p>
+              <Register register={this.register.bind(this)} />
+            </div>
+            }
         </div>
       );
   }
