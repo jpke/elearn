@@ -123,6 +123,14 @@ export function logOut() {
   };
 }
 
+export function selectQuiz(quizName, quiz_Id) {
+  return {
+    type: types.SELECT_QUIZ,
+    quizName,
+    quiz_Id
+  };
+}
+
 export function startQuiz(token, course_Id) {
   return function (dispatch) {
     dispatch(loading('startQuiz'));

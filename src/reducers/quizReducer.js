@@ -16,6 +16,12 @@ const initialState = {
 export default function quizReducer(state = initialState, action) {
   let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts;
   switch(action.type) {
+    case types.SELECT_QUIZ:
+     return {
+       ...state,
+       quizSelected: action.quizName,
+       quizSelectedId: action.quiz_Id
+     };
     case types.START_QUIZ:
     console.log("reducer: ", action.quizData);
       let quizIteration = quizQuestionRamdomizer(action.quizData.items);

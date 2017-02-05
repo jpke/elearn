@@ -32,6 +32,9 @@ export default class Quiz extends Component {
     //   if(question.idSelected != null) unansweredQuestions--
     // });
     // console.log("count: ", unansweredQuestions);
+    if(this.props.courses) {
+      let quizzes = listCreator(this.props.courses.quizzes, this.props.selectQuiz)
+    }
       return (
         <div className="quizContainer">
           <h2>Quiz</h2>

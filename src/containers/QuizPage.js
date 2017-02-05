@@ -8,6 +8,7 @@ import Quiz from '../components/Quiz';
 export const QuizPage = (props) => {
   return (
       <Quiz
+        selectQuiz={props.actions.selectQuiz}
         startQuiz={props.actions.startQuiz}
         selectAnswer={props.actions.selectAnswer}
         nextQuestion={props.actions.nextQuestion}
