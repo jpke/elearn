@@ -34,7 +34,7 @@ export default class Auth extends Component {
     if(this.props.courses) {
       courses = this.props.courses.map((course, index) => {
         let courseName = course.name;
-        return <li key={index} onClick={() => this.props.selectCourse(course.id)}>{courseName}</li>
+        return <li key={index} onClick={() => this.props.selectCourse(course._id, courseName)}>{courseName}</li>
       })
     }
     console.log("course: ", this.props.course);

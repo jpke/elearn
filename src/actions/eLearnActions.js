@@ -8,6 +8,23 @@ export function loading(item) {
   };
 }
 
+function loggedIn(response) {
+  console.log("response: ", response);
+  localStorage.setItem("login", {
+    userName: response.name,
+    user_Id: response._id,
+    courses: response.courses,
+    token: response.token
+  });
+  return {
+    type: types.LOG_IN,
+    userName: response.name,
+    user_Id: response._id,
+    courses: response.courses,
+    token: response.token
+  };
+}
+
 export function register(userName, email, password) {
   return function (dispatch) {
     dispatch(loading('register'));
@@ -41,13 +58,7 @@ export function register(userName, email, password) {
       .then(response => {
         window.localStorage.loggedIn = true;
         dispatch(loading(''));
-        return dispatch({
-          type: types.LOG_IN,
-          userName,
-          user_Id: response._id,
-          courses: response.courses,
-          token: response.token
-        });
+        dispatch(loggedIn(response));
       })
     } catch(error) {
       console.log("error response: ", error);
@@ -87,13 +98,7 @@ export function logIn(email, password) {
         //     httpOnly: true
         //   });
         dispatch(loading(''));
-        return dispatch({
-          type: types.LOG_IN,
-          userName: response.userName,
-          user_Id: response._id,
-          courses: response.courses,
-          token: response.token
-        });
+        dispatch(loggedIn(response));
       })
     } catch(error) {
       console.log("error response: ", error);
@@ -101,11 +106,11 @@ export function logIn(email, password) {
   };
 }
 
-export function selectCourse(courseName) {
-  console.log("courseName: ", courseName);
+export function selectCourse(courseName, course_Id) {
   return {
     type: types.SELECT_COURSE,
-    courseName
+    courseName,
+    course_Id
   };
 }
 

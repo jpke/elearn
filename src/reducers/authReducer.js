@@ -1,14 +1,28 @@
 import * as types from '../constants/actionTypes';
 
-const initialState = {
-  view: 'login',
-  userName: '',
-  _id: '',
-  course: "",
-  courses: [],
-  token: "",
-  loggedIn: false,
-  loading: false
+let initialState;
+if(localStorage.getItem('login')) {
+  initialState = {
+    view: 'login',
+    userName: localStorage.getItem('login').userName | '',
+    _id: localStorage.getItem('login').user_Id | '',
+    course: "",
+    courses: localStorage.getItem('login').courses | [],
+    token: localStorage.getItem('login').token | "",
+    loggedIn: false,
+    loading: false
+  };
+} else {
+  initialState = {
+    view: 'login',
+    userName: '',
+    _id: '',
+    course: "",
+    courses: [],
+    token: "",
+    loggedIn: false,
+    loading: false
+  }
 };
 
 export default function authReducer(state = initialState, action) {
@@ -43,10 +57,10 @@ export default function authReducer(state = initialState, action) {
         loggedIn: false
       };
     case types.SELECT_COURSE:
-    console.log("action: ", action.courseName);
       return {
         ...state,
-        course: action.courseName
+        course: action.courseName,
+        course_Id: action.course_Id
       };
     default:
     return state;
