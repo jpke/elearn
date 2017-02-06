@@ -2,8 +2,9 @@ import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
 import listCreator from '../utils/listCreator'
 import ListItems from './ListItems';
-import QuizViewContainer from '../containers/QuizViewContainer'
-import QuizLanding from './QuizLanding';
+import QuizViewContainer from '../containers/QuizViewContainer';
+import QuizStartContainer from '../containers/QuizStartContainer';
+import QuizListContainer from '../containers/QuizListContainer';
 
 export default class Quiz extends Component {
   static propTypes = {
@@ -28,12 +29,6 @@ export default class Quiz extends Component {
     this.props.startQuiz(this.props.token, this.props.quizSelected._id);
   }
   render() {
-    console.log("quiz props ", this.props.course);
-    let quizzes;
-    if(this.props.course) {
-      quizzes = listCreator(this.props.course.quizzes, this.props.selectQuiz);
-      console.log("quizzes: ", quizzes);
-    }
       return (
         <div className="quizContainer">
           <h2>Quiz</h2>
@@ -41,17 +36,10 @@ export default class Quiz extends Component {
             this.props.quizInProgress ?
               <QuizViewContainer />
              :
-             this.props.quizSelected ?
-              <QuizLanding
-                startQuiz={this.startQuiz.bind(this)}
-                passed={this.props.passed}
-                score={this.props.score}
-                attempts={this.props.attempts}
-              />
-            :
-            <div>
-            {quizzes}
-            </div>
+             this.props.viewQuizSelected ?
+              <QuizStartContainer />
+              :
+              <QuizListContainer />
           ) : (
             <h3>You must be <Link to='/' className="redirect">logged in</Link> to access this content</h3>
           )}

@@ -4,6 +4,7 @@ export const LOG_OUT = 'LOG_OUT';
 export const EMAIL_USED = 'EMAIL_USED';
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const SELECT_QUIZ = 'SELECT_QUIZ';
+export const VIEW_QUIZZES = 'VIEW_QUIZZES';
 export const START_QUIZ = 'START_QUIZ';
 export const SELECT_ANSWER = 'SELECT_ANSWER';
 export const NEXT_QUESTION = 'NEXT_QUESTION';

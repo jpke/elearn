@@ -1,29 +1,29 @@
 import * as types from '../constants/actionTypes';
 
 let initialState;
-if(localStorage.getItem('login')) {
-  initialState = {
-    view: 'login',
-    userName: localStorage.getItem('login').userName | '',
-    _id: localStorage.getItem('login').user_Id | '',
-    course: "",
-    courses: localStorage.getItem('login').courses | [],
-    token: localStorage.getItem('login').token | "",
-    loggedIn: false,
-    loading: false
+if(window.localStorage.userName) {
+    initialState = {
+      view: 'login',
+      userName: window.localStorage.userName,
+      _id: window.localStorage.user_Id,
+      course: "",
+      courses: JSON.parse(window.localStorage.courses),
+      token: window.localStorage.token,
+      loggedIn: false,
+      loading: false
+    }
+  } else {
+    initialState = {
+      view: 'login',
+      userName: '',
+      _id: '',
+      course: "",
+      courses: [],
+      token: "",
+      loggedIn: false,
+      loading: false
+    }
   };
-} else {
-  initialState = {
-    view: 'login',
-    userName: '',
-    _id: '',
-    course: "",
-    courses: [],
-    token: "",
-    loggedIn: false,
-    loading: false
-  }
-};
 
 export default function authReducer(state = initialState, action) {
   switch(action.type) {

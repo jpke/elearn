@@ -9,13 +9,11 @@ export function loading(item) {
 }
 
 function loggedIn(response) {
-  console.log("response: ", response);
-  localStorage.setItem("login", {
-    userName: response.name,
-    user_Id: response._id,
-    courses: response.courses,
-    token: response.token
-  });
+  let courses = JSON.stringify(response.courses);
+  window.localStorage.userName = response.name;
+  window.localStorage.user_Id = response._id;
+  window.localStorage.courses = courses;
+  window.localStorage.token =  response.token;
   return {
     type: types.LOG_IN,
     userName: response.name,
@@ -56,7 +54,6 @@ export function register(userName, email, password) {
         return response.json()
       })
       .then(response => {
-        window.localStorage.loggedIn = true;
         dispatch(loading(''));
         dispatch(loggedIn(response));
       })
@@ -90,7 +87,6 @@ export function logIn(email, password) {
         return response.json()
       })
       .then(response => {
-        window.localStorage.loggedIn = true;
         // console.log("set-cookie: ", response)
         // cookie.save("tokens",
         //   response.token,
@@ -127,6 +123,12 @@ export function selectQuiz(quizName, quiz_Id) {
     type: types.SELECT_QUIZ,
     quizName,
     quiz_Id
+  };
+}
+
+export function viewQuizzes() {
+  return {
+    type: types.VIEW_QUIZZES
   };
 }
 
@@ -184,7 +186,7 @@ export function prevQuestion() {
   };
 }
 
-export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
+export function submitQuiz(quizData, quizId, _id, token) {
   return function (dispatch) {
     dispatch(loading('submitQuiz'));
     try {
@@ -195,7 +197,6 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          title: quizTitle,
           quizData: quizData,
           quiz_Id: quizId,
           user_Id: _id
@@ -213,6 +214,7 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
       .then((response) => {
         console.log("action response: ", response);
         dispatch(loading(''));
+        // dispatch(viewQuizzes());
         return dispatch({
           type: types.SUBMIT_QUIZ,
           score: response.score

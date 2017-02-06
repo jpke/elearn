@@ -10,12 +10,14 @@ export const QuizPage = (props) => {
   return (
       <Quiz
         selectQuiz={props.actions.selectQuiz}
+        viewQuizzes={props.actions.viewQuizzes}
         startQuiz={props.actions.startQuiz}
         selectAnswer={props.actions.selectAnswer}
         nextQuestion={props.actions.nextQuestion}
         prevQuestion={props.actions.prevQuestion}
         submitQuiz={props.actions.submitQuiz}
         quizSelected={props.quizSelected}
+        viewQuizSelected={props.viewQuizSelected}
         question={props.question}
         answers={props.answers}
         idSelected={props.idSelected}
@@ -39,7 +41,6 @@ export const QuizPage = (props) => {
 // QuizPage.propTypes
 
 function mapStateToProps(state) {
-  console.log('quizPage state ', state);
   return state.quizReducer.quizData.length > 0 ?
     {
       quizSelected: state.quizReducer.quizSelected,
@@ -66,6 +67,7 @@ function mapStateToProps(state) {
     token: state.authReducer.token,
     course: state.authReducer.course,
     quizSelected: state.quizReducer.quizSelected,
+    viewQuizSelected: state.quizReducer.viewQuizSelected
   }
 }
 
