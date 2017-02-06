@@ -59,8 +59,7 @@ export default function authReducer(state = initialState, action) {
     case types.SELECT_COURSE:
       return {
         ...state,
-        course: action.courseName,
-        course_Id: action.course_Id
+        course: action.course
       };
     default:
     return state;

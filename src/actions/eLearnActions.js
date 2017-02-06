@@ -106,11 +106,10 @@ export function logIn(email, password) {
   };
 }
 
-export function selectCourse(courseName, course_Id) {
+export function selectCourse(course) {
   return {
     type: types.SELECT_COURSE,
-    courseName,
-    course_Id
+    course
   };
 }
 
@@ -131,12 +130,12 @@ export function selectQuiz(quizName, quiz_Id) {
   };
 }
 
-export function startQuiz(token, course_Id) {
+export function startQuiz(token, quiz_Id) {
   return function (dispatch) {
     dispatch(loading('startQuiz'));
     //pull down quiz questions, then
     try {
-      fetch('http://localhost:8080/elearn/quiz/'.concat(course_Id), {
+      fetch('http://localhost:8080/elearn/quiz/'.concat(quiz_Id), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

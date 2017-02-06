@@ -2,20 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/eLearnActions';
-import Quiz from '../components/Quiz';
-// import QuizLanding from '../components/QuizLanding';
+import QuizView from '../components/QuizView';
 
-export const QuizPage = (props) => {
-  console.log("quizPage PROPS: ", props);
+export const QuizViewPage = (props) => {
   return (
-      <Quiz
+      <QuizView
         selectQuiz={props.actions.selectQuiz}
         startQuiz={props.actions.startQuiz}
         selectAnswer={props.actions.selectAnswer}
         nextQuestion={props.actions.nextQuestion}
         prevQuestion={props.actions.prevQuestion}
         submitQuiz={props.actions.submitQuiz}
-        quizSelected={props.quizSelected}
         question={props.question}
         answers={props.answers}
         idSelected={props.idSelected}
@@ -42,7 +39,6 @@ function mapStateToProps(state) {
   console.log('quizPage state ', state);
   return state.quizReducer.quizData.length > 0 ?
     {
-      quizSelected: state.quizReducer.quizSelected,
       question: state.quizReducer.currentQuestion.question,
       answers: state.quizReducer.currentQuestion.answers,
       idSelected: state.quizReducer.currentQuestion.idSelected,
@@ -64,8 +60,7 @@ function mapStateToProps(state) {
   {
     _id: state.authReducer.user_Id,
     token: state.authReducer.token,
-    course: state.authReducer.course,
-    quizSelected: state.quizReducer.quizSelected,
+    course: state.authReducer.course
   }
 }
 
@@ -78,4 +73,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(QuizPage);
+)(QuizViewPage);
