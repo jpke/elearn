@@ -25,6 +25,7 @@ export default function quizReducer(state = initialState, action) {
         quizzes: action.quizzes
       }
     case types.SELECT_QUIZ:
+    console.log("SELECT QUIZ: ", action);
       return {
        ...state,
        quizSelected: action.quizName,

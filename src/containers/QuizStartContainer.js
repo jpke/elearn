@@ -5,6 +5,7 @@ import {startQuiz, viewQuizzes} from '../actions/eLearnActions';
 import QuizStartView from '../components/QuizStartView';
 
 export const QuizStartContainer = (props) => {
+  console.log("quizstartcontainer props: ", props);
 
   const startQuiz = () => {
     props.startQuiz(props.token, props.quizSelectedId);

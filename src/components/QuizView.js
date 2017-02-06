@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItems from './ListItems';
 
-export const QuizView = (props) => (
+const QuizView = (props) => (
   <div className="quizInProgress">
     <h3>Question {props.currentQuestionIndex + 1}</h3>
     <p>{props.question}</p>
@@ -27,3 +27,5 @@ export const QuizView = (props) => (
     }
   </div>
 );
+
+export default QuizView;

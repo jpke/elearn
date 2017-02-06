@@ -5,6 +5,7 @@ import {selectQuiz} from '../actions/eLearnActions';
 import QuizListView from '../components/QuizListView';
 
 export const QuizListContainer = (props) => {
+  console.log('quiz list cont: ', props);
   return (
       <QuizListView
         listCreator={listCreator}
@@ -23,7 +24,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    selectQuiz: (quizName, quiz_Id) => dispatch(selectQuiz(quizName, quiz_Id))
+    selectQuiz: (quiz) => dispatch(selectQuiz(quiz))
   };
 }
 export default connect(

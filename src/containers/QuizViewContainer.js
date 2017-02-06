@@ -5,6 +5,7 @@ import * as actions from '../actions/eLearnActions';
 import QuizView from '../components/QuizView';
 
 export const QuizViewContainer = (props) => {
+  console.log("quizviewcontainer props: ", props);
   let unansweredQuestionCount = props.quizData.length;
   props.quizData.forEach(question => {
     if(question.idSelected != null) unansweredQuestionCount--

@@ -118,11 +118,12 @@ export function logOut() {
   };
 }
 
-export function selectQuiz(quizName, quiz_Id) {
+export function selectQuiz(quiz) {
+  console.log('action: ', quiz);
   return {
     type: types.SELECT_QUIZ,
-    quizName,
-    quiz_Id
+    quizName: quiz.title,
+    quiz_Id: quiz._id
   };
 }
 

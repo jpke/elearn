@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const QuizStartView = (props) => (
+const QuizStartView = (props) => (
       <div>
         {props.attempts.length ? (
           <div>
@@ -24,3 +24,5 @@ export const QuizStartView = (props) => (
       </div>
     </div>
 );
+
+export default QuizStartView;
