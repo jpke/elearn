@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import Quiz from '../components/Quiz';
 
 const QuizPage = (props) => {
-  console.log("quiz page props: ", props);
   return (
       <Quiz
         viewQuizSelected={props.viewQuizSelected}

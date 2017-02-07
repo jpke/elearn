@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes';
-import quizQuestionRamdomizer from '../utils/quizDataRandomizer';
+import quizDataRamdomizer from '../utils/quizDataRandomizer';
 import evaluateSelection from '../utils/evaluateSelection';
+import calcPassed from '../utils/calcPassed';
 
 const initialState = {
   quizzes: [],
@@ -25,7 +26,6 @@ export default function quizReducer(state = initialState, action) {
         quizzes: action.quizzes
       }
     case types.SELECT_QUIZ:
-    console.log("SELECT QUIZ: ", action);
       return {
        ...state,
        quizSelected: action.quizName,
@@ -38,9 +38,7 @@ export default function quizReducer(state = initialState, action) {
         viewQuizSelected: !state.viewQuizSelected
       }
     case types.START_QUIZ:
-    console.log("reducer: ", action.quizData);
-      let quizIteration = quizQuestionRamdomizer(action.quizData.items);
-      console.log("iteration: ", quizIteration);
+      let quizIteration = quizDataRamdomizer(action.quizData.items);
       return {
         ...state,
         quiz: action.quizData,
@@ -49,6 +47,7 @@ export default function quizReducer(state = initialState, action) {
         currentQuestionIndex: 0,
         questionCount: quizIteration.length,
         score: 0,
+        attempts: action.attempts,
         minimumScore: action.quizData.minimumScore,
         quizInProgress: true
       };
@@ -83,11 +82,11 @@ export default function quizReducer(state = initialState, action) {
         currentQuestionIndex: currentQuestionIndex
       };
     case types.SUBMIT_QUIZ:
-      attempts = state.attempts.concat(action.score);
-      Math.max(...attempts) >= state.minimumScore ? passed = true : passed = state.passed;
+      let attempts = state.attempts.slice().concat(action.attempts);
+      let passed = calcPassed(attempts, state.minimumScore);
       return {
         ...state,
-        score,
+        score: action.score,
         passed,
         quizInProgress: false,
         attempts

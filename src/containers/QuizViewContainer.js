@@ -5,7 +5,6 @@ import * as actions from '../actions/eLearnActions';
 import QuizView from '../components/QuizView';
 
 export const QuizViewContainer = (props) => {
-  console.log("quizviewcontainer props: ", props);
   let unansweredQuestionCount = props.quizData.length;
   props.quizData.forEach(question => {
     if(question.idSelected != null) unansweredQuestionCount--
@@ -48,7 +47,7 @@ function mapStateToProps(state) {
       questionCount: state.quizReducer.questionCount,
       quizId: state.quizReducer.quiz._id,
       quizData: state.quizReducer.quizData,
-      user_id: state.authReducer.user_Id,
+      user_id: state.authReducer._id,
       token: state.authReducer.token,
     }
 }

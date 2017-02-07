@@ -35,7 +35,6 @@ export default class Auth extends Component {
     if(this.props.courses) {
       courses = listCreator(this.props.courses, this.props.selectCourse);
     }
-    console.log("course: ", this.props.course);
       return (
         <div className="authContainer">
           <h2>Welcome</h2>

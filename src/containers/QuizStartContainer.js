@@ -5,10 +5,9 @@ import {startQuiz, viewQuizzes} from '../actions/eLearnActions';
 import QuizStartView from '../components/QuizStartView';
 
 export const QuizStartContainer = (props) => {
-  console.log("quizstartcontainer props: ", props);
-
+  
   const startQuiz = () => {
-    props.startQuiz(props.token, props.quizSelectedId);
+    props.startQuiz(props.token, props.quizSelectedId, props.userId);
   }
 
   return (
@@ -30,13 +29,14 @@ function mapStateToProps(state) {
       passed: state.quizReducer.passed,
       attempts: state.quizReducer.attempts,
       quizSelectedId: state.quizReducer.quizSelectedId,
-      token: state.authReducer.token
+      token: state.authReducer.token,
+      userId: state.authReducer._id
     };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    startQuiz: (token, quizId) => dispatch(startQuiz(token, quizId)),
+    startQuiz: (token, quizId, userId) => dispatch(startQuiz(token, quizId, userId)),
     viewQuizzes: () => dispatch(viewQuizzes())
   };
 }

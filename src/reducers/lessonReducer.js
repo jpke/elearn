@@ -13,7 +13,6 @@ export default function lessonReducer(state = initialState, action) {
         lessons: action.lessons
       };
     case types.GET_PDF:
-    console.log('reducer response: ',action.response);
       return {
         ...state,
         selectedPdf: action.response.selectedPdf

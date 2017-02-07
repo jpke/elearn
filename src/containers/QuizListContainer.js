@@ -5,7 +5,7 @@ import {selectQuiz} from '../actions/eLearnActions';
 import QuizListView from '../components/QuizListView';
 
 export const QuizListContainer = (props) => {
-  console.log('quiz list cont: ', props);
+  props.quizzes ? "" : window.location.href="/";
   return (
       <QuizListView
         listCreator={listCreator}
