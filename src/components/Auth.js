@@ -40,7 +40,7 @@ export default class Auth extends Component {
           <h2>Welcome</h2>
           {this.props.token ?
             <div className="select-course-container">
-              <h3>Hi  {this.props.userName}</h3>
+              <h3>Hi {this.props.userName}</h3>
               <p>Select course</p>
               {courses}
               {this.props.course ?
@@ -51,13 +51,15 @@ export default class Auth extends Component {
             </div>
           :
             this.state.login === true ?
-            <div>
-              <p>You must login or <button onClick={this.toggleView.bind(this)}>Register</button></p>
+            <div className="authFormContainer">
+              <h4>You must login or </h4>
+              <button className="toggleLogin" onClick={this.toggleView.bind(this)}>Register</button>
               <Login logIn={this.logIn.bind(this)} />
             </div>
             :
-            <div>
-              <p>You must register or <button onClick={this.toggleView.bind(this)}>Login</button></p>
+            <div className="authFormContainer">
+              <h4>You must register or </h4>
+              <button className="toggleLogin" onClick={this.toggleView.bind(this)}>Login</button>
               <Register register={this.register.bind(this)} />
             </div>
             }

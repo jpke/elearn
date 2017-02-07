@@ -38,6 +38,18 @@ li:hover {
   color: $color-text-highlight;
 }
 
+button {
+  margin: 10px;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: $color-raised;
+  border: 1px solid $color-highlight;
+  font-size: 1.3em;
+  color: $color-text-highlight;
+  font-family: 'Contrail One', cursive;
+}
+
 @mixin unlistify {
 	list-style: none;
 
@@ -61,6 +73,10 @@ margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h2 {
+    margin: 0;
+  }
 }
 
 h1 {
@@ -70,35 +86,47 @@ h1 {
 
 .select-course-container {
   text-align: center;
-
-  button {
-    width: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: $color-raised;
-    border: 1px solid $color-highlight;
-    font-size: 1.3em;
-    color: $color-text-highlight;
-    font-family: 'Contrail One', cursive;
-  }
 }
 
-#authRegister {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
+.authFormContainer {
+  width: 200px;
+
+  h4 {
+    text-align: center;
+    margin-bottom: 3px;
+  }
+
+  .toggleLogin {
+    font-size: 1.1em;
+    width: 88%;
+  }
+
+  .title {
+    margin-bottom: 6px;
+  }
+
+  #authForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .auth {
+      margin: 3px 0;
+      padding: 5px;
+      // width: 100%;
+      border-radius: 5px;
+      border: 1px solid gray;
+    }
+
+    .authButton {
+      margin: 6px 0;
+    }
+  }
 }
 
 .authTitle {
   margin-bottom: -5px;
   margin-left: 10px;
-}
-
-.auth {
-  margin: 1px;
-  border-radius: 5px;
-  border: 1px solid gray;
-  padding: 2px;
 }
 
 .highlight {
@@ -115,11 +143,4 @@ h1 {
 
 .redirect {
   text-decoration: none;
-}
-
-.quizInProgress {
-  display: flex;
-  flex-direction: column;
-  // align-items: center;
-  justify-content: space-around;
 }

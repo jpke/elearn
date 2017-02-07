@@ -10,7 +10,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log("app props: ", this.props);
     return (
       <div>
         <div className="header">
