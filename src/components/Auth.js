@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
+import listCreator from '../utils/listCreator'
 import Register from '../components/Register';
 import Login from '../components/Login';
 
@@ -32,10 +33,7 @@ export default class Auth extends Component {
   render() {
     let courses;
     if(this.props.courses) {
-      courses = this.props.courses.map((course, index) => {
-        let courseName = course.name;
-        return <li key={index} onClick={() => this.props.selectCourse(course.id)}>{courseName}</li>
-      })
+      courses = listCreator(this.props.courses, this.props.selectCourse);
     }
     console.log("course: ", this.props.course);
       return (

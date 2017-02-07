@@ -3,6 +3,9 @@ import quizQuestionRamdomizer from '../utils/quizDataRandomizer';
 import evaluateSelection from '../utils/evaluateSelection';
 
 const initialState = {
+  quizzes: [],
+  quizSelected: false,
+  viewQuizSelected: false,
   quizData: 0,
   currentQuestion: undefined,
   currentQuestionIndex: null,
@@ -16,6 +19,24 @@ const initialState = {
 export default function quizReducer(state = initialState, action) {
   let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts;
   switch(action.type) {
+    case types.SELECT_COURSE:
+      return {
+        ...state,
+        quizzes: action.quizzes
+      }
+    case types.SELECT_QUIZ:
+    console.log("SELECT QUIZ: ", action);
+      return {
+       ...state,
+       quizSelected: action.quizName,
+       quizSelectedId: action.quiz_Id,
+       viewQuizSelected: true
+       };
+    case types.VIEW_QUIZZES:
+      return {
+        ...state,
+        viewQuizSelected: !state.viewQuizSelected
+      }
     case types.START_QUIZ:
     console.log("reducer: ", action.quizData);
       let quizIteration = quizQuestionRamdomizer(action.quizData.items);

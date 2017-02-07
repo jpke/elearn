@@ -8,6 +8,21 @@ export function loading(item) {
   };
 }
 
+function loggedIn(response) {
+  let courses = JSON.stringify(response.courses);
+  window.localStorage.userName = response.name;
+  window.localStorage.user_Id = response._id;
+  window.localStorage.courses = courses;
+  window.localStorage.token =  response.token;
+  return {
+    type: types.LOG_IN,
+    userName: response.name,
+    user_Id: response._id,
+    courses: response.courses,
+    token: response.token
+  };
+}
+
 export function register(userName, email, password) {
   return function (dispatch) {
     dispatch(loading('register'));
@@ -39,15 +54,8 @@ export function register(userName, email, password) {
         return response.json()
       })
       .then(response => {
-        window.localStorage.loggedIn = true;
         dispatch(loading(''));
-        return dispatch({
-          type: types.LOG_IN,
-          userName,
-          user_Id: response._id,
-          courses: response.courses,
-          token: response.token
-        });
+        dispatch(loggedIn(response));
       })
     } catch(error) {
       console.log("error response: ", error);
@@ -79,7 +87,6 @@ export function logIn(email, password) {
         return response.json()
       })
       .then(response => {
-        window.localStorage.loggedIn = true;
         // console.log("set-cookie: ", response)
         // cookie.save("tokens",
         //   response.token,
@@ -87,13 +94,7 @@ export function logIn(email, password) {
         //     httpOnly: true
         //   });
         dispatch(loading(''));
-        return dispatch({
-          type: types.LOG_IN,
-          userName: response.userName,
-          user_Id: response._id,
-          courses: response.courses,
-          token: response.token
-        });
+        dispatch(loggedIn(response));
       })
     } catch(error) {
       console.log("error response: ", error);
@@ -101,11 +102,10 @@ export function logIn(email, password) {
   };
 }
 
-export function selectCourse(courseName) {
-  console.log("courseName: ", courseName);
+export function selectCourse(course) {
   return {
     type: types.SELECT_COURSE,
-    courseName
+    course
   };
 }
 
@@ -118,12 +118,27 @@ export function logOut() {
   };
 }
 
-export function startQuiz(token, course_Id) {
+export function selectQuiz(quiz) {
+  console.log('action: ', quiz);
+  return {
+    type: types.SELECT_QUIZ,
+    quizName: quiz.title,
+    quiz_Id: quiz._id
+  };
+}
+
+export function viewQuizzes() {
+  return {
+    type: types.VIEW_QUIZZES
+  };
+}
+
+export function startQuiz(token, quiz_Id) {
   return function (dispatch) {
     dispatch(loading('startQuiz'));
     //pull down quiz questions, then
     try {
-      fetch('http://localhost:8080/elearn/quiz/'.concat(course_Id), {
+      fetch('http://localhost:8080/elearn/quiz/'.concat(quiz_Id), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -172,7 +187,7 @@ export function prevQuestion() {
   };
 }
 
-export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
+export function submitQuiz(quizData, quizId, _id, token) {
   return function (dispatch) {
     dispatch(loading('submitQuiz'));
     try {
@@ -183,7 +198,6 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          title: quizTitle,
           quizData: quizData,
           quiz_Id: quizId,
           user_Id: _id
@@ -201,6 +215,7 @@ export function submitQuiz(quizData, quizTitle, quizId, _id, token) {
       .then((response) => {
         console.log("action response: ", response);
         dispatch(loading(''));
+        // dispatch(viewQuizzes());
         return dispatch({
           type: types.SUBMIT_QUIZ,
           score: response.score
