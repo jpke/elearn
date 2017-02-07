@@ -119,7 +119,6 @@ export function logOut() {
 }
 
 export function selectQuiz(quiz) {
-  console.log('action: ', quiz);
   return {
     type: types.SELECT_QUIZ,
     quizName: quiz.title,
@@ -133,12 +132,12 @@ export function viewQuizzes() {
   };
 }
 
-export function startQuiz(token, quiz_Id) {
+export function startQuiz(token, quiz_Id, user_Id) {
   return function (dispatch) {
     dispatch(loading('startQuiz'));
     //pull down quiz questions, then
     try {
-      fetch('http://localhost:8080/elearn/quiz/'.concat(quiz_Id), {
+      fetch('http://localhost:8080/elearn/quiz/'.concat(quiz_Id,"/",user_Id), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -154,10 +153,10 @@ export function startQuiz(token, quiz_Id) {
       })
       .then(response => {
         dispatch(loading(''));
-        console.log("quiz actions: ", response);
         return dispatch({
           type: types.START_QUIZ,
-          quizData: response
+          quizData: response[0][0],
+          attempts: response[1]
         });
         })
     } catch(error) {
@@ -213,7 +212,6 @@ export function submitQuiz(quizData, quizId, _id, token) {
       })
       .then(response => response.json())
       .then((response) => {
-        console.log("action response: ", response);
         dispatch(loading(''));
         // dispatch(viewQuizzes());
         return dispatch({
@@ -282,7 +280,6 @@ export function getPDF(pdfId, token) {
       })
       .then(response => {
         dispatch(loading(""));
-        console.log("response: ", response);
           return dispatch({
             type: types.GET_PDF,
             response

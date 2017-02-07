@@ -5,7 +5,6 @@ import QuizStartContainer from '../containers/QuizStartContainer';
 import QuizListContainer from '../containers/QuizListContainer';
 
 const Quiz = (props) => {
-  console.log("quiz props: ", props);
   return (
     <div className="quizContainer">
       <h2>Quiz</h2>

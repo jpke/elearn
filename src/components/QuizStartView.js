@@ -1,4 +1,5 @@
 import React from 'react';
+import highScore from '../utils/highScore';
 
 const QuizStartView = (props) => (
       <div>
@@ -11,7 +12,7 @@ const QuizStartView = (props) => (
                   props.attempts.length.toString().concat(" times")
                 }
             </h3>
-            <h4>Your best score was {Math.max(...props.attempts)}</h4>
+            <h4>Your best score was {highScore(props.attempts)}</h4>
             <h3>You have {props.passed ? "" : "not"} passed this quiz</h3>
           </div>
         ):(
