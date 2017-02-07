@@ -10,6 +10,7 @@ export default class App extends Component {
   }
 
   render() {
+    console.log("app props: ", this.props);
     return (
       <div>
         <div className="header">
@@ -19,8 +20,8 @@ export default class App extends Component {
             <Link to="/quiz">Quiz</Link>
             {' | '}
             <Link to="/lessons">Lessons</Link>
-          </div> ""}
-          <p>Logged in as ""</p>
+          </div>
+          {this.props.token ? <p>Logged in as {this.props.userName}</p> : ""}
         </div>
           <br/>
           {this.props.children}
