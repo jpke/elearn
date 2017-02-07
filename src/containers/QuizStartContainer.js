@@ -29,7 +29,7 @@ function mapStateToProps(state) {
       score: state.quizReducer.score,
       passed: state.quizReducer.passed,
       attempts: state.quizReducer.attempts,
-      quizSelectedId: state.quizReducer.quizSelected._id,
+      quizSelectedId: state.quizReducer.quizSelectedId,
       token: state.authReducer.token
     };
 }
