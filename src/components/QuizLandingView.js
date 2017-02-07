@@ -4,7 +4,7 @@ import QuizViewContainer from '../containers/QuizViewContainer';
 import QuizStartContainer from '../containers/QuizStartContainer';
 import QuizListContainer from '../containers/QuizListContainer';
 
-const Quiz = (props) => {
+const QuizLandingView = (props) => {
   return (
     <div className="quizContainer">
       <h2>Quiz</h2>
@@ -23,4 +23,4 @@ const Quiz = (props) => {
   );
 }
 
-export default Quiz;
+export default QuizLandingView;

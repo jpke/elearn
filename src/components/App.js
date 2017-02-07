@@ -23,6 +23,7 @@ export default class App extends Component {
           {this.props.token ? <p>Logged in as {this.props.userName}</p> : ""}
         </div>
           <br/>
+          <h1>Learn Online</h1>
           {this.props.children}
       </div>
     );

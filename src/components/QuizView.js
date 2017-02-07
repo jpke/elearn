@@ -5,8 +5,8 @@ const QuizView = (props) => (
   <div className="quizInProgress">
     <h3>Question {props.currentQuestionIndex + 1}</h3>
     <p>{props.question}</p>
-    <h3>Answers</h3>
-    <ul>
+    <h3 className="answers">Answers</h3>
+    <ul className="quiz-questions">
       <ListItems
         idSelected={props.idSelected}
         itemSelected={props.itemSelected}

@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Quiz from '../components/Quiz';
+import QuizLandingView from '../components/QuizLandingView';
 
-const QuizPage = (props) => {
+const QuizLanding = (props) => {
   return (
-      <Quiz
+      <QuizLandingView
         viewQuizSelected={props.viewQuizSelected}
         quizInProgress={props.quizInProgress}
         token={props.token}
@@ -24,4 +24,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps
-)(QuizPage);
+)(QuizLanding);

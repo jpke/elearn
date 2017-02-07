@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 
 const QuizListView = (props) => (
-    <div>
-    {props.listCreator(props.quizzes, props.selectQuiz)}
-    </div>
+  <div>
+    <h2>Select quiz</h2>
+    <ul className="quiz-list">
+      {props.listCreator(props.quizzes, props.selectQuiz)}
+    </ul>
+  </div>
 );
 
 export default QuizListView;

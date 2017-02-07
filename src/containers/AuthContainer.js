@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/eLearnActions';
 import Auth from '../components/Auth';
 
-export const AuthPage = (props) => {
+export const AuthContainer = (props) => {
   return (
       <Auth
         register={props.actions.register}
@@ -43,4 +43,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthPage);
+)(AuthContainer);
