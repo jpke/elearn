@@ -54,13 +54,18 @@ button {
 	list-style: none;
 
 	> li {
-		margin: 10px 0;
-		padding: 15px 10px;
+		// margin: 10px 0;
+		padding: 5px;
 	}
 }
 
-div {
+ul {
   @include unlistify;
+  margin-top: 30px;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  border: 1px solid black;
 }
 
 #app {
@@ -69,13 +74,14 @@ height: 100vh;
 margin: auto;
 }
 
-.authContainer {
+.authContainer, .course-list {
   display: flex;
   flex-direction: column;
   align-items: center;
 
   h2 {
     margin: 0;
+    text-align: center;
   }
 }
 
@@ -84,11 +90,11 @@ h1 {
   font-family: 'Contrail One', cursive;
 }
 
-.select-course-container {
-  text-align: center;
-}
+// .course-list {
+//   text-align: center;
+// }
 
-.authFormContainer {
+.authFormContainer, .course-list {
   width: 200px;
 
   h4 {
@@ -113,14 +119,23 @@ h1 {
     .auth {
       margin: 3px 0;
       padding: 5px;
-      // width: 100%;
       border-radius: 5px;
       border: 1px solid gray;
+      font-size: 1em;
+      font-family: 'Open Sans', sans-serif;
     }
 
     .authButton {
       margin: 6px 0;
     }
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .redirect {
+    font-weight: bold;
   }
 }
 
