@@ -39,8 +39,8 @@ export default class Auth extends Component {
         <div className="authContainer">
           <h2>Welcome</h2>
           {this.props.token ?
-            <div>
-              <h3>Hi, {this.props.userName}</h3>
+            <div className="select-course-container">
+              <h3>Hi  {this.props.userName}</h3>
               <p>Select course</p>
               {courses}
               {this.props.course ?

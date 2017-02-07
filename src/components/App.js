@@ -12,13 +12,18 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <IndexLink to="/">Home</IndexLink>
-        {' | '}
-        <Link to="/quiz">Quiz</Link>
-        {' | '}
-        <Link to="/lessons">Lessons</Link>
-        <br/>
-        {this.props.children}
+        <div className="header">
+          <div>
+            <IndexLink to="/">Home</IndexLink>
+            {' | '}
+            <Link to="/quiz">Quiz</Link>
+            {' | '}
+            <Link to="/lessons">Lessons</Link>
+          </div> ""}
+          <p>Logged in as ""</p>
+        </div>
+          <br/>
+          {this.props.children}
       </div>
     );
   }

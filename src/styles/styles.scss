@@ -1,6 +1,60 @@
+$color-background: #dbdbb8;
+$color-primary: #dbb8db;
+$color-raised: #dbcab8;
+$color-text: #7676b9;
+$color-text-highlight: #414137;
+$color-highlight: #b8dbdb;
+
+@import url('https://fonts.googleapis.com/css?family=Contrail+One|Open+Sans');
+
+body {
+  margin: 0;
+  padding: 10px;
+  background-color: $color-background;
+  color: $color-text;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    margin: 0;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $color-text;
+}
+
+a:hover {
+  color: $color-text-highlight;
+}
+
+li:hover {
+  background-color: $color-highlight;
+  color: $color-text-highlight;
+}
+
+@mixin unlistify {
+	list-style: none;
+
+	> li {
+		margin: 10px 0;
+		padding: 15px 10px;
+	}
+}
+
+div {
+  @include unlistify;
+}
+
 #app {
-max-width: 600px;
-margin: 30px auto;
+// max-width: 600px;
+height: 100vh;
+margin: auto;
 }
 
 .authContainer {
@@ -11,6 +65,22 @@ margin: 30px auto;
 
 h1 {
   text-align: center;
+  font-family: 'Contrail One', cursive;
+}
+
+.select-course-container {
+  text-align: center;
+
+  button {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: $color-raised;
+    border: 1px solid $color-highlight;
+    font-size: 1.3em;
+    color: $color-text-highlight;
+    font-family: 'Contrail One', cursive;
+  }
 }
 
 #authRegister {
