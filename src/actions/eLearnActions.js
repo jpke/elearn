@@ -1,6 +1,8 @@
 // import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
 
+const url = "http://localhost:8080/elearn/";
+
 export function loading(item) {
   return {
     type: 'LOADING',
@@ -27,7 +29,7 @@ export function register(userName, email, password) {
   return function (dispatch) {
     dispatch(loading('register'));
     try {
-      fetch('http://localhost:8080/elearn/users', {
+      fetch(url.concat('users'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +69,7 @@ export function logIn(email, password) {
   return function (dispatch) {
     dispatch(loading('logIn'));
     try {
-      fetch('http://localhost:8080/elearn/login', {
+      fetch(url.concat('login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -137,7 +139,7 @@ export function startQuiz(token, quiz_Id, user_Id) {
     dispatch(loading('startQuiz'));
     //pull down quiz questions, then
     try {
-      fetch('http://localhost:8080/elearn/quiz/'.concat(quiz_Id,"/",user_Id), {
+      fetch(url.concat('quiz/',quiz_Id,"/",user_Id), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -190,7 +192,7 @@ export function submitQuiz(quizData, quizId, _id, token) {
   return function (dispatch) {
     dispatch(loading('submitQuiz'));
     try {
-      fetch('http://localhost:8080/elearn/quiz/submit', {
+      fetch(url.concat('quiz/submit'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -231,7 +233,7 @@ export function getLessons(token) {
     // console.log("cookieToken: ", cookieToken);
     dispatch(loading('lessons'));
     try {
-      fetch('http://localhost:8080/elearn/lessons', {
+      fetch(url.concat('lessons'), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -259,11 +261,19 @@ export function getLessons(token) {
   };
 }
 
+export function loadPreview(response) {
+  return {
+    type: types.GET_PDF,
+    selectedPdf: response.selectedPdf || ""
+  };
+}
+
 export function getPDF(pdfId, token) {
   return function (dispatch) {
+    dispatch(loadPreview(""));
     dispatch(loading("pdf"));
     try {
-      fetch('http://localhost:8080/elearn/lessons/'.concat(pdfId), {
+      fetch(url.concat('lessons/',pdfId), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -280,10 +290,7 @@ export function getPDF(pdfId, token) {
       })
       .then(response => {
         dispatch(loading(""));
-          return dispatch({
-            type: types.GET_PDF,
-            response
-          });
+          return dispatch(loadPreview(response));
         })
     } catch(error) {
       console.log("error response: ", error);

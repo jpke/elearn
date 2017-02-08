@@ -33,28 +33,39 @@ a:hover {
   color: $color-text-highlight;
 }
 
+li {
+  border-radius: 5px;
+  text-align: center;
+}
+
 li:hover {
   background-color: $color-highlight;
   color: $color-text-highlight;
 }
 
 button {
-  margin: 10px;
+  // margin: 10px;
   width: 100%;
   padding: 5px;
   border-radius: 5px;
   background-color: $color-raised;
-  border: 1px solid $color-highlight;
+  border: 3px solid $color-background;
   font-size: 1.3em;
   color: $color-text-highlight;
   font-family: 'Contrail One', cursive;
+  // border: 3px solid $color-text;
+}
+
+button:focus {outline:0;}
+
+button:hover {
+  border: 3px solid $color-text;
 }
 
 @mixin unlistify {
 	list-style: none;
 
 	> li {
-		// margin: 10px 0;
 		padding: 5px;
 	}
 }
@@ -65,13 +76,19 @@ ul {
   padding: 0;
   width: 100%;
   text-align: left;
-  border: 1px solid black;
+  border: 1px solid $color-text-highlight;
+  border-radius: 5px;
 }
 
 #app {
 // max-width: 600px;
 height: 100vh;
 margin: auto;
+}
+
+.user-name {
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .authContainer, .course-list {
@@ -90,9 +107,13 @@ h1 {
   font-family: 'Contrail One', cursive;
 }
 
-// .course-list {
-//   text-align: center;
-// }
+.authFormContainer {
+  text-align: center;
+
+  h3 {
+    text-align: left;
+  }
+}
 
 .authFormContainer, .course-list, .quizContainer {
   width: 200px;
@@ -105,6 +126,7 @@ h1 {
   .toggleLogin {
     font-size: 1.1em;
     width: 88%;
+    margin: 0 auto;
   }
 
   .title {
@@ -144,11 +166,6 @@ h1 {
   margin-left: 10px;
 }
 
-.highlight {
-  background-color: yellow;
-  font-weight: bold;
-}
-
 .quizContainer {
   width: 100%;
   display: flex;
@@ -176,6 +193,7 @@ h1 {
 
   h3 {
     margin: 0;
+    color: $color-text-highlight;
   }
 
   > p {
@@ -185,14 +203,68 @@ h1 {
   .answers {
     margin-left: 10px;
   }
-  .quiz-questions {
-    margin: 10px;
+  .item-list {
+    margin: 10px 0;
     li {
       padding: 6px;
+      width: auto;
+      text-align: left;
+    }
+
+    .highlight {
+      background-color: #e9eff4;
+      font-weight: bold;
+    }
+  }
+
+  .quizNav-buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    width: 90%;
+    margin: 3px;
+  }
+
+  .unansweredCount {
+    text-align: center;
+
+    span {
+      font-size: larger;
+      color: $color-text-highlight;
     }
   }
 }
 
-.redirect {
-  text-decoration: none;
+.lessonsContainer {
+  width: 400px;
+  margin: auto;
+  h2 {
+    text-align: center;
+  }
+
+  h3 {
+    color: $color-text-highlight;
+    margin: 0;
+  }
+
+  .item-list {
+    margin: 10px 0;
+    li {
+      padding: 6px;
+      width: auto;
+      text-align: left;
+    }
+  }
+
+  .preview {
+    text-align: center;
+  }
+
 }
+
+
+// .redirect {
+//   text-decoration: none;
+// }

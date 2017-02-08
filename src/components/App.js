@@ -20,7 +20,7 @@ export default class App extends Component {
             {' | '}
             <Link to="/lessons">Lessons</Link>
           </div>
-          {this.props.token ? <p>Logged in as {this.props.userName}</p> : ""}
+          {this.props.token ? <div className="user-name"><p>Logged in as &nbsp;</p><p>{this.props.userName}</p></div> : ""}
         </div>
           <br/>
           <h1>Learn Online</h1>
