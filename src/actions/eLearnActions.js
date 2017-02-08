@@ -124,16 +124,23 @@ export function logOut() {
   };
 }
 
-export function createQuiz(title, courseId, minScore) {
+export function createQuiz(token, title, courseId, minScore) {
   return function (dispatch) {
     console.log("creating quiz");
+    console.log(token, title, courseId, minScore);
+    console.log(JSON.stringify({
+      title: title,
+      courseId: courseId,
+      minimumScore: minScore
+    }));
     dispatch(loading('createQuiz'));
     try {
       fetch(url.concat('quiz'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         withCredentials: true,
         body: JSON.stringify({
