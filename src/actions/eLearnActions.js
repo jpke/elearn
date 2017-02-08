@@ -11,6 +11,10 @@ export function loading(item) {
 }
 
 function loggedIn(response) {
+  console.log("response: ", response);
+  response.courses.forEach((course) => {
+    course.admin = course.admin.indexOf(response._id) > -1;
+  })
   let courses = JSON.stringify(response.courses);
   window.localStorage.userName = response.name;
   window.localStorage.user_Id = response._id;
