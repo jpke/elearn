@@ -6,7 +6,6 @@ import CreateQuizContainer from './CreateQuizContainer';
 import QuizListView from '../components/QuizListView';
 
 export const QuizListContainer = (props) => {
-  console.log("props: ", props.admin);
   props.quizzes ? "" : window.location.href="/";
   return (
     <div>

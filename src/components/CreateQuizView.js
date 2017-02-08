@@ -1,42 +1,54 @@
 import React from 'react';
+import EditQuizQuestion from './EditQuizQuestion';
 
 const CreateQuizView = (props) => {
+  console.log("props: ", props.quiz);
   let items;
   if(props.quiz) {
+    console.log("no seed running")
     items = props.quiz.map((item, index) => {
       return (
-        <div key={index}>
-          <input type="text" id={index}className="quizQuestion" value={item.question}/>
-          {item.answers.map((answer, index) => {
-            <div>
-              <input type="text" id={index}className="quizAnswer" value={item.answer}/>
-              <label><input type="checkbox" id={index + " checkbox"} value={item.correct}/>Correct</label>
-            </div>
-          })}
-        </div>
+        <EditQuizQuestion
+          item={item}
+          index={index}
+        />
       )
-    });
+    })
   } else {
-    console.log("creating items");
-    let answers = [];
-    for(let i = 0; i < 4; i++) {
-      answers.push({answer: "enter answer here", correct: false});
+    console.log("seed running")
+    const seedItem = {
+      question: "enter question here",
+      answers: [
+        {
+          answer: "enter answer here",
+          correct: false
+        },
+        {
+          answer: "enter answer here",
+          correct: false
+        },
+        {
+          answer: "enter answer here",
+          correct: false
+        },
+        {
+          answer: "enter answer here",
+          correct: false
+        }
+      ]
     };
-    items =
-        <div>
-          <input type="text" id={1}className="quizQuestion" placeholder="enter question here"/>
-          {props.answerList(answers)}
-        </div>
+    items = <EditQuizQuestion
+              item={seedItem}
+            />
   };
-  console.log("items: ", items);
   return (
     <div className="createNewQuiz">
       <h2>Create New Quiz</h2>
         <form onSubmit={props.createQuiz} id="newQuizForm">
           <label>Title</label>
-          <input type="text" id="quizTitle" className="newQuiz" />
+          <input type="text" id="quizTitle" name="title" className="newQuiz" />
           <label>Minimum Passing Score</label>
-          <input type="number" id="quizMinScore" className="newQuiz" />
+          <input type="number" id="quizMinScore" name="minimumScore" className="newQuiz" />
           {items}
           <button className="newQuizButton" type="submit">Create Quiz</button>
         </form>

@@ -8,25 +8,22 @@ export const CreateQuizContainer = (props) => {
   const createQuiz = (event) => {
     event.preventDefault();
     const form = event.target.elements;
-    console.log('form ', form.quizMinScore.value);
-    props.createQuiz(props.token, form.quizTitle.value, props.courseId, form.quizMinScore.value);
-  }
-
-  const answerList = (answers) => {
-    console.log("answers: ", answers);
-    let answerList = [];
-    for(let i in answers) {
-      answerList.push(
-        <div key={i}>
-          <input type="text" id={i} className="quizAnswer" placeholder={answers[i].answer}/>
-          <label>
-            <input type="radio" id={i + " radio"} name="quizAnswerCorrect" value={i}/>Correct
-          </label>
-        </div>
-      );
-    }
-    console.log("answerlist: ", answerList);
-    return answerList;
+    let quiz = {};
+    console.log("title: ", form.title.value);
+    quiz.title = form.title.value;
+    quiz.minimumScore = form.minimumScore.value;
+    quiz.items = [];
+    let item = {};
+    item.question = form.question.value;
+    item.answers = [];
+    for(let i = 0; i < form.quizAnswer; i++) {
+      item.answers[i] = form.quizAnswer[i].value
+    };
+    quiz.items.push(item);
+    console.log("quiz: ", quiz);
+    // quiz.items.push({question: form[2].value})
+    console.log('form quizanswer', form.quizAnswer);
+    // props.createQuiz(props.token, form.quizTitle.value, props.courseId, form.quizMinScore.value);
   }
 
   return (
@@ -35,7 +32,6 @@ export const CreateQuizContainer = (props) => {
       newQuiz={props.newQuiz}
       addItem={props.addItem}
       createQuiz={createQuiz.bind(this)}
-      answerList={answerList.bind(this)}
     />
   );
 };
