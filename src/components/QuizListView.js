@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 const QuizListView = (props) => (
   <div>
@@ -6,6 +6,7 @@ const QuizListView = (props) => (
     <ul className="quiz-list">
       {props.listCreator(props.quizzes, props.selectQuiz)}
     </ul>
+    {props.admin && <button onClick={props.createQuizViewToggle}>Create Quiz</button>}
   </div>
 );
 

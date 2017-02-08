@@ -124,6 +124,44 @@ export function logOut() {
   };
 }
 
+export function createQuiz(title, courseId, minScore) {
+  return function (dispatch) {
+    console.log("creating quiz");
+    dispatch(loading('createQuiz'));
+    try {
+      fetch(url.concat('quiz'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        withCredentials: true,
+        body: JSON.stringify({
+          title: title,
+          courseId: courseId,
+          minimumScore: minScore
+        })
+      })
+      .then(response => {
+        if(response.status != 201) {
+          let error = response;
+          throw error;
+        }
+        return response.json()
+      })
+      .then(response => {
+        dispatch(loading(''));
+        dispatch({
+          type: types.CREATE_QUIZ,
+          response
+        });
+      })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  };
+}
+
 export function selectQuiz(quiz) {
   return {
     type: types.SELECT_QUIZ,
@@ -135,6 +173,13 @@ export function selectQuiz(quiz) {
 export function viewQuizzes() {
   return {
     type: types.VIEW_QUIZZES
+  };
+}
+
+export function createQuizView() {
+  console.log("clicked");
+  return {
+    type: types.CREATE_QUIZ_VIEW
   };
 }
 

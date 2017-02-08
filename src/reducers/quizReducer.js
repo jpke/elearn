@@ -15,6 +15,8 @@ const initialState = {
   passed: false,
   quizInProgress: false,
   attempts: [],
+  createQuizView: false,
+  newQuiz: false
 };
 
 export default function quizReducer(state = initialState, action) {
@@ -36,6 +38,17 @@ export default function quizReducer(state = initialState, action) {
       return {
         ...state,
         viewQuizSelected: !state.viewQuizSelected
+      };
+    case types.CREATE_QUIZ_VIEW: {
+      return {
+        ...state,
+        createQuizView: !state.createQuizView
+      };
+    }
+    case types.CREATE_QUIZ:
+      return {
+        ...state,
+        newQuiz: action.response
       }
     case types.START_QUIZ:
       let quizIteration = quizDataRamdomizer(action.quizData.items);

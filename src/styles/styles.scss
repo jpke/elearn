@@ -237,6 +237,11 @@ h1 {
   }
 }
 
+.createNewQuiz #newQuizForm {
+  display: flex;
+  flex-direction: column;
+}
+
 .lessonsContainer {
   width: 400px;
   margin: auto;
