@@ -48,7 +48,8 @@ export default function quizReducer(state = initialState, action) {
     case types.CREATE_QUIZ:
       return {
         ...state,
-        newQuiz: action.response
+        quizSelected: action.response,
+        quizSelectedId: action.response._id
       }
     case types.START_QUIZ:
       let quizIteration = quizDataRamdomizer(action.quizData.items);

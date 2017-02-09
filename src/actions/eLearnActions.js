@@ -127,7 +127,6 @@ export function logOut() {
 export function createQuiz(token, title, courseId, minScore) {
   return function (dispatch) {
     console.log("creating quiz");
-    console.log(token, title, courseId, minScore);
     console.log(JSON.stringify({
       title: title,
       courseId: courseId,

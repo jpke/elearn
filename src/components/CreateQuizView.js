@@ -1,5 +1,6 @@
 import React from 'react';
 import EditQuizQuestion from './EditQuizQuestion';
+import {Link} from 'react-router';
 
 const CreateQuizView = (props) => {
   console.log("props: ", props.quiz);
@@ -46,13 +47,12 @@ const CreateQuizView = (props) => {
       <h2>Create New Quiz</h2>
         <form onSubmit={props.createQuiz} id="newQuizForm">
           <label>Title</label>
-          <input type="text" id="quizTitle" name="title" className="newQuiz" />
+          <input type="text" id="quizTitle" name="title" className="newQuiz" value={props.title}/>
           <label>Minimum Passing Score</label>
-          <input type="number" id="quizMinScore" name="minimumScore" className="newQuiz" />
-          {items}
+          <input type="number" id="quizMinScore" name="minimumScore" className="newQuiz" value={props.minimumScore}/>
           <button className="newQuizButton" type="submit">Create Quiz</button>
         </form>
-      <button onClick={props.createQuizViewToggle}>Quiz List</button>
+        <Link to="/quiz"><button>Quiz List</button></Link>
     </div>
   )
 };
