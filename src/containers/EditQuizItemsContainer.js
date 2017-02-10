@@ -31,6 +31,10 @@ export const EditQuizItemsContainer = (props) => {
     // answers.push(newAnswer);
   }
 
+  const updateQuiz = (event) => {
+    console.log(event.target);
+  }
+
   let items = props.items.slice();
   if(items == false) {
     items = [seedItem];
@@ -51,11 +55,12 @@ export const EditQuizItemsContainer = (props) => {
 
   console.log("items into render: ", items);
   return (
-    <div className="editQuiz">
+    <div className="editQuiz-container">
       <EditQuizTitleView
         title={props.title}
         minimumScore={props.minimumScore}
         editQuizItem= {editQuizItem}
+        updateQuiz={updateQuiz}
       />
     {items}
     </div>
