@@ -22,7 +22,7 @@ const initialState = {
 };
 
 export default function quizReducer(state = initialState, action) {
-  let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts;
+  let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts, quiz;
   switch(action.type) {
     case types.SELECT_COURSE:
       return {
@@ -54,6 +54,36 @@ export default function quizReducer(state = initialState, action) {
         quizSelected: action.response.title,
         quizSelectedId: action.response._id
       }
+    case types.UPDATE_QUIZ: {
+      // let quiz = Object.assign({}, state.quiz);
+      let quiz = JSON.parse(JSON.stringify(state.quiz));
+      console.log("quiz copy: ", quiz);
+      console.log(action.itemName == "minimumScore");
+      let itemName = action.itemName.toString();
+      if(itemName === "title"){
+        console.log("title running");
+        quiz.title = action.value;
+      } else if(itemName === "minimumScore") {
+        console.log("minscore running");
+        quiz.minimumScore = action.value;
+      } else if(itemName === "question") {
+        quiz.items[action.itemIndex].question = action.value;
+      } else if(itemName === "answer") {
+        quiz.items[action.itemIndex].answers[action.subIndex].answer = action.value;
+      } else if(itemName === "radio") {
+        quiz.items[action.itemIndex].answers = quiz.items[action.itemIndex].answers.map((answer, idx) => {
+          answer.correct = action.subIndex == idx ? true : false;
+          console.log("answer: ", answer,action.subIndex == idx, action.subIndex, idx);
+          return answer;
+        });
+        console.log(quiz.items[action.itemIndex].answers);
+      };
+      return {
+        ...state,
+        quiz
+      };
+    };
+
     case types.START_QUIZ:
       let quizIteration = quizDataRamdomizer(action.quizData.items);
       return {

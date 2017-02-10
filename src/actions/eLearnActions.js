@@ -168,6 +168,17 @@ export function createQuiz(token, title, courseId, minScore) {
   };
 }
 
+export function editQuiz(itemIndex, itemName, value, subIndex) {
+  console.log(itemIndex, itemName, value, subIndex);
+  return {
+    type: types.UPDATE_QUIZ,
+    itemName,
+    value,
+    itemIndex,
+    subIndex
+  };
+}
+
 export function selectQuiz(quiz) {
   return {
     type: types.SELECT_QUIZ,

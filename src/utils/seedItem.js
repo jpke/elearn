@@ -6,7 +6,7 @@ const seedItem = {
     answers: [
       {
         answer: "enter answer here",
-        correct: false
+        correct: true
       },
       {
         answer: "enter answer here",

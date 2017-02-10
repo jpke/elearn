@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {createQuizView, createQuiz, addItem} from '../actions/eLearnActions';
+import {createQuizView, createQuiz, addItem, editQuiz} from '../actions/eLearnActions';
 import EditQuizItemView from '../components/EditQuizItemView';
 import EditQuizTitleView from '../components/EditQuizTitleView';
 import seedItem from '../utils/seedItem';
@@ -10,7 +10,16 @@ export const EditQuizItemsContainer = (props) => {
 
   const editQuizItem = (event) => {
     event.preventDefault();
-    console.log(event.target);
+    console.log("target: ", event.target);
+    const target = event.target.id.split(" ");
+    const itemIndex = target[0];
+    const itemName = target[1];
+    const value = event.target.value;
+    const subIndex = target[2];
+    console.log("value: ", value);
+    props.editQuiz(itemIndex, itemName, value, subIndex)
+
+
   };
 
   const deleteAnswer = (event) => {
@@ -71,7 +80,8 @@ function mapDispatchToProps(dispatch) {
   return {
     createQuizViewToggle: () => dispatch(createQuizView()),
     addItem: (item) => dispatch(addItem(item)),
-    createQuiz: (token, title, courseId, minScore) => dispatch(createQuiz(token, title, courseId, minScore))
+    createQuiz: (token, title, courseId, minScore) => dispatch(createQuiz(token, title, courseId, minScore)),
+    editQuiz: (itemIndex, itemName, value, subIndex) => dispatch(editQuiz(itemIndex, itemName, value, subIndex))
   };
 }
 export default connect(

@@ -6,6 +6,13 @@ export const SELECT_COURSE = 'SELECT_COURSE';
 export const SELECT_QUIZ = 'SELECT_QUIZ';
 export const CREATE_QUIZ_VIEW = 'CREATE_QUIZ_VIEW';
 export const CREATE_QUIZ = 'CREATE_QUIZ';
+
+export const UPDATE_QUIZ = 'UPDATE_QUIZ';
+// export const UPDATE_MINIMUM_SCORE = 'UPDATE_MINIMUM_SCORE';
+// export const UPDATE_QUESTION = 'UPDATE_QUESTION';
+// export const UPDATE_ANSWER = 'UPDATE_ANSWER';
+// export const UPDATE_CORRECT_ANSWER = 'UPDATE_CORRECT_ANSWER';
+
 export const VIEW_QUIZZES = 'VIEW_QUIZZES';
 export const START_QUIZ = 'START_QUIZ';
 export const SELECT_ANSWER = 'SELECT_ANSWER';
