@@ -51,7 +51,7 @@ export const EditQuizItemsContainer = (props) => {
 
   console.log("items into render: ", items);
   return (
-    <div>
+    <div className="editQuiz">
       <EditQuizTitleView
         title={props.title}
         minimumScore={props.minimumScore}

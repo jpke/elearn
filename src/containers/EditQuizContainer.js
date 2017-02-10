@@ -12,11 +12,7 @@ export const EditQuizContainer = (props) => {
     props.createQuiz(props.token, form.title.value, props.courseId, form.minimumScore.value);
   };
 
-  return (
-    <div>
-      <EditQuizItemsContainer />
-    </div>
-  );
+  return <EditQuizItemsContainer />
 };
 
 // QuizPage.propTypes
