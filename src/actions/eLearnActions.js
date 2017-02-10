@@ -179,6 +179,40 @@ export function editQuiz(itemIndex, itemName, value, subIndex) {
   };
 }
 
+export function deleteSavedQuiz(token, userId, courseID, quizId) {
+  return function (dispatch) {
+    dispatch(loading('deleteQuiz'));
+    try {
+      fetch(url.concat('quiz/').concat(quizId + "/" + courseID), {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        } else {
+          return response;
+        }
+      })
+      .then(response => response.json())
+      .then((response) => {
+        dispatch(loading(''));
+        // dispatch(viewQuizzes());
+        return dispatch({
+          type: types.SUBMIT_QUIZ,
+          score: response.score
+        });
+        })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  }
+}
+
 export function selectQuiz(quiz) {
   return {
     type: types.SELECT_QUIZ,
