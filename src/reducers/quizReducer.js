@@ -2,6 +2,7 @@ import * as types from '../constants/actionTypes';
 import quizDataRamdomizer from '../utils/quizDataRandomizer';
 import evaluateSelection from '../utils/evaluateSelection';
 import calcPassed from '../utils/calcPassed';
+import seedItem from '../utils/seedItem';
 
 const initialState = {
   quizzes: [],
@@ -16,7 +17,8 @@ const initialState = {
   quizInProgress: false,
   attempts: [],
   createQuizView: false,
-  newQuiz: false
+  newQuiz: false,
+  quiz: seedItem
 };
 
 export default function quizReducer(state = initialState, action) {
@@ -48,7 +50,8 @@ export default function quizReducer(state = initialState, action) {
     case types.CREATE_QUIZ:
       return {
         ...state,
-        quizSelected: action.response,
+        quiz: action.response,
+        quizSelected: action.response.title,
         quizSelectedId: action.response._id
       }
     case types.START_QUIZ:

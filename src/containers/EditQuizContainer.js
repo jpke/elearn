@@ -11,6 +11,7 @@ export const EditQuizContainer = (props) => {
     const form = event.target.elements;
     props.createQuiz(props.token, form.title.value, props.courseId, form.minimumScore.value);
   };
+
   return (
     <div>
     {props.quizSelected ?
