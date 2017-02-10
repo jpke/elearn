@@ -245,9 +245,11 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 500px;
+  margin: 0 auto;
 
   .editQuiz-item {
-    width: 500px;
+    width: 100%;
     border: 1px solid $color-raised;
 
     h3 {
@@ -281,10 +283,20 @@ h1 {
         font-size: 16px;
       }
     }
+    .item-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 30%;
+        height: 35px;
+        font-size: 16px;
+      }
+    }
   }
 
   .editQuizTitle {
-    width: 500px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -297,7 +309,7 @@ h1 {
     }
     input {
       margin: 3px;
-      padding: 3px;
+      padding: 6px;
       border-radius: 3px;
       border: none;
       width: 70%;
@@ -307,13 +319,11 @@ h1 {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      // align-items:stretch;
 
-      div {
-        flex: 1;
+      .delete {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-end;
       }
 
       .passing-score {
@@ -322,6 +332,7 @@ h1 {
       }
 
       .save {
+        display: flex;
         justify-content: flex-end;
         align-items: flex-end;
       }
@@ -336,6 +347,19 @@ h1 {
     .edit-minimumScore {
       width: 60px;
       // text-align: center;
+    }
+  }
+
+  .addItem {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    button {
+      width: 30%;
+      height: 40px;
+      font-size: 18px;
+      margin: 3px;
     }
   }
 }

@@ -5,7 +5,9 @@ import EditQuizItemsContainer from './EditQuizItemsContainer';
 import CreateQuizView from '../components/CreateQuizView';
 
 export const EditQuizContainer = (props) => {
-  console.log("props: ", props);
+  if(props.message) {
+    alert(props.message);
+  }
   const createQuiz = (event) => {
     event.preventDefault();
     const form = event.target.elements;
@@ -23,7 +25,8 @@ function mapStateToProps(state) {
     courseId: state.authReducer.course._id,
     token: state.authReducer.token,
     quizSelected: state.quizReducer.quizSelected,
-    quizSelectedId: state.quizReducer.quizSelectedId
+    quizSelectedId: state.quizReducer.quizSelectedId,
+    message: state.quizReducer.message || ""
   };
 }
 function mapDispatchToProps(dispatch) {

@@ -55,10 +55,7 @@ export default function quizReducer(state = initialState, action) {
         quizSelectedId: action.response._id
       }
     case types.UPDATE_QUIZ: {
-      // let quiz = Object.assign({}, state.quiz);
       let quiz = JSON.parse(JSON.stringify(state.quiz));
-      console.log("quiz copy: ", quiz);
-      console.log(action.itemName == "minimumScore");
       let itemName = action.itemName.toString();
       if(itemName === "title"){
         console.log("title running");
@@ -77,7 +74,20 @@ export default function quizReducer(state = initialState, action) {
           return answer;
         });
         console.log(quiz.items[action.itemIndex].answers);
-      };
+      } else if(itemName === "deleteItem") {
+          if(quiz.items.length > 1) {
+            quiz.items = quiz.items.slice(0,action.itemIndex).concat(quiz.items.slice(action.itemIndex + 1, quiz.items.length));
+          } else return {
+            ...state,
+            message: "Quiz must have at least one question."
+          };
+      } else if(itemName === "addAnswer") {
+        quiz.items[action.itemIndex].answers.push(seedItem.items[0].answers[0]);
+      } else if(itemName === "addItem") {
+        quiz.items.push(seedItem.items[0]);
+      } else if(itemName === 'deleteQuiz') {
+        quiz = seedItem;
+      }
       return {
         ...state,
         quiz

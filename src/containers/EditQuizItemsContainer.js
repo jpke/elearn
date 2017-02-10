@@ -10,7 +10,6 @@ export const EditQuizItemsContainer = (props) => {
 
   const editQuizItem = (event) => {
     event.preventDefault();
-    console.log(event.target);
     const target = event.target.id.split(" ");
     const itemIndex = target[0];
     const itemName = target[1];
@@ -20,26 +19,23 @@ export const EditQuizItemsContainer = (props) => {
     props.editQuiz(itemIndex, itemName, value, subIndex)
   };
 
-  const deleteAnswer = (event) => {
-    console.log(event.target);
-    // answers = answers.slice(0,answerIndex).concat(answers.slice(answerIndex+1,answers.length));
-  };
-
-  const addAnswer = (event) => {
-    console.log(event.target);
-    const newAnswer = {answer: "Add answer here", correct: false};
-    // answers.push(newAnswer);
+  const deleteQuiz = () => {
+    let result = confirm("Confirm to delete quiz. This cannot be undone.")
+    console.log("confirmed? ", result);
+    if(result) props.editQuiz(0, "deleteQuiz");
   }
 
-  const updateQuiz = (event) => {
-    console.log(event.target);
+  const saveQuiz = () => {
+    console.log("saved quiz");
   }
 
-  let items = props.items.slice();
-  if(items == false) {
-    items = [seedItem];
+  const formSubmit = (e) => {
+    e.preventDefault();
+    console.log("event: ", e.target.elements);
+    deleteQuiz();
   }
-  items = items.map((item, index) => {
+
+  let items = props.items.map((item, index) => {
     return (
       <EditQuizItemView
         key={index}
@@ -47,8 +43,6 @@ export const EditQuizItemsContainer = (props) => {
         answers={item.answers}
         index={index}
         editQuizItem={editQuizItem}
-        deleteAnswer={deleteAnswer}
-        addAnswer={addAnswer}
       />
     );
   });
@@ -60,9 +54,13 @@ export const EditQuizItemsContainer = (props) => {
         title={props.title}
         minimumScore={props.minimumScore}
         editQuizItem= {editQuizItem}
-        updateQuiz={updateQuiz}
+        saveQuiz={saveQuiz}
+        deleteQuiz={deleteQuiz}
       />
-    {items}
+      {items}
+      <div className="addItem">
+        <button id="0 addItem" name="0 addItem" className="addItem-button" onClick={editQuizItem}>Add Question</button>
+      </div>
     </div>
   );
 };
