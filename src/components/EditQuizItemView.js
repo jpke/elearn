@@ -1,5 +1,4 @@
 import React from 'react';
-import RadioButton from './RadioButton';
 
 const EditQuizItemView = (props) => {
 
@@ -8,9 +7,10 @@ const EditQuizItemView = (props) => {
     return (
       <div key={props.index + " answer " + idx} id={props.index + " answerDiv " + idx}>
         <input type="text" id={props.index + " answer " + idx} name="itemAnswer" className="edit-quiz-item" defaultValue={itemAnswer.answer} onChange={(e) => {props.editQuizItem(e)}}/>
-        <RadioButton index={props.index} idx={idx} correct={itemAnswer.correct}
-          editQuizItem={props.editQuizItem} />
-        <button id={props.index + " answerDiv " + idx} className="modify-answers" onClick={props.deleteAnswer}>Delete</button>
+        <div className="editQuiz-answer-button">
+          <button id={props.index + " answerDiv " + idx} className="modify-answers" onClick={props.deleteAnswer}>Delete</button>
+          <button id={props.index + " answerCorrect " + idx} className="modify-answers" onClick={(e) => {props.editQuizItem(e)}}>{itemAnswer.correct ? "True" : "False"}</button>
+        </div>
       </div>
     );
   });

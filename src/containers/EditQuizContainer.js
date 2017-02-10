@@ -14,13 +14,7 @@ export const EditQuizContainer = (props) => {
 
   return (
     <div>
-    {props.quizSelected ?
       <EditQuizItemsContainer />
-    :
-      <CreateQuizView
-        createQuiz={createQuiz.bind(this)}
-      />
-    }
     </div>
   );
 };

@@ -70,7 +70,7 @@ export default function quizReducer(state = initialState, action) {
         quiz.items[action.itemIndex].question = action.value;
       } else if(itemName === "answer") {
         quiz.items[action.itemIndex].answers[action.subIndex].answer = action.value;
-      } else if(itemName === "radio") {
+      } else if(itemName === "answerCorrect") {
         quiz.items[action.itemIndex].answers = quiz.items[action.itemIndex].answers.map((answer, idx) => {
           answer.correct = action.subIndex == idx ? true : false;
           console.log("answer: ", answer,action.subIndex == idx, action.subIndex, idx);
