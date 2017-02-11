@@ -4,10 +4,11 @@ export const LOG_OUT = 'LOG_OUT';
 export const EMAIL_USED = 'EMAIL_USED';
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const SELECT_QUIZ = 'SELECT_QUIZ';
-export const CREATE_QUIZ_VIEW = 'CREATE_QUIZ_VIEW';
+export const TOGGLE_QUIZ_VIEW = 'TOGGLE_QUIZ_VIEW';
 export const CREATE_QUIZ = 'CREATE_QUIZ';
 
 export const UPDATE_QUIZ = 'UPDATE_QUIZ';
+export const DELETE_QUIZ = 'DELETE_QUIZ';
 export const SAVE_QUIZ = 'SAVE_QUIZ';
 
 export const VIEW_QUIZZES = 'VIEW_QUIZZES';

@@ -203,7 +203,9 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
         dispatch(loading(''));
         // dispatch(viewQuizzes());
         return dispatch({
-          type: types.DELETE_QUIZ
+          type: types.DELETE_QUIZ,
+          courseID,
+          quizId
         });
       })
     } catch(error) {
@@ -253,11 +255,14 @@ export function saveQuiz(token, userId, courseID, quiz) {
 }
 
 export function selectQuiz(quiz) {
-  return {
-    type: types.SELECT_QUIZ,
-    quizName: quiz.title,
-    quiz_Id: quiz._id
-  };
+  return function(dispatch) {
+    dispatch(toggleQuizView());
+    return dispatch({
+      type: types.SELECT_QUIZ,
+      quizName: quiz.title,
+      quiz_Id: quiz._id
+    });
+  }
 }
 
 export function viewQuizzes() {
@@ -267,9 +272,9 @@ export function viewQuizzes() {
 }
 
 export function toggleQuizView() {
-  console.log("clicked");
+  console.log("clicked toggle");
   return {
-    type: types.CREATE_QUIZ_VIEW
+    type: types.TOGGLE_QUIZ_VIEW
   };
 }
 

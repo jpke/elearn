@@ -26,6 +26,7 @@ if(window.localStorage.userName) {
   };
 
 export default function authReducer(state = initialState, action) {
+  let courses, index, i;
   switch(action.type) {
     case types.LOADING:
       return {
@@ -61,23 +62,45 @@ export default function authReducer(state = initialState, action) {
         ...state,
         course: action.course
       };
-    case types.SAVE_QUIZ:
-      if(!action.course) return state;
-      let courses = JSON.parse(JSON.stringify(state.courses));
-      let index = -1;
-      let i = 0
+    case types.DELETE_QUIZ:
+      if(!action.quizId) return state;
+      courses = JSON.parse(JSON.stringify(state.courses));
+      index = -1;
+      i = 0;
       for(i; i < courses.length; i++) {
         if(courses[i]._id === action.course._id) index = i;
       }
       console.log("index: ", index);
       if(i != -1) {
-        console.log("course not found in courses")
-        courses[index].quizzes.push(action.quiz._id);
+          let quizzes = courses[index].quizzes;
+          let j = 0;
+          for(j; i < quizzes.length; j++) {
+            if(quizzes[j]._id === action.quizId)
+            quizzes = quizzes.slice(0,j).concat(quizzes.slice(j + 1, quizzes.length));
+          }
+          courses[index].quizzes = quizzes;
+      }
+      return {
+        ...state,
+        course: courses[index],
+        courses: courses
+      };
+    case types.SAVE_QUIZ:
+      if(!action.course) return state;
+      courses = JSON.parse(JSON.stringify(state.courses));
+      index = -1;
+      i = 0
+      for(i; i < courses.length; i++) {
+        if(courses[i]._id === action.course._id) index = i;
+      }
+      console.log("index: ", index);
+      if(i != -1) {
+        courses[index].quizzes.push({_id: action.quiz._id, title: action.quiz.title});
       }
       return {
         ...state,
         courses: courses,
-        course: action.course
+        course: courses[index]
       };
     default:
     return state;

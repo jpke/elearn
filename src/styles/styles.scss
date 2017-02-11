@@ -179,6 +179,27 @@ h1 {
 
   .quiz-list {
     width: auto;
+
+    .listed-item {
+      min-width: 200px;
+      margin: 3px;
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        padding: 6px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 19px;
+      }
+
+      button {
+        font-size: 18px;
+        width: 60px;
+        border-radius: 10px;
+      }
+    }
   }
 }
 

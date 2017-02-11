@@ -6,10 +6,11 @@ import EditQuizContainer from './EditQuizContainer';
 import QuizListView from '../components/QuizListView';
 
 export const QuizListContainer = (props) => {
+  console.log("quiz list props: ", props);
   props.quizzes ? "" : window.location.href="/";
   return (
     <div>
-    {props.createQuizView && props.admin ?
+    {props.viewQuizSelected && props.admin ?
       <EditQuizContainer />
     :
       <QuizListView
@@ -30,7 +31,7 @@ function mapStateToProps(state) {
   return {
     quizzes: state.authReducer.course.quizzes,
     admin: state.authReducer.course.admin,
-    createQuizView: state.quizReducer.createQuizView
+    viewQuizSelected: state.quizReducer.viewQuizSelected
   };
 }
 function mapDispatchToProps(dispatch) {

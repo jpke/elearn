@@ -57,8 +57,8 @@ export const EditQuizItemsContainer = (props) => {
   return (
     <div className="editQuiz-container">
       <div className="backToQuizList">
-        <Link to="/quiz">
-          <button id="toggleQuizView" className="toggleQuizView">Back to Quizzes
+        <Link to="/quiz" >
+          <button id="toggleQuizView" className="toggleQuizView" onClick={() => toggleQuizView()}>Back to Quizzes
           </button>
         </Link>
       </div>

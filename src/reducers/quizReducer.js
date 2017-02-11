@@ -34,17 +34,17 @@ export default function quizReducer(state = initialState, action) {
        ...state,
        quizSelected: action.quizName,
        quizSelectedId: action.quiz_Id,
-       viewQuizSelected: true
        };
     case types.VIEW_QUIZZES:
       return {
         ...state,
         viewQuizSelected: !state.viewQuizSelected
       };
-    case types.CREATE_QUIZ_VIEW: {
+    case types.TOGGLE_QUIZ_VIEW: {
+      console.log("quiz view ", state.viewQuizSelected);
       return {
         ...state,
-        createQuizView: !state.createQuizView
+        viewQuizSelected: !state.viewQuizSelected
       };
     }
     // case types.CREATE_QUIZ:
