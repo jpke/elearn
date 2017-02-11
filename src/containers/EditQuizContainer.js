@@ -8,11 +8,6 @@ export const EditQuizContainer = (props) => {
   if(props.message) {
     alert(props.message);
   }
-  const createQuiz = (event) => {
-    event.preventDefault();
-    const form = event.target.elements;
-    props.createQuiz(props.token, form.title.value, props.courseId, form.minimumScore.value);
-  };
 
   return <EditQuizItemsContainer />
 };
@@ -32,8 +27,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     createQuizViewToggle: () => dispatch(createQuizView()),
-    addItem: (item) => dispatch(addItem(item)),
-    createQuiz: (token, title, courseId, minScore) => dispatch(createQuiz(token, title, courseId, minScore))
   };
 }
 export default connect(

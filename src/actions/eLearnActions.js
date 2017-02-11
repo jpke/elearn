@@ -203,10 +203,49 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
         dispatch(loading(''));
         // dispatch(viewQuizzes());
         return dispatch({
-          type: types.SUBMIT_QUIZ,
-          score: response.score
+          type: types.DELETE_QUIZ
         });
+      })
+    } catch(error) {
+      console.log("error response: ", error);
+    }
+  }
+}
+
+export function saveQuiz(token, userId, courseID, quiz) {
+  console.log("sending saved quiz");
+  return function (dispatch) {
+    dispatch(loading('saveQuiz'));
+    try {
+      fetch(url.concat('quiz/'), {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          userId,
+          courseID,
+          quiz
         })
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        } else {
+          return response;
+        }
+      })
+      .then(response => response.json())
+      .then((response) => {
+        dispatch(loading(''));
+        return dispatch({
+          type: types.SAVE_QUIZ,
+          quiz: response[0],
+          course: response[1]
+        });
+      })
     } catch(error) {
       console.log("error response: ", error);
     }
@@ -227,7 +266,7 @@ export function viewQuizzes() {
   };
 }
 
-export function createQuizView() {
+export function toggleQuizView() {
   console.log("clicked");
   return {
     type: types.CREATE_QUIZ_VIEW

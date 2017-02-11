@@ -18,7 +18,7 @@ return (
           </div>
         </div>
         <div className="save">
-          <button id="updateQuiz" className="updateQuiz" onClick={props.saveQuiz}>Save</button>
+          <button id="updateQuiz" className="updateQuiz" onClick={() => {props.saveQuiz()}}>Save</button>
         </div>
       </section>
     </div>

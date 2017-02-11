@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {createQuizView, createQuiz, addItem, editQuiz, deleteSavedQuiz} from '../actions/eLearnActions';
+import {toggleQuizView, editQuiz, deleteSavedQuiz, saveQuiz} from '../actions/eLearnActions';
 import EditQuizItemView from '../components/EditQuizItemView';
 import EditQuizTitleView from '../components/EditQuizTitleView';
 import seedItem from '../utils/seedItem';
@@ -30,7 +31,8 @@ export const EditQuizItemsContainer = (props) => {
   }
 
   const saveQuiz = () => {
-    console.log("saved quiz");
+    console.log("saved quiz: ", props.userId, props.courseId, props.quiz);
+    props.saveQuiz(props.token, props.userId, props.courseId, props.quiz)
   }
 
   const formSubmit = (e) => {
@@ -54,6 +56,12 @@ export const EditQuizItemsContainer = (props) => {
   console.log("items into render: ", items);
   return (
     <div className="editQuiz-container">
+      <div className="backToQuizList">
+        <Link to="/quiz">
+          <button id="toggleQuizView" className="toggleQuizView">Back to Quizzes
+          </button>
+        </Link>
+      </div>
       <EditQuizTitleView
         title={props.title}
         minimumScore={props.minimumScore}
@@ -73,6 +81,7 @@ export const EditQuizItemsContainer = (props) => {
 
 function mapStateToProps(state) {
   return {
+    quiz: state.quizReducer.quiz,
     quizSelectedId: state.quizReducer.quizSelectedId,
     items: state.quizReducer.quiz.items,
     title: state.quizReducer.quiz.title,
@@ -85,8 +94,10 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
+    toggleQuizView: () => dispatch(toggleQuizView()),
     editQuiz: (itemIndex, itemName, value, subIndex) => dispatch(editQuiz(itemIndex, itemName, value, subIndex)),
-    deleteSavedQuiz: (token, userId, courseId, quizId) => dispatch(deleteSavedQuiz(token, userId, courseId, quizId))
+    deleteSavedQuiz: (token, userId, courseId, quizId) => dispatch(deleteSavedQuiz(token, userId, courseId, quizId)),
+    saveQuiz: (token, userId, courseId, quiz) => dispatch(saveQuiz(token, userId, courseId, quiz))
   };
 }
 export default connect(
