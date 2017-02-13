@@ -5,9 +5,6 @@ import EditQuizItemsContainer from './EditQuizItemsContainer';
 import CreateQuizView from '../components/CreateQuizView';
 
 export const EditQuizContainer = (props) => {
-  if(props.message) {
-    alert(props.message);
-  }
 
   return <EditQuizItemsContainer />
 };
@@ -21,7 +18,6 @@ function mapStateToProps(state) {
     token: state.authReducer.token,
     quizSelected: state.quizReducer.quizSelected,
     quizSelectedId: state.quizReducer.quizSelectedId,
-    message: state.quizReducer.message || ""
   };
 }
 function mapDispatchToProps(dispatch) {

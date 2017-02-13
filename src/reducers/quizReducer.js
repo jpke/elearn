@@ -47,13 +47,6 @@ export default function quizReducer(state = initialState, action) {
         viewQuizSelected: !state.viewQuizSelected
       };
     }
-    // case types.CREATE_QUIZ:
-    //   return {
-    //     ...state,
-    //     quiz: action.response,
-    //     quizSelected: action.response.title,
-    //     quizSelectedId: action.response._id
-    //   }
     case types.UPDATE_QUIZ: {
       let quiz = JSON.parse(JSON.stringify(state.quiz));
       let itemName = action.itemName.toString();
@@ -96,7 +89,8 @@ export default function quizReducer(state = initialState, action) {
     case types.SAVE_QUIZ:
       return {
         ...state,
-        quiz: action.quiz
+        quiz: action.quiz,
+        message: "Quiz saved!"
       };
     case types.START_QUIZ:
       let quizIteration = quizDataRamdomizer(action.quizData.items);

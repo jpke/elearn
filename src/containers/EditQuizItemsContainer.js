@@ -57,10 +57,15 @@ export const EditQuizItemsContainer = (props) => {
   return (
     <div className="editQuiz-container">
       <div className="backToQuizList">
+        <div>
+        </div>
         <Link to="/quiz" >
-          <button id="toggleQuizView" className="toggleQuizView" onClick={() => toggleQuizView()}>Back to Quizzes
+          <button id="toggleQuizView" className="toggleQuizView">Back to Quizzes
           </button>
         </Link>
+        <div>
+          <h3>{props.message}</h3>
+        </div>
       </div>
       <EditQuizTitleView
         title={props.title}
@@ -88,7 +93,8 @@ function mapStateToProps(state) {
     minimumScore: state.quizReducer.quiz.minimumScore,
     courseId: state.authReducer.course._id,
     token: state.authReducer.token,
-    userId: state.authReducer._id
+    userId: state.authReducer._id,
+    message: state.quizReducer.message
 
   };
 }

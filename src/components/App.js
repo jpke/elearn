@@ -10,6 +10,9 @@ export default class App extends Component {
   }
 
   render() {
+    if(this.props.errorMessage) {
+      alert(this.props.errorMessage.concat(", please try again, or contact your instructor for help"));
+    }
     return (
       <div>
         <div className="header">

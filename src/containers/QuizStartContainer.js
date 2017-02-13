@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 // import {bindActionCreators} from 'redux';
-import {startQuiz, viewQuizzes} from '../actions/eLearnActions';
+import {startQuiz, toggleQuizView} from '../actions/eLearnActions';
 import QuizStartView from '../components/QuizStartView';
 
 export const QuizStartContainer = (props) => {
-  
+
   const startQuiz = () => {
     props.startQuiz(props.token, props.quizSelectedId, props.userId);
   }
@@ -13,7 +13,7 @@ export const QuizStartContainer = (props) => {
   return (
       <QuizStartView
         startQuiz={startQuiz}
-        viewQuizzes={props.viewQuizzes}
+        viewQuizzes={props.toggleQuizView}
         passed={props.passed}
         score={props.score}
         attempts={props.attempts}
@@ -37,7 +37,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     startQuiz: (token, quizId, userId) => dispatch(startQuiz(token, quizId, userId)),
-    viewQuizzes: () => dispatch(viewQuizzes())
+    toggleQuizView: () => dispatch(toggleQuizView())
   };
 }
 

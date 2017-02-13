@@ -269,6 +269,21 @@ h1 {
   width: 500px;
   margin: 0 auto;
 
+  .backToQuizList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    button {
+      width: 200px;
+    }
+    h3 {
+      margin: 0 0 6px 0;
+      color: red;
+      text-align: center;
+    }
+  }
+
   .editQuiz-item {
     width: 100%;
     border: 1px solid $color-raised;

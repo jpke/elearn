@@ -5,9 +5,9 @@ const QuizListView = (props) => (
   <div>
     <h2>Select quiz</h2>
     <ul className="quiz-list">
-      {props.listCreator(props.quizzes, props.selectQuiz, props.admin)}
+      {props.listCreator(props.quizzes, props.selectQuiz, props.admin, props.editQuiz)}
     </ul>
-    {props.admin && <Link to="/quiz/modify"><button>Create Quiz</button></Link>}
+    {props.admin && <button onClick={() => {props.editQuiz()}}>Create Quiz</button>}
   </div>
 );
 

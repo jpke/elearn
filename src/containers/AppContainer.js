@@ -17,6 +17,7 @@ class AppContainer extends Component {
   render() {
     return (
         <App
+          errorMessage={this.props.errorMessage}
           userName={this.props.userName}
           token={this.props.token}
           children={this.props.children}
@@ -29,6 +30,7 @@ function mapStateToProps(state) {
   return {
     userName: state.authReducer.userName,
     token: state.authReducer.token,
+    errorMessage: state.authReducer.errorMessage
   }
 }
 
