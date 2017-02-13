@@ -5,6 +5,7 @@ export const LOG_OUT = 'LOG_OUT';
 export const EMAIL_USED = 'EMAIL_USED';
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const SELECT_QUIZ = 'SELECT_QUIZ';
+export const LOAD_QUIZ = 'LOAD_QUIZ';
 export const TOGGLE_QUIZ_VIEW = 'TOGGLE_QUIZ_VIEW';
 
 export const UPDATE_QUIZ = 'UPDATE_QUIZ';

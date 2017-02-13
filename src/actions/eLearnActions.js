@@ -133,53 +133,7 @@ export function logOut() {
   };
 }
 
-// export function createQuiz(token, title, courseId, minScore) {
-//   return function (dispatch) {
-//     console.log("creating quiz");
-//     console.log(JSON.stringify({
-//       title: title,
-//       courseId: courseId,
-//       minimumScore: minScore
-//     }));
-//     dispatch(loading('createQuiz'));
-//     try {
-//       fetch(url.concat('quiz'), {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Accept': 'application/json',
-//           'Authorization': `Bearer ${token}`
-//         },
-//         withCredentials: true,
-//         body: JSON.stringify({
-//           title: title,
-//           courseId: courseId,
-//           minimumScore: minScore
-//         })
-//       })
-//       .then(response => {
-//         if(response.status != 201) {
-//           let error = response;
-//           throw error;
-//         }
-//         return response.json()
-//       })
-//       .then(response => {
-//         dispatch(loading(''));
-//         dispatch({
-//           type: types.CREATE_QUIZ,
-//           response
-//         });
-//       })
-//     } catch(error) {
-//       dispatch(badResponse("Problem with creating quiz"))
-//       console.log("error response: ", error);
-//     }
-//   };
-// }
-
 export function editQuiz(itemIndex, itemName, value, subIndex) {
-  console.log(itemIndex, itemName, value, subIndex);
   return {
     type: types.UPDATE_QUIZ,
     itemName,
@@ -266,27 +220,29 @@ export function saveQuiz(token, userId, courseID, quiz) {
   }
 }
 
-export function selectQuiz(quiz) {
+export function selectQuizToEdit(token, quizId, userId) {
+  return function(dispatch) {
+    // dispatch(selectQuiz(quiz));
+    dispatch(loadQuiz(token, quizId, userId));
+  }
+}
+
+export function selectQuiz(token, quizId, userId) {
   return function(dispatch) {
     dispatch(toggleQuizView());
-    return dispatch({
-      type: types.SELECT_QUIZ,
-      quizName: quiz.title,
-      quiz_Id: quiz._id
-    });
+    dispatch(loadQuiz(token, quizId, userId));
   }
 }
 
 export function toggleQuizView() {
-  console.log("clicked toggle");
   return {
     type: types.TOGGLE_QUIZ_VIEW
   };
 }
 
-export function startQuiz(token, quiz_Id, user_Id) {
+export function loadQuiz(token, quiz_Id, user_Id) {
   return function (dispatch) {
-    dispatch(loading('startQuiz'));
+    dispatch(loading('loadQuiz'));
     //pull down quiz questions, then
     try {
       fetch(url.concat('quiz/',quiz_Id,"/",user_Id), {
@@ -306,7 +262,7 @@ export function startQuiz(token, quiz_Id, user_Id) {
       .then(response => {
         dispatch(loading(''));
         return dispatch({
-          type: types.START_QUIZ,
+          type: types.LOAD_QUIZ,
           quizData: response[0][0],
           attempts: response[1]
         });
@@ -315,6 +271,12 @@ export function startQuiz(token, quiz_Id, user_Id) {
       dispatch(badResponse("Problem with loading quiz"))
       console.log("error response: ", error);
     }
+  };
+}
+
+export function startQuiz() {
+  return {
+    type: types.START_QUIZ
   };
 }
 

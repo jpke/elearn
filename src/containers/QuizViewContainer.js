@@ -19,6 +19,7 @@ export const QuizViewContainer = (props) => {
         nextQuestion={props.actions.nextQuestion}
         prevQuestion={props.actions.prevQuestion}
         submitQuiz={submitQuiz}
+        title={props.title}
         question={props.question}
         answers={props.answers}
         idSelected={props.idSelected}
@@ -39,6 +40,7 @@ export const QuizViewContainer = (props) => {
 
 function mapStateToProps(state) {
   return {
+      title: state.quizReducer.quiz.title,
       question: state.quizReducer.currentQuestion.question || "",
       answers: state.quizReducer.currentQuestion.answers,
       idSelected: state.quizReducer.currentQuestion.idSelected,

@@ -35,26 +35,19 @@ export default function quizReducer(state = initialState, action) {
        quizSelected: action.quizName,
        quizSelectedId: action.quiz_Id,
        };
-    case types.VIEW_QUIZZES:
-      return {
-        ...state,
-        viewQuizSelected: !state.viewQuizSelected
-      };
     case types.TOGGLE_QUIZ_VIEW: {
-      console.log("quiz view ", state.viewQuizSelected);
       return {
         ...state,
-        viewQuizSelected: !state.viewQuizSelected
+        viewQuizSelected: !state.viewQuizSelected,
+        message: ""
       };
     }
     case types.UPDATE_QUIZ: {
       let quiz = JSON.parse(JSON.stringify(state.quiz));
       let itemName = action.itemName.toString();
       if(itemName === "title"){
-        console.log("title running");
         quiz.title = action.value;
       } else if(itemName === "minimumScore") {
-        console.log("minscore running");
         quiz.minimumScore = action.value;
       } else if(itemName === "question") {
         quiz.items[action.itemIndex].question = action.value;
@@ -63,10 +56,8 @@ export default function quizReducer(state = initialState, action) {
       } else if(itemName === "answerCorrect") {
         quiz.items[action.itemIndex].answers = quiz.items[action.itemIndex].answers.map((answer, idx) => {
           answer.correct = action.subIndex == idx ? true : false;
-          console.log("answer: ", answer,action.subIndex == idx, action.subIndex, idx);
           return answer;
         });
-        console.log(quiz.items[action.itemIndex].answers);
       } else if(itemName === "deleteItem") {
           if(quiz.items.length > 1) {
             quiz.items = quiz.items.slice(0,action.itemIndex).concat(quiz.items.slice(action.itemIndex + 1, quiz.items.length));
@@ -83,16 +74,24 @@ export default function quizReducer(state = initialState, action) {
       }
       return {
         ...state,
-        quiz
+        quiz,
+        message: ""
       };
     };
+    case types.DELETE_QUIZ:
+      return {
+        ...state,
+        quiz: seedItem,
+        message: ""
+      };
     case types.SAVE_QUIZ:
+      console.log("saved quiz: ", action.quiz);
       return {
         ...state,
         quiz: action.quiz,
         message: "Quiz saved!"
       };
-    case types.START_QUIZ:
+    case types.LOAD_QUIZ:
       let quizIteration = quizDataRamdomizer(action.quizData.items);
       return {
         ...state,
@@ -104,6 +103,11 @@ export default function quizReducer(state = initialState, action) {
         score: 0,
         attempts: action.attempts,
         minimumScore: action.quizData.minimumScore,
+      };
+
+    case types.START_QUIZ:
+      return {
+        ...state,
         quizInProgress: true
       };
     case types.SELECT_ANSWER:

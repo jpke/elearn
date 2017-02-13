@@ -5,6 +5,7 @@ const QuizStartView = (props) => (
       <div className="quiz-start">
         {props.attempts.length ? (
           <div>
+            <h3>{props.title}</h3>
             <h3>You have attempted this quiz {
                 props.attempts.length === 1 ?
                   props.attempts.length.toString().concat(" time")

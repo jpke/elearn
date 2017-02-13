@@ -7,7 +7,6 @@ import EditQuizTitleView from '../components/EditQuizTitleView';
 import seedItem from '../utils/seedItem';
 
 export const EditQuizItemsContainer = (props) => {
-  console.log("edit items cont ", props);
 
   const editQuizItem = (event) => {
     event.preventDefault();
@@ -16,7 +15,6 @@ export const EditQuizItemsContainer = (props) => {
     const itemName = target[1];
     const value = event.target.value;
     const subIndex = target[2];
-    console.log("value: ", value);
     props.editQuiz(itemIndex, itemName, value, subIndex)
   };
 
@@ -31,13 +29,11 @@ export const EditQuizItemsContainer = (props) => {
   }
 
   const saveQuiz = () => {
-    console.log("saved quiz: ", props.userId, props.courseId, props.quiz);
     props.saveQuiz(props.token, props.userId, props.courseId, props.quiz)
   }
 
   const formSubmit = (e) => {
     e.preventDefault();
-    console.log("event: ", e.target.elements);
     deleteQuiz();
   }
 
@@ -53,7 +49,6 @@ export const EditQuizItemsContainer = (props) => {
     );
   });
 
-  console.log("items into render: ", items);
   return (
     <div className="editQuiz-container">
       <div className="backToQuizList">

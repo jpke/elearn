@@ -7,7 +7,7 @@ import QuizStartView from '../components/QuizStartView';
 export const QuizStartContainer = (props) => {
 
   const startQuiz = () => {
-    props.startQuiz(props.token, props.quizSelectedId, props.userId);
+    props.startQuiz();
   }
 
   return (
@@ -17,6 +17,7 @@ export const QuizStartContainer = (props) => {
         passed={props.passed}
         score={props.score}
         attempts={props.attempts}
+        title={props.title}
       />
   );
 };
@@ -25,10 +26,11 @@ export const QuizStartContainer = (props) => {
 
 function mapStateToProps(state) {
   return {
+      title: state.quizReducer.quiz.title,
       score: state.quizReducer.score,
       passed: state.quizReducer.passed,
       attempts: state.quizReducer.attempts,
-      quizSelectedId: state.quizReducer.quizSelectedId,
+      quizSelectedId: state.quizReducer.quiz._id,
       token: state.authReducer.token,
       userId: state.authReducer._id
     };
@@ -36,7 +38,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    startQuiz: (token, quizId, userId) => dispatch(startQuiz(token, quizId, userId)),
+    startQuiz: () => dispatch(startQuiz()),
     toggleQuizView: () => dispatch(toggleQuizView())
   };
 }

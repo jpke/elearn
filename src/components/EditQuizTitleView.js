@@ -1,7 +1,6 @@
 import React from 'react';
 
 const EditQuizTitleView = (props) =>  {
-  console.log("edit quiz view :" , props);
 return (
     <div className="editQuizTitle">
       <h3>Title</h3>

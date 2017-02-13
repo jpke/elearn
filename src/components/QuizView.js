@@ -3,6 +3,7 @@ import ListItems from './ListItems';
 
 const QuizView = (props) => (
   <div className="quizInProgress">
+    <h3 className="title">{props.title}</h3>
     <h3>Question {props.currentQuestionIndex + 1}</h3>
     <p>{props.question}</p>
     <h3 className="answers">Answers</h3>
