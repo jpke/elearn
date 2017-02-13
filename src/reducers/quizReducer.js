@@ -42,6 +42,11 @@ export default function quizReducer(state = initialState, action) {
         message: ""
       };
     }
+    case types.CREATE_QUIZ:
+      return {
+        ...state,
+        quiz: seedItem
+      };
     case types.UPDATE_QUIZ: {
       let quiz = JSON.parse(JSON.stringify(state.quiz));
       let itemName = action.itemName.toString();

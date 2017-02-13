@@ -8,6 +8,7 @@ export const SELECT_QUIZ = 'SELECT_QUIZ';
 export const LOAD_QUIZ = 'LOAD_QUIZ';
 export const TOGGLE_QUIZ_VIEW = 'TOGGLE_QUIZ_VIEW';
 
+export const CREATE_QUIZ = 'CREATE_QUIZ';
 export const UPDATE_QUIZ = 'UPDATE_QUIZ';
 export const DELETE_QUIZ = 'DELETE_QUIZ';
 export const SAVE_QUIZ = 'SAVE_QUIZ';

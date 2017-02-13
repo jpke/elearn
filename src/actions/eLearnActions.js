@@ -133,6 +133,12 @@ export function logOut() {
   };
 }
 
+export function createQuiz() {
+  return {
+    type: types.CREATE_QUIZ
+  };
+}
+
 export function editQuiz(itemIndex, itemName, value, subIndex) {
   return {
     type: types.UPDATE_QUIZ,
@@ -180,7 +186,7 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
 }
 
 export function saveQuiz(token, userId, courseID, quiz) {
-  console.log("sending saved quiz");
+  console.log("sending saved quiz", quiz);
   return function (dispatch) {
     dispatch(loading('saveQuiz'));
     try {
@@ -220,14 +226,8 @@ export function saveQuiz(token, userId, courseID, quiz) {
   }
 }
 
-export function selectQuizToEdit(token, quizId, userId) {
-  return function(dispatch) {
-    // dispatch(selectQuiz(quiz));
-    dispatch(loadQuiz(token, quizId, userId));
-  }
-}
-
 export function selectQuiz(token, quizId, userId) {
+  console.log("quiz Id selected: ", quizId);
   return function(dispatch) {
     dispatch(toggleQuizView());
     dispatch(loadQuiz(token, quizId, userId));

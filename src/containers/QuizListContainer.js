@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import listCreator from '../utils/listCreator';
-import {selectQuiz, toggleQuizView, selectQuizToEdit} from '../actions/eLearnActions';
+import {selectQuiz, createQuiz, toggleQuizView} from '../actions/eLearnActions';
 import EditQuizContainer from './EditQuizContainer';
 import QuizListView from '../components/QuizListView';
 
@@ -12,7 +12,8 @@ export const QuizListContainer = (props) => {
     window.location.href="#/quiz/modify";
     if(modify) {
       props.toggleQuizView();
-      // props.selectQuizToEdit(props.token, quiz._id, props.userId);
+    } else {
+      props.createQuiz();
     }
   }
 
@@ -51,6 +52,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     selectQuiz: (token, quizId, userId) => dispatch(selectQuiz(token, quizId, userId)),
+    createQuiz: () => dispatch(createQuiz()),
     toggleQuizView: () => dispatch(toggleQuizView()),
   };
 }

@@ -72,13 +72,14 @@ export default function authReducer(state = initialState, action) {
       for(i; i < action.courses.length; i++) {
         if(action.courses[i]._id === action.courseID) index = i;
       }
-      console.log("index: ", index);
       return {
         ...state,
         course: action.courses[index],
         courses: action.courses
       };
     case types.SAVE_QUIZ:
+      console.log("course: ", action.course);
+      console.log("courses: ", state.courses);
       if(!action.course) return state;
       courses = JSON.parse(JSON.stringify(state.courses));
       index = -1;
@@ -86,10 +87,8 @@ export default function authReducer(state = initialState, action) {
       for(i; i < courses.length; i++) {
         if(courses[i]._id === action.course._id) index = i;
       }
-      console.log("index: ", index);
-      if(i != -1) {
-        courses[index].quizzes.push({_id: action.quiz._id, title: action.quiz.title});
-      }
+      courses = courses.slice(0, index).concat(action.course, courses.slice(index + 1, courses.length));
+      console.log("updated courses: ", courses);
       return {
         ...state,
         courses: courses,
