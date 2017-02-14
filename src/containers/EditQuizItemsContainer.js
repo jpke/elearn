@@ -82,7 +82,7 @@ export const EditQuizItemsContainer = (props) => {
 function mapStateToProps(state) {
   return {
     quiz: state.quizReducer.quiz,
-    quizSelectedId: state.quizReducer.quizSelectedId,
+    quizSelectedId: state.quizReducer.quiz._id,
     items: state.quizReducer.quiz.items,
     title: state.quizReducer.quiz.title,
     minimumScore: state.quizReducer.quiz.minimumScore,
