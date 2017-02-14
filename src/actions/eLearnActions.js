@@ -18,7 +18,6 @@ export function badResponse(message) {
 }
 
 function loggedIn(response) {
-  console.log("response: ", response);
   response.courses.forEach((course) => {
     course.admin = course.admin.indexOf(response._id) > -1;
   })
@@ -80,7 +79,7 @@ export function register(userName, email, password) {
 export function logIn(email, password) {
   return function (dispatch) {
     dispatch(loading('logIn'));
-    try {
+
       fetch(url.concat('login'), {
         method: 'POST',
         headers: {
@@ -96,7 +95,7 @@ export function logIn(email, password) {
       .then(response => {
         if(response.status != 302) {
           let error = response;
-          throw error;
+          throw response;
         }
         return response.json()
       })
@@ -110,10 +109,14 @@ export function logIn(email, password) {
         dispatch(loading(''));
         dispatch(loggedIn(response));
       })
-    } catch(error) {
+      .catch((response) => {
+        dispatch(loading(''));
+        if(response.status === 400) {
+          return dispatch(badResponse("Incorrect Password"));
+        }
       dispatch(badResponse("Problem with login"))
       console.log("error response: ", error);
-    }
+    })
   };
 }
 
@@ -186,7 +189,6 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
 }
 
 export function saveQuiz(token, userId, courseID, quiz) {
-  console.log("sending saved quiz", quiz);
   return function (dispatch) {
     dispatch(loading('saveQuiz'));
     try {
@@ -227,7 +229,6 @@ export function saveQuiz(token, userId, courseID, quiz) {
 }
 
 export function selectQuiz(token, quizId, userId) {
-  console.log("quiz Id selected: ", quizId);
   return function(dispatch) {
     dispatch(toggleQuizView());
     dispatch(loadQuiz(token, quizId, userId));
@@ -331,7 +332,8 @@ export function submitQuiz(quizData, quizId, _id, token) {
         // dispatch(viewQuizzes());
         return dispatch({
           type: types.SUBMIT_QUIZ,
-          score: response.score
+          score: response.score,
+          attempt: response.attempt
         });
         })
     } catch(error) {

@@ -42,7 +42,7 @@ export const QuizListContainer = (props) => {
 
 function mapStateToProps(state) {
   return {
-    quizzes: state.authReducer.course.quizzes,
+    quizzes: state.authReducer.course.quizzes || "",
     admin: state.authReducer.course.admin,
     viewQuizSelected: state.quizReducer.viewQuizSelected,
     token: state.authReducer.token,

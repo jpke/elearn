@@ -9,10 +9,18 @@ export default class App extends Component {
     children: PropTypes.element
   }
 
-  render() {
-    if(this.props.errorMessage) {
-      alert(this.props.errorMessage.concat(", please try again, or contact your instructor for help"));
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if(newProps.errorMessage) {
+      alert(newProps.errorMessage.concat(", please try again, or contact your instructor for help"));
+      this.props.clearErrorMessage();
     }
+  }
+
+  render() {
     return (
       <div>
         <div className="header">

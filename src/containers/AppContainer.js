@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
+import {badResponse} from '../actions/eLearnActions';
 import App from '../components/App';
 
 // This is a class-based component because the current
@@ -18,6 +19,7 @@ class AppContainer extends Component {
     return (
         <App
           errorMessage={this.props.errorMessage}
+          clearErrorMessage={this.props.clearErrorMessage}
           userName={this.props.userName}
           token={this.props.token}
           children={this.props.children}
@@ -34,6 +36,13 @@ function mapStateToProps(state) {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    clearErrorMessage: () => dispatch(badResponse(""))
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(AppContainer);

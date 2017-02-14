@@ -44,6 +44,7 @@ export default function authReducer(state = initialState, action) {
         userName: action.userName,
         user_Id: action.user_Id,
         courses: action.courses,
+        course: "",
         token: action.token,
         loggedIn: true
       };

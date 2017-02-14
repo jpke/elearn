@@ -22,7 +22,7 @@ const initialState = {
 };
 
 export default function quizReducer(state = initialState, action) {
-  let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts, quiz;
+  let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts, quiz, quizIteration;
   switch(action.type) {
     case types.SELECT_COURSE:
       return {
@@ -90,14 +90,14 @@ export default function quizReducer(state = initialState, action) {
         message: ""
       };
     case types.SAVE_QUIZ:
-      console.log("saved quiz: ", action.quiz);
       return {
         ...state,
         quiz: action.quiz,
         message: "Quiz saved!"
       };
     case types.LOAD_QUIZ:
-      let quizIteration = quizDataRamdomizer(action.quizData.items);
+      quizIteration = quizDataRamdomizer(action.quizData.items);
+      passed = calcPassed(action.attempts, action.quizData.minimumScore);
       return {
         ...state,
         quiz: action.quizData,
@@ -106,13 +106,20 @@ export default function quizReducer(state = initialState, action) {
         currentQuestionIndex: 0,
         questionCount: quizIteration.length,
         score: 0,
+        passed,
         attempts: action.attempts,
         minimumScore: action.quizData.minimumScore,
       };
-
     case types.START_QUIZ:
+      updateQuizData = JSON.parse(JSON.stringify(state.quiz.items));
+      quizIteration = quizDataRamdomizer(updateQuizData);
       return {
         ...state,
+        quizData: quizIteration,
+        currentQuestion: quizIteration[0],
+        currentQuestionIndex: 0,
+        questionCount: quizIteration.length,
+        score: 0,
         quizInProgress: true
       };
     case types.SELECT_ANSWER:
@@ -146,14 +153,18 @@ export default function quizReducer(state = initialState, action) {
         currentQuestionIndex: currentQuestionIndex
       };
     case types.SUBMIT_QUIZ:
-      let attempts = state.attempts.slice().concat(action.attempts);
-      let passed = calcPassed(attempts, state.minimumScore);
+      if(state.attempts) {
+          attempts = JSON.parse(JSON.stringify(state.attempts)).concat(action.attempt);
+      } else {
+        attempts = action.attempt;
+      }
+      passed = calcPassed(attempts, state.minimumScore);
       return {
         ...state,
         score: action.score,
-        passed,
-        quizInProgress: false,
-        attempts
+        attempts: attempts,
+        passed: passed,
+        quizInProgress: false
       };
     default:
     return state;
