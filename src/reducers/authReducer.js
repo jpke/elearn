@@ -5,7 +5,7 @@ if(window.localStorage.userName) {
     initialState = {
       view: 'login',
       userName: window.localStorage.userName,
-      _id: window.localStorage.user_Id,
+      userId: window.localStorage.user_Id,
       course: "",
       courses: JSON.parse(window.localStorage.courses),
       passed: window.localStorage.passed,
@@ -17,7 +17,7 @@ if(window.localStorage.userName) {
     initialState = {
       view: 'login',
       userName: '',
-      _id: '',
+      userId: '',
       course: "",
       courses: [],
       passed: [],
@@ -28,7 +28,7 @@ if(window.localStorage.userName) {
   };
 
 export default function authReducer(state = initialState, action) {
-  let courses, index, i;
+  let courses, index, i, passed;
   switch(action.type) {
     case types.LOADING:
       return {
@@ -44,7 +44,7 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         userName: action.userName,
-        user_Id: action.user_Id,
+        userId: action.user_Id,
         courses: action.courses,
         course: "",
         passed: action.passed,
@@ -61,7 +61,7 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         userName: "",
-        user_Id: "",
+        userId: "",
         token: "",
         loggedIn: false
       };
@@ -69,6 +69,16 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         course: action.course
+      };
+    case types.SUBMIT_QUIZ:
+      if(action.passed) {
+        passed = JSON.parse(JSON.stringify(state.passed)).concat({_id: action.attempt._id, of: action.attempt.of});
+      } else {
+        passed = state.passed;
+      }
+      return {
+        ...state,
+        passed: passed
       };
     case types.DELETE_QUIZ:
       index = -1;

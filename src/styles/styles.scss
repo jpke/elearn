@@ -180,6 +180,7 @@ h1 {
   .quiz-list-container {
     display: flex;
     justify-content: space-between;
+    min-width: 300px;
   }
 
   .create-quiz {
@@ -191,7 +192,6 @@ h1 {
     display: flex;
     flex-direction: column;
     border: none;
-    // margin-left: -30px;
 
     li {
       width: 30px;
@@ -203,7 +203,6 @@ h1 {
   }
 
   .quiz-list {
-    // width: auto;
     display: flex;
     flex-direction: column;
     flex: 4;

@@ -332,10 +332,12 @@ export function submitQuiz(quizData, quizId, _id, token) {
       .then((response) => {
         dispatch(loading(''));
         // dispatch(viewQuizzes());
+        console.log("submit response: ", response);
         return dispatch({
           type: types.SUBMIT_QUIZ,
           score: response.score,
-          attempt: response.attempt
+          attempt: response.attempt,
+          passed: response.passed
         });
         })
     } catch(error) {

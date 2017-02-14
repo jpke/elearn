@@ -14,7 +14,7 @@ export const EditQuizContainer = (props) => {
 function mapStateToProps(state) {
   return {
     newQuiz: state.quizReducer.newQuiz,
-    courseId: state.authReducer.course._id,
+    courseId: state.authReducer.course.userId,
     token: state.authReducer.token,
     quizSelected: state.quizReducer.quizSelected,
     quizSelectedId: state.quizReducer.quizSelectedId,

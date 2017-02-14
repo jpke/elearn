@@ -26,7 +26,7 @@ export const AuthContainer = (props) => {
 function mapStateToProps(state) {
   return {
       userName: state.authReducer.userName,
-      _id: state.authReducer._id,
+      _id: state.authReducer.userId,
       courses: state.authReducer.courses,
       course: state.authReducer.course,
       token: state.authReducer.token,

@@ -49,7 +49,7 @@ function mapStateToProps(state) {
       questionCount: state.quizReducer.questionCount,
       quizId: state.quizReducer.quiz._id,
       quizData: state.quizReducer.quizData,
-      user_id: state.authReducer._id,
+      user_id: state.authReducer.userId,
       token: state.authReducer.token,
     }
 }

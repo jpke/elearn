@@ -50,7 +50,7 @@ function mapStateToProps(state) {
     admin: state.authReducer.course.admin,
     viewQuizSelected: state.quizReducer.viewQuizSelected,
     token: state.authReducer.token,
-    userId: state.authReducer._id
+    userId: state.authReducer.userId
   };
 }
 function mapDispatchToProps(dispatch) {
