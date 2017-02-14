@@ -26,11 +26,13 @@ function loggedIn(response) {
   window.localStorage.user_Id = response._id;
   window.localStorage.courses = courses;
   window.localStorage.token =  response.token;
+  window.localStorage.passed = response.passed;
   return {
     type: types.LOG_IN,
     userName: response.name,
     user_Id: response._id,
     courses: response.courses,
+    passed: response.passed,
     token: response.token
   };
 }

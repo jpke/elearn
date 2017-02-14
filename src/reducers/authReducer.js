@@ -8,6 +8,7 @@ if(window.localStorage.userName) {
       _id: window.localStorage.user_Id,
       course: "",
       courses: JSON.parse(window.localStorage.courses),
+      passed: window.localStorage.passed,
       token: window.localStorage.token,
       loggedIn: false,
       loading: false
@@ -19,6 +20,7 @@ if(window.localStorage.userName) {
       _id: '',
       course: "",
       courses: [],
+      passed: [],
       token: "",
       loggedIn: false,
       loading: false
@@ -45,6 +47,7 @@ export default function authReducer(state = initialState, action) {
         user_Id: action.user_Id,
         courses: action.courses,
         course: "",
+        passed: action.passed,
         token: action.token,
         loggedIn: true
       };
