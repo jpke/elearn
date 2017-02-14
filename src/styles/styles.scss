@@ -177,22 +177,39 @@ h1 {
   justify-content: center;
   align-items: center;
 
-  // .quiz-list-container {
-  //   display: flex;
-  //   justify-content: space-between;
-  //
-  //   ul {
-  //     margin: 3px;
-  //   }
-  // }
+  .quiz-list-container {
+    display: flex;
+    justify-content: space-between;
+  }
 
-  .quiz-list {
-    width: auto;
+  .create-quiz {
+    width: 90%;
+  }
+
+  .passed {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    border: none;
+    // margin-left: -30px;
+
+    li {
+      width: 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .quiz-list {
+    // width: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 4;
 
     .listed-item {
-      min-width: 200px;
+      min-width: 300px;
       margin: 3px;
       display: flex;
       justify-content: space-between;
