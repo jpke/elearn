@@ -8,7 +8,7 @@ if(window.localStorage.userName) {
       userId: window.localStorage.user_Id,
       course: "",
       courses: JSON.parse(window.localStorage.courses),
-      passed: window.localStorage.passed,
+      passed: [],
       token: window.localStorage.token,
       loggedIn: false,
       loading: false
