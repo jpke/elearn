@@ -49,7 +49,8 @@ export default function authReducer(state = initialState, action) {
         course: "",
         passed: action.passed,
         token: action.token,
-        loggedIn: true
+        loggedIn: true,
+        url: action.url
       };
     case types.EMAIL_USED:
       return {

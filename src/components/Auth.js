@@ -33,7 +33,7 @@ export default class Auth extends Component {
   render() {
     let courses;
     if(this.props.courses) {
-      courses = courseListCreator(this.props.courses, this.props.selectCourse, this.props.passed, this.props.token);
+      courses = courseListCreator(this.props.courses, this.props.selectCourse, this.props.passed, this.props.token, this.props.url);
     }
       return (
         <div className="authContainer">
