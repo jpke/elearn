@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/eLearnActions';
 import Auth from '../components/Auth';
+import passedCoursesList from '../utils/passedCoursesList';
 
 export const AuthContainer = (props) => {
   return (
@@ -11,6 +12,7 @@ export const AuthContainer = (props) => {
         logIn={props.actions.logIn}
         logOut={props.actions.logOut}
         selectCourse={props.actions.selectCourse}
+        passedCoursesList={passedCoursesList}
         userName={props.userName}
         courses={props.courses}
         course={props.course}
@@ -29,6 +31,7 @@ function mapStateToProps(state) {
       _id: state.authReducer.userId,
       courses: state.authReducer.courses,
       course: state.authReducer.course,
+      passed: state.authReducer.passed,
       token: state.authReducer.token,
       view: state.authReducer.view
   };

@@ -38,11 +38,14 @@ export default class Auth extends Component {
         <div className="authContainer">
 
           {this.props.token ?
+            <div>
             <CourseList
               courses={courses}
               course={this.props.course}
               logOut={this.props.logOut}
             />
+          {this.props.passedCoursesList(this.props.courses)}
+            </div>
           :
             this.state.login === true ?
             <div className="authFormContainer">
