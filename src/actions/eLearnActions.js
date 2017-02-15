@@ -33,7 +33,8 @@ function loggedIn(response) {
     user_Id: response._id,
     courses: response.courses,
     passed: response.passed,
-    token: response.token
+    token: response.token,
+    url: url
   };
 }
 

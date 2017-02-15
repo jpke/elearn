@@ -24,6 +24,7 @@ export const AuthContainer = (props) => {
         _id={props._id}
         token={props.token}
         view={props.view}
+        url={props.url}
       />
   );
 };
@@ -38,7 +39,8 @@ function mapStateToProps(state) {
       course: state.authReducer.course,
       passed: state.authReducer.passed,
       token: state.authReducer.token,
-      view: state.authReducer.view
+      view: state.authReducer.view,
+      url: state.authReducer.url
   };
 }
 
