@@ -1,6 +1,5 @@
 // import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
-import {saveAs} from 'file-saver';
 
 const url = "http://localhost:8080/elearn/";
 
@@ -97,7 +96,6 @@ export function logIn(email, password) {
       })
       .then(response => {
         if(response.status != 302) {
-          let error = response;
           throw response;
         }
         return response.json()
@@ -118,7 +116,7 @@ export function logIn(email, password) {
           return dispatch(badResponse("Incorrect Password"));
         }
       dispatch(badResponse("Problem with login"))
-      console.log("error response: ", error);
+      console.log("error response: ", response);
     })
   };
 }

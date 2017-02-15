@@ -22,7 +22,7 @@ const initialState = {
 };
 
 export default function quizReducer(state = initialState, action) {
-  let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, score, index, updatedCurrentQuestion, attempts, quiz, quizIteration;
+  let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, index, updatedCurrentQuestion, attempts, quiz, itemName, quizIteration;
   switch(action.type) {
     case types.SELECT_COURSE:
       return {
@@ -48,8 +48,8 @@ export default function quizReducer(state = initialState, action) {
         quiz: seedItem
       };
     case types.UPDATE_QUIZ: {
-      let quiz = JSON.parse(JSON.stringify(state.quiz));
-      let itemName = action.itemName.toString();
+      quiz = JSON.parse(JSON.stringify(state.quiz));
+      itemName = action.itemName.toString();
       if(itemName === "title"){
         quiz.title = action.value;
       } else if(itemName === "minimumScore") {
@@ -82,7 +82,7 @@ export default function quizReducer(state = initialState, action) {
         quiz,
         message: ""
       };
-    };
+    }
     case types.DELETE_QUIZ:
       return {
         ...state,

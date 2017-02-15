@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {toggleQuizView, editQuiz, deleteSavedQuiz, saveQuiz} from '../actions/eLearnActions';
 import EditQuizItemView from '../components/EditQuizItemView';
 import EditQuizTitleView from '../components/EditQuizTitleView';
-import seedItem from '../utils/seedItem';
 
 export const EditQuizItemsContainer = (props) => {
 
@@ -30,11 +29,6 @@ export const EditQuizItemsContainer = (props) => {
 
   const saveQuiz = () => {
     props.saveQuiz(props.token, props.userId, props.courseId, props.quiz)
-  }
-
-  const formSubmit = (e) => {
-    e.preventDefault();
-    deleteQuiz();
   }
 
   let items = props.items.map((item, index) => {

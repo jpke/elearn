@@ -7,4 +7,4 @@ export default function calcPassed(attempts, minScore) {
   }, []);
   return Math.max(...scores) >= minScore ?
     true : false;
-};
+}

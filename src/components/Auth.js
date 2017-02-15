@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
 import courseListCreator from '../utils/courseListCreator'
 import CourseList from '../components/CourseList';
 import Register from '../components/Register';

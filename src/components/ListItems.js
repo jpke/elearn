@@ -12,7 +12,7 @@ export default class ListItems extends Component {
     this.state = Object.assign({}, {answerClasses: currentSelected}, {reset: answerArray});
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps) {
     if(this.props != nextProps) {
       let currentSelected = this.state.reset.slice();
       currentSelected[nextProps.itemSelected] = "highlight"

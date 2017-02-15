@@ -3,7 +3,7 @@ import React from 'react'
 export default function passedCoursesList(courses, passed) {
   let q;
   return courses.map((course, index) => {
-      q = course.quizzes.map((quiz, idx) => {
+      q = course.quizzes.map((quiz) => {
         return passed.find((item) => {
           return quiz._id === item.of
         })
@@ -13,4 +13,4 @@ export default function passedCoursesList(courses, passed) {
       }
       return <li key={index}></li>
     })
-};
+}

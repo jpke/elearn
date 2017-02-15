@@ -5,7 +5,7 @@ export default function courseListCreator(items, selectFunction, passed, token, 
     let q, qSum;
     let itemName = item.name || item.title;
     if(passed) {
-      q = item.quizzes.map((quiz, idx) => {
+      q = item.quizzes.map((quiz) => {
         return passed.find((passedQuiz) => {
           return quiz._id === passedQuiz.of
         })
@@ -21,4 +21,4 @@ export default function courseListCreator(items, selectFunction, passed, token, 
     }
     return <li key={index} onClick={() => selectFunction(item)}>{itemName}</li>
   })
-};
+}

@@ -6,10 +6,6 @@ import Auth from '../components/Auth';
 import passedCoursesList from '../utils/passedCoursesList';
 
 export const AuthContainer = (props) => {
-
-  const getCertificate = (item) => {
-    props.actions.getCertificate(props.token, item)
-  }
   return (
       <Auth
         register={props.actions.register}

@@ -16,4 +16,4 @@ export default function listCreator(items, selectFunction, admin, editQuiz) {
     let itemName = item.name || item.title;
     return <li key={index} onClick={() => selectFunction(item)}>{itemName}</li>
   })
-};
+}

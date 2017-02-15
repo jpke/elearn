@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import listCreator from '../utils/listCreator';
 import passedList from '../utils/passedList';
 import {selectQuiz, createQuiz, toggleQuizView} from '../actions/eLearnActions';
-import EditQuizContainer from './EditQuizContainer';
+import EditQuizItemsContainer from './EditQuizItemsContainer';
 import QuizListView from '../components/QuizListView';
 
 export const QuizListContainer = (props) => {
   props.quizzes ? "" : window.location.href="/";
 
-  const editQuiz = (modify, quiz) => {
+  const editQuiz = (modify) => {
     window.location.href="#/quiz/modify";
     if(modify) {
       props.toggleQuizView();
@@ -25,7 +25,7 @@ export const QuizListContainer = (props) => {
   return (
     <div>
     {props.viewQuizSelected && props.admin ?
-      <EditQuizContainer />
+      <EditQuizItemsContainer />
     :
       <QuizListView
         listCreator={listCreator}

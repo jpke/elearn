@@ -7,4 +7,4 @@ export default function evaluateSelection(answerSelected, currentQuestion) {
   }
   const answer = findAnswer(answerSelected, currentQuestion.answers)[0]
   return answer.correct ? true : false
-};
+}

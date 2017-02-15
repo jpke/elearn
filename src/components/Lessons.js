@@ -11,20 +11,7 @@ export default class Lessons extends Component {
     //download lesson, accessing by lesson id
     this.props.getPDF(event.target.id, this.props.token);
   }
-
-  upload(event) {
-    // console.log(event.target);
-    // let input = document.querySelector('input[type="file"]');
-    // var data = new FormData();
-    // data.append('file', input.files[0]);
-    // console.log("data: ", data);
-    //
-    // fetch('http://localhost:8080/elearn/lessons/', {
-    //   method: 'POST',
-    //   body: data
-    // });
-  }
-
+  
   render() {
     let lessons = this.props.lessons.map((lesson, index) => {
       return (

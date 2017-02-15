@@ -25,7 +25,7 @@ if(window.localStorage.userName) {
       loggedIn: false,
       loading: false
     }
-  };
+  }
 
 export default function authReducer(state = initialState, action) {
   let courses, index, i, passed;

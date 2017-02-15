@@ -1,18 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {createQuizView, createQuiz, addItem} from '../actions/eLearnActions';
+import {createQuiz} from '../actions/eLearnActions';
 import EditQuizItemView from '../components/EditQuizItemView';
-import EditQuizTitleView from '../components/EditQuizTitleView';
 
 export const EditQuizItemContainer = (props) => {
-  console.log("item Container: " ,props);
-  const editQuizItem = (event) => {
-    event.preventDefault();
-    const form = event.target.elements;
-    // const items =
-    // editQuizItem(props.token, form.title.value, props.courseId form.minimumScore.value);
-  };
-
   return (
     <div>
       <p>Edit quiz here</p>
@@ -38,8 +29,6 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    createQuizViewToggle: () => dispatch(createQuizView()),
-    addItem: (item) => dispatch(addItem(item)),
     createQuiz: (token, title, courseId, minScore) => dispatch(createQuiz(token, title, courseId, minScore))
   };
 }

@@ -6,4 +6,4 @@ export default function highScore(attempts) {
     }
   });
   return highScore;
-};
+}
