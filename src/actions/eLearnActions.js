@@ -1,5 +1,6 @@
 // import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
+import {saveAs} from 'file-saver';
 
 const url = "http://localhost:8080/elearn/";
 
@@ -134,6 +135,43 @@ export function logOut() {
   // cookie.remove('token');
   return {
     type: types.LOG_OUT
+  };
+}
+
+export function getCertificate(token, course) {
+  console.log(course.name);
+  return function (dispatch) {
+    dispatch(loading('getCertificate'));
+    //pull down quiz questions, then
+    try {
+      fetch(url.concat('users/certificate/', course.name), {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'responseType': 'arraybuffer'
+        }
+      })
+      .then(response => {
+        if(response.status < 200 || response.status >= 300) {
+          let error = response;
+          throw error;
+        }
+        console.log(response);
+        return response
+      })
+      .then(response => {
+        var windowUrl = window.URL || window.webkitURL;
+        var blob = new Blob([response.body], {type: "application/pdf"});
+        var url = windowUrl.createObjectURL(blob);
+        // saveAs(blob, "certificate.pdf")
+        window.open(url, "_target")
+        dispatch(loading(''));
+        })
+    } catch(error) {
+      dispatch(badResponse("Problem with loading quiz"))
+      console.log("error response: ", error);
+    }
   };
 }
 
