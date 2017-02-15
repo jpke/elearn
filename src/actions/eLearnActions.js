@@ -1,7 +1,8 @@
 // import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
 
-const url = "http://localhost:8080/elearn/";
+// const url = "http://localhost:8080/elearn/";
+const url = "https://portfolio-express.herokuapp.com/elearn/"
 
 export function loading(item) {
   return {
