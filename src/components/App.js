@@ -9,16 +9,33 @@ export default class App extends Component {
     children: PropTypes.element
   }
 
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if(newProps.errorMessage) {
+      alert(newProps.errorMessage.concat(", please try again, or contact your instructor for help"));
+      this.props.clearErrorMessage();
+    }
+  }
+
   render() {
     return (
       <div>
-        <IndexLink to="/">Home</IndexLink>
-        {' | '}
-        <Link to="/quiz">Quiz</Link>
-        {' | '}
-        <Link to="/lessons">Lessons</Link>
-        <br/>
-        {this.props.children}
+        <div className="header">
+          <div>
+            <IndexLink to="/">Home</IndexLink>
+            {' | '}
+            <Link to="/quiz">Quiz</Link>
+            {' | '}
+            <Link to="/lessons">Lessons</Link>
+          </div>
+          {this.props.token ? <div className="user-name"><p>Logged in as &nbsp;</p><p>{this.props.userName}</p></div> : ""}
+        </div>
+          <br/>
+          <h1>Learn Online</h1>
+          {this.props.children}
       </div>
     );
   }

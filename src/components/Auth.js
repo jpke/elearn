@@ -1,6 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
-import listCreator from '../utils/listCreator'
+import courseListCreator from '../utils/courseListCreator'
+import CourseList from '../components/CourseList';
 import Register from '../components/Register';
 import Login from '../components/Login';
 
@@ -13,6 +14,7 @@ export default class Auth extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {login: true};
+    console.log("passed: ", props.passed)
   }
   toggleView() {
     this.setState({login: !this.state.login});
@@ -27,37 +29,36 @@ export default class Auth extends Component {
     const form = event.target.elements;
     this.props.logIn(form.email.value, form.password.value);
   }
-  logOut() {
-    this.props.logOut();
-  }
+
   render() {
     let courses;
     if(this.props.courses) {
-      courses = listCreator(this.props.courses, this.props.selectCourse);
+      courses = courseListCreator(this.props.courses, this.props.selectCourse, this.props.passed, this.props.token);
     }
       return (
         <div className="authContainer">
-          <h2>Welcome</h2>
+
           {this.props.token ?
-            <div>
-              <h3>Hi, {this.props.userName}</h3>
-              <p>Select course</p>
-              {courses}
-              {this.props.course ?
-                <p>Click on the <Link to="/quiz" className="redirect">Quiz</Link> or <Link to="/lessons" className="redirect">Lessons</Link> tabs to access course content</p>
-              : ""
-              }
-              <button onClick={this.props.logOut}>Logout</button>
+            <div className="course-list-container">
+              <CourseList
+                courses={courses}
+                course={this.props.course}
+                logOut={this.props.logOut}
+              />
             </div>
           :
             this.state.login === true ?
-            <div>
-              <p>You must login or <button onClick={this.toggleView.bind(this)}>Register</button></p>
+            <div className="authFormContainer">
+              <h2>Welcome</h2>
+              <h4>You must login or </h4>
+              <button className="toggleLogin" onClick={this.toggleView.bind(this)}>Register</button>
               <Login logIn={this.logIn.bind(this)} />
             </div>
             :
-            <div>
-              <p>You must register or <button onClick={this.toggleView.bind(this)}>Login</button></p>
+            <div className="authFormContainer">
+              <h2>Welcome</h2>
+              <h4>You must register or </h4>
+              <button className="toggleLogin" onClick={this.toggleView.bind(this)}>Login</button>
               <Register register={this.register.bind(this)} />
             </div>
             }

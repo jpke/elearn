@@ -3,27 +3,29 @@ import ListItems from './ListItems';
 
 const QuizView = (props) => (
   <div className="quizInProgress">
+    <h3 className="title">{props.title}</h3>
     <h3>Question {props.currentQuestionIndex + 1}</h3>
     <p>{props.question}</p>
-    <h3>Answers</h3>
-    <ul>
+    <h3 className="answers">Answers</h3>
+    <ul className="item-list">
       <ListItems
         idSelected={props.idSelected}
         itemSelected={props.itemSelected}
         answers={props.answers}
         selectAnswer={props.selectAnswer}/>
     </ul>
-    {props.currentQuestionIndex > 0 &&
-        <button onClick={props.prevQuestion}>Previous Question</button>
-    }
-    {props.currentQuestionIndex != props.questionCount - 1 ? (
+    <div className="quizNav-buttons">
+      {props.currentQuestionIndex != props.questionCount - 1 ?
         <button onClick={props.nextQuestion}>Next Question</button>
-      ) : (
-        <div>
-          <button onClick={props.submitQuiz}>Submit Quiz</button>
-          <p>Unanswered Questions {props.unansweredQuestions}</p>
-        </div>
-      )
+        :
+        <button onClick={props.submitQuiz}>Submit Quiz</button>
+      }
+      {props.currentQuestionIndex > 0 &&
+          <button onClick={props.prevQuestion}>Previous Question</button>
+      }
+    </div>
+    {props.currentQuestionIndex === props.questionCount - 1 &&
+      <p className="unansweredCount">Unanswered Questions:  <span>{props.unansweredQuestions}</span></p>
     }
   </div>
 );

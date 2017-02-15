@@ -1,12 +1,10 @@
 import React from 'react';
-import AuthPage from '../containers/AuthPage';
+import AuthContainer from '../containers/AuthContainer';
 
 const HomePage = () => {
   return (
     <div>
-      <h1>Home Page</h1>
-
-      <AuthPage />
+      <AuthContainer />
     </div>
   );
 };

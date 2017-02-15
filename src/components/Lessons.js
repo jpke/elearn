@@ -34,19 +34,20 @@ export default class Lessons extends Component {
       );
     });
 
+    // <input type="file"/>
+    // <button onClick={this.upload.bind(this)}>Submit</button>
+
     return (
-      <div>
-        <h1>Lessons Page</h1>
-        <input type="file"/>
-        <button onClick={this.upload.bind(this)}>Submit</button>
+      <div className="lessonsContainer">
+        <h2>Lessons</h2>
         {this.props.token ?
           <div>
-            <h2>Links to pdfs.</h2>
-            <ul>
+            <h3>pdfs</h3>
+            <ul className="item-list">
               {lessons}
             </ul>
             {this.props.preview ?
-              <div>
+              <div className="preview">
                 <a href={this.props.preview} target="_blank">Preview</a>
               </div>
             : ""}

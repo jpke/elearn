@@ -1,22 +1,178 @@
-#app {
-max-width: 600px;
-margin: 30px auto;
+$color-background: #dbdbb8;
+$color-primary: #dbb8db;
+$color-raised: #dbcab8;
+$color-text: #7676b9;
+$color-text-highlight: #414137;
+$color-highlight: #b8dbdb;
+
+@import url('https://fonts.googleapis.com/css?family=Contrail+One|Open+Sans');
+
+* {
+  box-sizing: border-box;
 }
 
-.authContainer {
+body {
+  margin: 0;
+  padding: 10px;
+  background-color: $color-background;
+  color: $color-text;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    margin: 0;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $color-text;
+}
+
+a:hover {
+  color: $color-text-highlight;
+}
+
+li {
+  border-radius: 5px;
+  text-align: center;
+}
+
+li:hover {
+  background-color: $color-highlight;
+  color: $color-text-highlight;
+}
+
+button {
+  // margin: 10px;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: $color-raised;
+  border: 3px solid $color-background;
+  font-size: 1.3em;
+  color: $color-text-highlight;
+  font-family: 'Contrail One', cursive;
+  // border: 3px solid $color-text;
+}
+
+button:focus {outline:0;}
+
+button:hover {
+  border: 3px solid $color-text;
+}
+
+@mixin unlistify {
+	list-style: none;
+
+	> li {
+		padding: 5px;
+	}
+}
+
+ul {
+  @include unlistify;
+  margin-top: 30px;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  border: 1px solid $color-text-highlight;
+  border-radius: 5px;
+}
+
+#app {
+// max-width: 600px;
+height: 100vh;
+margin: auto;
+}
+
+.user-name {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.authContainer, .course-list {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h2 {
+    margin: 0;
+    text-align: center;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    svg {
+      width: 30px;
+    }
+
+  }
 }
 
 h1 {
   text-align: center;
+  font-family: 'Contrail One', cursive;
 }
 
-#authRegister {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
+.authFormContainer {
+  text-align: center;
+
+  h3 {
+    text-align: left;
+  }
+}
+
+.authFormContainer, .course-list, .quizContainer {
+  width: 200px;
+
+  h4 {
+    text-align: center;
+    margin-bottom: 3px;
+  }
+
+  .toggleLogin {
+    font-size: 1.1em;
+    width: 88%;
+    margin: 0 auto;
+  }
+
+  .title {
+    margin-bottom: 6px;
+  }
+
+  #authForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .auth {
+      margin: 3px 0;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid gray;
+      font-size: 1em;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .authButton {
+      margin: 6px 0;
+    }
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .redirect {
+    font-weight: bold;
+  }
 }
 
 .authTitle {
@@ -24,32 +180,295 @@ h1 {
   margin-left: 10px;
 }
 
-.auth {
-  margin: 1px;
-  border-radius: 5px;
-  border: 1px solid gray;
-  padding: 2px;
-}
-
-.highlight {
-  background-color: yellow;
-  font-weight: bold;
-}
-
 .quizContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
+  justify-content: center;
   align-items: center;
+
+  .quiz-list-container {
+    display: flex;
+    justify-content: space-between;
+    min-width: 300px;
+  }
+
+  .create-quiz {
+    width: 90%;
+  }
+
+  .passed {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: none;
+
+    li {
+      width: 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .quiz-list {
+    display: flex;
+    flex-direction: column;
+    flex: 4;
+
+    .listed-item {
+      min-width: 300px;
+      margin: 3px;
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        padding: 6px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 19px;
+      }
+
+      button {
+        font-size: 18px;
+        width: 60px;
+        border-radius: 10px;
+      }
+    }
+  }
 }
 
-.redirect {
-  text-decoration: none;
+.quiz-start {
+  width: 200px;
+  h3 {
+    text-align: center;
+  }
+  .quiz-start-button {
+    margin: 6px 0;
+  }
 }
 
 .quizInProgress {
+  width: 400px;
+
+  h3 {
+    margin: 0;
+    color: $color-text-highlight;
+  }
+
+  .title {
+    text-align: center;
+    font-style: italic;
+  }
+
+  > p {
+    text-align: left;
+    margin-left: 10px;
+  }
+  .answers {
+    margin-left: 10px;
+  }
+  .item-list {
+    margin: 10px 0;
+    li {
+      padding: 6px;
+      width: auto;
+      text-align: left;
+    }
+
+    .highlight {
+      background-color: #e9eff4;
+      font-weight: bold;
+    }
+  }
+
+  .quizNav-buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    width: 90%;
+    margin: 3px;
+  }
+
+  .unansweredCount {
+    text-align: center;
+
+    span {
+      font-size: larger;
+      color: $color-text-highlight;
+    }
+  }
+}
+
+.editQuiz-container {
   display: flex;
   flex-direction: column;
-  // align-items: center;
-  justify-content: space-around;
+  align-items: center;
+  width: 500px;
+  margin: 0 auto;
+
+  .backToQuizList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      width: 200px;
+    }
+    h3 {
+      margin: 0 0 6px 0;
+      color: red;
+      text-align: center;
+    }
+  }
+
+  .editQuiz-item {
+    width: 100%;
+    border: 1px solid $color-raised;
+
+    h3 {
+      margin: 6px auto 6px 10px;
+    }
+
+    .question-container {
+      text-align: center;
+    }
+
+    input, textarea {
+      width: 98%;
+      padding: 6px;
+      border-radius: 3px;
+      margin: 3px;
+      // border: none;
+    }
+
+    .answer-container {
+      display: flex;
+      margin: 3px;
+    }
+    .buttons-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      button {
+        width: 60px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+    .item-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 30%;
+        height: 35px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .editQuizTitle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 6px;
+
+    h3 {
+      margin: 3px;
+      text-align: center;
+
+    }
+    input {
+      margin: 3px;
+      padding: 6px;
+      border-radius: 3px;
+      border: none;
+      width: 70%;
+    }
+
+    section {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .delete {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+      }
+
+      .passing-score {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .save {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+
+      button {
+        width: 60px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+
+    .edit-minimumScore {
+      width: 60px;
+      // text-align: center;
+    }
+  }
+
+  .addItem {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    button {
+      width: 30%;
+      height: 40px;
+      font-size: 18px;
+      margin: 3px;
+    }
+  }
 }
+
+.lessonsContainer {
+  width: 400px;
+  margin: auto;
+  h2 {
+    text-align: center;
+  }
+
+  h3 {
+    color: $color-text-highlight;
+    margin: 0;
+  }
+
+  .item-list {
+    margin: 10px 0;
+    li {
+      padding: 6px;
+      width: auto;
+      text-align: left;
+    }
+  }
+
+  .preview {
+    text-align: center;
+  }
+}
+
+
+// .redirect {
+//   text-decoration: none;
+// }

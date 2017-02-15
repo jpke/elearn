@@ -1,10 +1,18 @@
 export const LOADING = 'LOADING';
+export const BAD_RESPONSE = 'BAD_RESPONSE';
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const EMAIL_USED = 'EMAIL_USED';
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const SELECT_QUIZ = 'SELECT_QUIZ';
-export const VIEW_QUIZZES = 'VIEW_QUIZZES';
+export const LOAD_QUIZ = 'LOAD_QUIZ';
+export const TOGGLE_QUIZ_VIEW = 'TOGGLE_QUIZ_VIEW';
+
+export const CREATE_QUIZ = 'CREATE_QUIZ';
+export const UPDATE_QUIZ = 'UPDATE_QUIZ';
+export const DELETE_QUIZ = 'DELETE_QUIZ';
+export const SAVE_QUIZ = 'SAVE_QUIZ';
+
 export const START_QUIZ = 'START_QUIZ';
 export const SELECT_ANSWER = 'SELECT_ANSWER';
 export const NEXT_QUESTION = 'NEXT_QUESTION';
