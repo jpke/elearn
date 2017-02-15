@@ -104,6 +104,20 @@ margin: auto;
     margin: 0;
     text-align: center;
   }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    svg {
+      width: 30px;
+    }
+    g:hover {
+      color: $color-text-highlight;
+      width: 33px;
+    }
+
+  }
 }
 
 h1 {

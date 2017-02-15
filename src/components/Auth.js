@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
-import listCreator from '../utils/listCreator'
+import courseListCreator from '../utils/courseListCreator'
 import CourseList from '../components/CourseList';
 import Register from '../components/Register';
 import Login from '../components/Login';
@@ -14,6 +14,7 @@ export default class Auth extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {login: true};
+    console.log("passed: ", props.passed)
   }
   toggleView() {
     this.setState({login: !this.state.login});
@@ -32,19 +33,18 @@ export default class Auth extends Component {
   render() {
     let courses;
     if(this.props.courses) {
-      courses = listCreator(this.props.courses, this.props.selectCourse);
+      courses = courseListCreator(this.props.courses, this.props.selectCourse, this.props.passed);
     }
       return (
         <div className="authContainer">
 
           {this.props.token ?
-            <div>
-            <CourseList
-              courses={courses}
-              course={this.props.course}
-              logOut={this.props.logOut}
-            />
-          {this.props.passedCoursesList(this.props.courses)}
+            <div className="course-list-container">
+              <CourseList
+                courses={courses}
+                course={this.props.course}
+                logOut={this.props.logOut}
+              />
             </div>
           :
             this.state.login === true ?

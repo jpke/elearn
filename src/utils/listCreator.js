@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router';
 
 export default function listCreator(items, selectFunction, admin, editQuiz) {
   if(admin) {

@@ -16,6 +16,7 @@ export const AuthContainer = (props) => {
         userName={props.userName}
         courses={props.courses}
         course={props.course}
+        passed={props.passed}
         _id={props._id}
         token={props.token}
         view={props.view}
