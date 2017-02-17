@@ -69,6 +69,7 @@ export function register(userName, email, password) {
         return response.json()
       })
       .then(response => {
+        console.log("user registered: ", response);
         dispatch(loading(''));
         dispatch(loggedIn(response));
       })
@@ -86,20 +87,6 @@ export function editCourse(id, value) {
     value
   };
 }
-
-// export function addUser(user) {
-//   return {
-//     type: types.ADD_USER,
-//     user
-//   };
-// }
-//
-// export function deleteUser(index) {
-//   return {
-//     type: types.DELETE_USER,
-//     index
-//   };
-// }
 
 export function addUser(token, course_id, email, admin) {
   console.log(course_id, email, admin);
