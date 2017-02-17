@@ -97,7 +97,7 @@ export default function authReducer(state = initialState, action) {
       console.log("courses: ", state.courses);
       if(!action.course) return state;
       courses = JSON.parse(JSON.stringify(state.courses));
-      index = -1;
+      index = 0;
       i = 0
       for(i; i < courses.length; i++) {
         if(courses[i]._id === action.course._id) index = i;

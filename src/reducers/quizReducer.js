@@ -96,7 +96,8 @@ export default function quizReducer(state = initialState, action) {
         message: "Quiz saved!"
       };
     case types.LOAD_QUIZ:
-      quizIteration = quizDataRamdomizer(action.quizData.items);
+      quizIteration = JSON.parse(JSON.stringify(action.quizData.items));
+      quizIteration = quizDataRamdomizer(quizIteration);
       passed = calcPassed(action.attempts, action.quizData.minimumScore);
       return {
         ...state,
