@@ -7,6 +7,9 @@ const AdminView = (props) => (
       <button id="toggleView" className="toggleView">Back to Courses
       </button>
     </Link>
+    <div>
+      <h3 className="message">{props.message}</h3>
+    </div>
     <div className="edit-course-header">
       <div>
       </div>
@@ -22,12 +25,18 @@ const AdminView = (props) => (
       <h3>Email addresses of students who can register for the course</h3>
     </div>
     <form name="newUserForm" onSubmit={(e) => {props.addUser(e)}}>
-      <input type='email' id="new-user" name="newUser" defaultValue={props.newUser} className="edit-new-user" placeholder='newUser@email.com' />
+      <div>
+        <input type='email' id="new-user" name="newUser" defaultValue={props.newUser} className="edit-new-user" placeholder='newUser@email.com' />
+        <div className="admin-checkbox">
+          <label>Admin:  &nbsp;</label>
+          <input type="checkbox" id="new-user-admin" name="admin" className="edit-new-user-admin" />
+        </div>
+      </div>
       <button className="add-student" type='submit'>Add Student</button>
     </form>
     <div className="enrollable-users">
       <ul className="user-list">
-        {props.listUsers(props.course.enrollable, props.deleteUser)}
+        {props.listUsers(props.enrollable, props.deleteUser)}
       </ul>
     </div>
   </div>

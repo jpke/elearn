@@ -29,10 +29,15 @@ export default class Auth extends Component {
     this.props.logIn(form.email.value, form.password.value);
   }
 
+  selectCourse(course) {
+    if(course.admin) return this.props.getEnrollable(this.props.token, course);
+    else return this.props.selectCourse(course);
+  }
+
   render() {
     let courses;
     if(this.props.courses) {
-      courses = courseListCreator(this.props.courses, this.props.selectCourse, this.props.passed, this.props.token, this.props.url);
+      courses = courseListCreator(this.props.courses, this.selectCourse.bind(this), this.props.passed, this.props.token, this.props.url);
     }
       return (
         <div className="authContainer">

@@ -12,6 +12,7 @@ export const AuthContainer = (props) => {
         logIn={props.actions.logIn}
         logOut={props.actions.logOut}
         selectCourse={props.actions.selectCourse}
+        getEnrollable={props.actions.getEnrollable}
         passedCoursesList={passedCoursesList}
         userName={props.userName}
         courses={props.courses}

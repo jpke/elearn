@@ -87,17 +87,91 @@ export function editCourse(id, value) {
   };
 }
 
-export function addUser(user) {
-  return {
-    type: types.ADD_USER,
-    user
+// export function addUser(user) {
+//   return {
+//     type: types.ADD_USER,
+//     user
+//   };
+// }
+//
+// export function deleteUser(index) {
+//   return {
+//     type: types.DELETE_USER,
+//     index
+//   };
+// }
+
+export function addUser(token, course_id, email, admin) {
+  console.log(course_id, email, admin);
+  return function (dispatch) {
+    dispatch(loading('update Course'));
+
+      fetch(url.concat('course/enrollable'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          email: email,
+          course_id: course_id,
+          admin: admin
+        })
+      })
+      .then(response => {
+        if(response.status != 201) {
+          throw response;
+        }
+        return response.json()
+      })
+      .then(response => {
+        dispatch(loading(''));
+        dispatch({
+          type: types.UPDATE_ENROLLABLE,
+          enrollable: response.enrollable
+        });
+      })
+      .catch((response) => {
+        dispatch(loading(''));
+        console.log("error response: ", response);
+    })
   };
 }
 
-export function deleteUser(index) {
-  return {
-    type: types.DELETE_USER,
-    index
+export function deleteUser(token, course_id, email) {
+  return function (dispatch) {
+    dispatch(loading('update Course'));
+
+      fetch(url.concat('course/enrollable'), {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          email: email,
+          course_id: course_id
+        })
+      })
+      .then(response => {
+        if(response.status != 200) {
+          throw response;
+        }
+        return response.json()
+      })
+      .then(response => {
+        dispatch(loading(''));
+        dispatch({
+          type: types.UPDATE_ENROLLABLE,
+          enrollable: response.enrollable
+        });
+      })
+      .catch((response) => {
+        dispatch(loading(''));
+        console.log("error response: ", response);
+    })
   };
 }
 
@@ -113,7 +187,7 @@ export function updateCourse(token, course) {
           'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
-          course: course
+          course
         })
       })
       .then(response => {
@@ -181,8 +255,40 @@ export function logIn(email, password) {
 
 export function selectCourse(course) {
   return {
-    type: types.SELECT_COURSE,
-    course
+      type: types.SELECT_COURSE,
+      course
+  };
+}
+
+export function getEnrollable(token, course) {
+  return function (dispatch) {
+    dispatch(loading('update Course'));
+    dispatch(selectCourse(course));
+      fetch(url.concat('course/enrollable/', course._id), {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+      .then(response => {
+        if(response.status != 200) {
+          throw response;
+        }
+        return response.json()
+      })
+      .then(response => {
+        dispatch(loading(''));
+        dispatch({
+          type: types.UPDATE_ENROLLABLE,
+          enrollable: response.enrollable
+        });
+      })
+      .catch((response) => {
+        dispatch(loading(''));
+        console.log("error response: ", response);
+    })
   };
 }
 

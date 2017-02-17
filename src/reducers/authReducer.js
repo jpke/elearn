@@ -12,7 +12,9 @@ if(window.localStorage.userName) {
       token: window.localStorage.token,
       loggedIn: false,
       loading: false,
-      newUser: ""
+      newUser: "",
+      enrollable: [],
+      message: ""
     }
   } else {
     initialState = {
@@ -25,12 +27,14 @@ if(window.localStorage.userName) {
       token: "",
       loggedIn: false,
       loading: false,
-      newUser: ""
+      newUser: "",
+      enrollable: [],
+      message: ""
     }
   }
 
 export default function authReducer(state = initialState, action) {
-  let courses, course, index, i, passed;
+  let courses, course, enrollable, index, i, passed;
   switch(action.type) {
     case types.LOADING:
       return {
@@ -71,7 +75,8 @@ export default function authReducer(state = initialState, action) {
     case types.SELECT_COURSE:
       return {
         ...state,
-        course: action.course
+        course: action.course,
+        message: ""
       };
     case types.EDIT_COURSE:
       course = JSON.parse(JSON.stringify(state.course));
@@ -80,15 +85,16 @@ export default function authReducer(state = initialState, action) {
       }
       return {
         ...state,
-        course: course
+        course: course,
+        message: ""
       };
     case types.ADD_USER:
-      course = JSON.parse(JSON.stringify(state.course));
-      course.enrollable.push(action.user);
-      console.log(course.enrollable)
+      enrollable = JSON.parse(JSON.stringify(state.enrollable));
+      enrollable.push(action.user);
+      console.log(enrollable)
       return {
         ...state,
-        course: course
+        enrollable: enrollable
       };
     case types.DELETE_USER:
       console.log(action.index)
@@ -99,6 +105,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         course: course
+      };
+    case types.UPDATE_ENROLLABLE:
+      return {
+        ...state,
+        enrollable: action.enrollable
       };
     case types.UPDATE_COURSE:
       if(!action.course) return state;
@@ -113,7 +124,8 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         course: action.course,
-        courses: courses
+        courses: courses,
+        message: "Course saved!"
       };
     case types.SUBMIT_QUIZ:
       if(action.passed) {
