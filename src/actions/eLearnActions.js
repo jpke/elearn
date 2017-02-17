@@ -79,6 +79,63 @@ export function register(userName, email, password) {
   };
 }
 
+export function editCourse(id, value) {
+  return {
+    type: types.EDIT_COURSE,
+    id,
+    value
+  };
+}
+
+export function addUser(user) {
+  return {
+    type: types.ADD_USER,
+    user
+  };
+}
+
+export function deleteUser(index) {
+  return {
+    type: types.DELETE_USER,
+    index
+  };
+}
+
+export function updateCourse(token, course) {
+  return function (dispatch) {
+    dispatch(loading('update Course'));
+
+      fetch(url.concat('course'), {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          course: course
+        })
+      })
+      .then(response => {
+        if(response.status != 200) {
+          throw response;
+        }
+        return response.json()
+      })
+      .then(response => {
+        dispatch(loading(''));
+        dispatch({
+          type: types.UPDATE_COURSE,
+          course: response.course
+        });
+      })
+      .catch((response) => {
+        dispatch(loading(''));
+        console.log("error response: ", response);
+    })
+  };
+}
+
 export function logIn(email, password) {
   return function (dispatch) {
     dispatch(loading('logIn'));

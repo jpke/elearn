@@ -1,14 +1,29 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addUser, deleteUser} from '../actions/eLearnActions';
+import {updateCourse, editCourse, addUser, deleteUser} from '../actions/eLearnActions';
 import listUsers from '../utils/listUsers';
+import AdminView from '../components/AdminView';
 
 export const AdminContainer = (props) => {
+
+  const editCourse = (event) => {
+    event.preventDefault();
+    props.editCourse(event.target.id, event.target.value);
+  }
+
+  const addUser = (event) => {
+    event.preventDefault();
+    props.addUser(event.target.elements.newUser.value);
+  }
+
   return (
       <AdminView
-        addUser={props.addUser}
+        editCourse={editCourse}
+        addUser={addUser}
         deleteUser={props.deleteUser}
+        updateCourse={props.updateCourse}
         listUsers={listUsers}
+        newUser={props.newUser}
         course={props.course}
         _id={props._id}
         token={props.token}
@@ -23,14 +38,16 @@ function mapStateToProps(state) {
       _id: state.authReducer.userId,
       course: state.authReducer.course,
       token: state.authReducer.token,
-      courseUser: state.authReducer.courseUser
+      newUser: state.authReducer.newUser
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addUser: (token, course, user) => {dispatch(addUser(token, course, user))},
-    deleteUser: (token, course, user) => {dispatch(deleteUser(token, course, user))}
+    updateCourse: (token, course) => {dispatch(updateCourse(token, course))},
+    editCourse: (id, value) => {dispatch(editCourse(id, value))},
+    addUser: (user) => {dispatch(addUser(user))},
+    deleteUser: (index) => {dispatch(deleteUser(index))}
   };
 }
 

@@ -6,12 +6,14 @@ import HomePage from './components/HomePage';
 import QuizLanding from './containers/QuizLanding';
 import EditQuizItemsContainer from './containers/EditQuizItemsContainer';
 import LessonsPage from './containers/LessonsPage';
+import AdminContainer from './containers/AdminContainer';
 
 export default (
   <Route path="/" component={AppContainer}>
     <IndexRoute component={HomePage}/>
     <Route path="quiz" component={QuizLanding}/>
-    <Route path="quiz/modify" component={EditQuizItemsContainer} />
+    <Route path="quiz/modify" component={EditQuizItemsContainer}/>
     <Route path="lessons" component={LessonsPage}/>
+    <Route path="admin" component={AdminContainer}/>
   </Route>
 );

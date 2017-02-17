@@ -15,7 +15,7 @@ const CourseList = (props) => {
           <div>
             <p>Admin:</p>
             <Link to="/admin" className="redirect">
-              <button className="manageUsers">Manage Enrolled Users</button>
+              <button className="manageUsers">Manage Course</button>
             </Link>
           </div>
           }
