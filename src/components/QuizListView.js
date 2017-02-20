@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 const QuizListView = (props) => (
   <div>
@@ -11,7 +12,7 @@ const QuizListView = (props) => (
         {props.passedList(props.quizzes, props.passed)}
       </ul>
     </div>
-    {props.admin && <button className= "create-quiz" onClick={() => {props.editQuiz()}}>Create Quiz</button>}
+    {props.admin && <Link to="/quiz/modify"><button className= "create-quiz" onClick={() => {props.editQuiz()}}>Create Quiz</button></Link>}
   </div>
 );
 

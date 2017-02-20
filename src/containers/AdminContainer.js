@@ -21,7 +21,6 @@ export const AdminContainer = (props) => {
   }
 
   const deleteUserFromCourse = (email) => {
-    if(email === "jpearnest08@gmail.com") return alert("unable to delete site admin from course");
     props.deleteUserFromCourse(props.token, props.course._id, email)
   }
 

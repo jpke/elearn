@@ -7,10 +7,9 @@ import EditQuizItemsContainer from './EditQuizItemsContainer';
 import QuizListView from '../components/QuizListView';
 
 export const QuizListContainer = (props) => {
-  props.quizzes ? "" : window.location.href="/";
+  // props.quizzes ? "" : window.location.href="/";
 
   const editQuiz = (modify) => {
-    window.location.href="#/quiz/modify";
     if(modify) {
       props.toggleQuizView();
     } else {

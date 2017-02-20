@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
 import {toggleQuizView, editQuiz, deleteSavedQuiz, saveQuiz} from '../actions/eLearnActions';
 import EditQuizItemView from '../components/EditQuizItemView';
 import EditQuizTitleView from '../components/EditQuizTitleView';
@@ -47,10 +48,8 @@ export const EditQuizItemsContainer = (props) => {
       <div className="backToQuizList">
         <div>
         </div>
-        <Link to="/quiz" >
-          <button id="toggleQuizView" className="toggleQuizView">Back to Quizzes
+          <button id="toggleQuizView" className="toggleQuizView" onClick={browserHistory.goBack}>Back to Quizzes
           </button>
-        </Link>
         <div>
           <h3>{props.message}</h3>
         </div>

@@ -1,5 +1,6 @@
 // import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
+import {browserHistory} from 'react-router';
 
 const url = "http://localhost:8080/elearn/";
 // const url = "https://portfolio-express.herokuapp.com/elearn/"
@@ -22,11 +23,11 @@ function loggedIn(response) {
   // response.courses.forEach((course) => {
   //   course.admin = course.admin.indexOf(response._id) > -1;
   // })
-  let courses = JSON.stringify(response.courses);
-  window.localStorage.userName = response.name;
-  window.localStorage.user_Id = response._id;
-  window.localStorage.courses = courses;
-  window.localStorage.token =  response.token;
+  // let courses = JSON.stringify(response.courses);
+  // window.localStorage.userName = response.name;
+  // window.localStorage.user_Id = response._id;
+  // window.localStorage.courses = courses;
+  // window.localStorage.token =  response.token;
   return {
     type: types.LOG_IN,
     userName: response.name,
@@ -120,6 +121,7 @@ export function addUser(token, course_id, email, admin) {
       .catch((response) => {
         dispatch(loading(''));
         console.log("error response: ", response);
+        dispatch(badResponse("Problem with adding user"))
     })
   };
 }
@@ -156,6 +158,7 @@ export function deleteUser(token, course_id, email) {
       .catch((response) => {
         dispatch(loading(''));
         console.log("error response: ", response);
+        dispatch(badResponse("Problem with deleting user"))
     })
   };
 }
@@ -191,6 +194,7 @@ export function updateCourse(token, course) {
       .catch((response) => {
         dispatch(loading(''));
         console.log("error response: ", response);
+        dispatch(badResponse("Problem with updating course"))
     })
   };
 }
@@ -278,6 +282,7 @@ export function getEnrollable(token, course) {
       .catch((response) => {
         dispatch(loading(''));
         console.log("error response: ", response);
+        dispatch(badResponse("Problem with retrieving enrollable and enrolled users"))
     })
   };
 }
@@ -313,7 +318,15 @@ export function deleteUserFromCourse(token, course_id, email) {
       .catch((response) => {
         dispatch(loading(''));
         console.log("error response: ", response);
-    })
+        return response.json()
+      })
+      .then(function(response) {
+        if(response.message === 'Unable to delete site admin from course') {
+          dispatch(badResponse('Unable to delete site admin from course'))
+        } else {
+          dispatch(badResponse("Problem with deleting user. "))
+        }
+      })
   };
 }
 
@@ -399,7 +412,7 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
       .then(response => response.json())
       .then((response) => {
         dispatch(loading(''));
-        window.location.href="/#/quiz";
+        browserHistory.push("/quiz");
         return dispatch({
           type: types.DELETE_QUIZ,
           courses: response.courses,

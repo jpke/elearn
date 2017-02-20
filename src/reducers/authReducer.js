@@ -46,6 +46,7 @@ export default function authReducer(state = initialState, action) {
       };
     case types.BAD_RESPONSE:
       return {
+        ...state,
         errorMessage: action.message
       };
     case types.LOG_IN:

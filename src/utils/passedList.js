@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function passedList(quizzes, passed) {
+  if(!quizzes) return <li></li>; 
   let p;
   return quizzes.map((quiz, index) => {
     p = passed ? passed.filter((item) => {
