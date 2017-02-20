@@ -16,6 +16,7 @@ class AppContainer extends Component {
   }
 
   render() {
+    console.log("App Loading...")
     return (
         <App
           errorMessage={this.props.errorMessage}

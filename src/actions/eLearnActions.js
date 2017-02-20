@@ -412,7 +412,8 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
       .then(response => response.json())
       .then((response) => {
         dispatch(loading(''));
-        browserHistory.push("/quiz");
+        // browserHistory.push("/quiz");
+        window.location.href="#/quiz";
         return dispatch({
           type: types.DELETE_QUIZ,
           courses: response.courses,
