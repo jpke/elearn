@@ -1,6 +1,6 @@
 // import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
-import {browserHistory} from 'react-router';
+// import {browserHistory} from 'react-router';
 
 const url = "http://localhost:8080/elearn/";
 // const url = "https://portfolio-express.herokuapp.com/elearn/"
