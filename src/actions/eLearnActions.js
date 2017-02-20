@@ -19,9 +19,9 @@ export function badResponse(message) {
 }
 
 function loggedIn(response) {
-  response.courses.forEach((course) => {
-    course.admin = course.admin.indexOf(response._id) > -1;
-  })
+  // response.courses.forEach((course) => {
+  //   course.admin = course.admin.indexOf(response._id) > -1;
+  // })
   let courses = JSON.stringify(response.courses);
   window.localStorage.userName = response.name;
   window.localStorage.user_Id = response._id;
@@ -69,13 +69,12 @@ export function register(userName, email, password) {
         return response.json()
       })
       .then(response => {
-        console.log("user registered: ", response);
         dispatch(loading(''));
         dispatch(loggedIn(response));
       })
     } catch(error) {
-      dispatch(badResponse("Problem with registration"))
       console.log("error response: ", error);
+      dispatch(badResponse("Problem with registration"))
     }
   };
 }
@@ -89,7 +88,6 @@ export function editCourse(id, value) {
 }
 
 export function addUser(token, course_id, email, admin) {
-  console.log(course_id, email, admin);
   return function (dispatch) {
     dispatch(loading('update Course'));
 
@@ -289,7 +287,6 @@ export function logOut() {
 }
 
 export function getCertificate(token, course) {
-  console.log(course.name);
   return function (dispatch) {
     dispatch(loading('getCertificate'));
     //pull down quiz questions, then
@@ -307,7 +304,6 @@ export function getCertificate(token, course) {
           let error = response;
           throw error;
         }
-        console.log(response);
         return response
       })
       .then(response => {
@@ -519,7 +515,6 @@ export function submitQuiz(quizData, quizId, _id, token) {
       .then((response) => {
         dispatch(loading(''));
         // dispatch(viewQuizzes());
-        console.log("submit response: ", response);
         return dispatch({
           type: types.SUBMIT_QUIZ,
           score: response.score,
@@ -536,8 +531,6 @@ export function submitQuiz(quizData, quizId, _id, token) {
 
 export function getLessons(token) {
   return function (dispatch) {
-    // let cookieToken = cookie.load('token');
-    // console.log("cookieToken: ", cookieToken);
     dispatch(loading('lessons'));
     try {
       fetch(url.concat('lessons'), {

@@ -13,7 +13,6 @@ export const AdminContainer = (props) => {
 
   const addUser = (event) => {
     event.preventDefault();
-    console.log("admin: ", event.target.elements.admin.checked);
     props.addUser(props.token, props.course._id, event.target.elements.newUser.value, event.target.elements.admin.checked);
   }
 

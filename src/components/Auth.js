@@ -13,7 +13,6 @@ export default class Auth extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {login: true};
-    console.log("passed: ", props.passed)
   }
   toggleView() {
     this.setState({login: !this.state.login});

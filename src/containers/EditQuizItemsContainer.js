@@ -19,7 +19,6 @@ export const EditQuizItemsContainer = (props) => {
 
   const deleteQuiz = () => {
     let result = confirm("Confirm to delete quiz. This cannot be undone.")
-    console.log("confirmed? ", result);
     if(result) {
       if(props.quizSelectedId) {
         props.deleteSavedQuiz(props.token, props.userId, props.courseId, props.quizSelectedId)

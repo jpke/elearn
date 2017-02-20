@@ -91,17 +91,13 @@ export default function authReducer(state = initialState, action) {
     case types.ADD_USER:
       enrollable = JSON.parse(JSON.stringify(state.enrollable));
       enrollable.push(action.user);
-      console.log(enrollable)
       return {
         ...state,
         enrollable: enrollable
       };
     case types.DELETE_USER:
-      console.log(action.index)
       course = JSON.parse(JSON.stringify(state.course));
-      console.log(course.enrollable);
       course.enrollable = course.enrollable.slice(0, action.index).concat(course.enrollable.slice(action.index + 1, course.enrollable.length));
-      console.log(course.enrollable);
       return {
         ...state,
         course: course
@@ -120,7 +116,6 @@ export default function authReducer(state = initialState, action) {
         if(courses[i]._id === action.course._id) index = i;
       }
       courses = courses.slice(0, index).concat(action.course, courses.slice(index + 1, courses.length));
-      console.log("updated courses: ", courses);
       return {
         ...state,
         course: action.course,
@@ -157,7 +152,6 @@ export default function authReducer(state = initialState, action) {
         if(courses[i]._id === action.course._id) index = i;
       }
       courses = courses.slice(0, index).concat(action.course, courses.slice(index + 1, courses.length));
-      console.log("updated courses: ", courses);
       return {
         ...state,
         courses: courses,
