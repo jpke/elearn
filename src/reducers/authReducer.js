@@ -14,6 +14,7 @@ if(window.localStorage.userName) {
       loading: false,
       newUser: "",
       enrollable: [],
+      enrolled: [],
       message: ""
     }
   } else {
@@ -29,6 +30,7 @@ if(window.localStorage.userName) {
       loading: false,
       newUser: "",
       enrollable: [],
+      enrolled: [],
       message: ""
     }
   }
@@ -105,8 +107,13 @@ export default function authReducer(state = initialState, action) {
     case types.UPDATE_ENROLLABLE:
       return {
         ...state,
-        enrollable: action.enrollable
+        enrollable: action.enrollable,
       };
+    case types.UPDATE_ENROLLED:
+      return {
+        ...state,
+        enrolled: action.enrolled
+      }
     case types.UPDATE_COURSE:
       if(!action.course) return state;
       courses = JSON.parse(JSON.stringify(state.courses));

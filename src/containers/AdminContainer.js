@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateCourse, updateEnrollable, editCourse, addUser, deleteUser} from '../actions/eLearnActions';
+import {updateCourse, updateEnrollable, editCourse, addUser, deleteUser, deleteUserFromCourse} from '../actions/eLearnActions';
 import listUsers from '../utils/listUsers';
 import AdminView from '../components/AdminView';
 
@@ -20,17 +20,24 @@ export const AdminContainer = (props) => {
     props.deleteUser(props.token, props.course._id, email)
   }
 
+  const deleteUserFromCourse = (email) => {
+    if(email === "jpearnest08@gmail.com") return alert("unable to delete site admin from course");
+    props.deleteUserFromCourse(props.token, props.course._id, email)
+  }
+
   return (
       <AdminView
         editCourse={editCourse}
         addUser={addUser}
         deleteUser={deleteUser}
+        deleteUserFromCourse={deleteUserFromCourse}
         message={props.message}
         updateCourse={props.updateCourse}
         listUsers={listUsers}
         newUser={props.newUser}
         course={props.course}
         enrollable={props.enrollable}
+        enrolled={props.enrolled}
         _id={props._id}
         token={props.token}
       />
@@ -44,6 +51,7 @@ function mapStateToProps(state) {
       _id: state.authReducer.userId,
       course: state.authReducer.course,
       enrollable: state.authReducer.enrollable,
+      enrolled: state.authReducer.enrolled,
       token: state.authReducer.token,
       newUser: state.authReducer.newUser,
       message: state.authReducer.message
@@ -56,7 +64,8 @@ function mapDispatchToProps(dispatch) {
     updateCourse: (token, course) => {dispatch(updateCourse(token, course))},
     editCourse: (id, value) => {dispatch(editCourse(id, value))},
     addUser: (token, course_id, email, admin) => {dispatch(addUser(token, course_id, email, admin))},
-    deleteUser: (token, course_id, email) => {dispatch(deleteUser(token, course_id, email))}
+    deleteUser: (token, course_id, email) => {dispatch(deleteUser(token, course_id, email))},
+    deleteUserFromCourse: (token, course_id, email) => {dispatch(deleteUserFromCourse(token, course_id, email))}
   };
 }
 

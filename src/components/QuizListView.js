@@ -2,7 +2,7 @@ import React from 'react';
 
 const QuizListView = (props) => (
   <div>
-    <h2>Select quiz</h2>
+    <h3>Select quiz</h3>
     <div className="quiz-list-container">
       <ul className="quiz-list">
         {props.listCreator(props.quizzes, props.selectQuiz, props.admin, props.editQuiz, props.passed)}

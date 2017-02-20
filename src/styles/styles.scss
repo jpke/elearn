@@ -1,7 +1,7 @@
 $color-background: #dbdbb8;
 $color-primary: #dbb8db;
 $color-raised: #dbcab8;
-$color-text: #7676b9;
+$color-text: #9A6667;
 $color-text-highlight: #414137;
 $color-highlight: #b8dbdb;
 
@@ -22,6 +22,7 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
+  // color: #2A2A2E;
 
   p {
     margin: 0;
@@ -118,7 +119,7 @@ margin: auto;
 
 h1 {
   text-align: center;
-  font-family: 'Contrail One', cursive;
+  // font-family: 'Contrail One', cursive;
 }
 
 .authFormContainer {
@@ -188,10 +189,12 @@ h1 {
 
   h3 {
     text-align: center;
+    max-width: 280px;
+    margin: 10px auto;
   }
 
   .message {
-    margin: 0;
+    margin: auto;
     color: $color-text-highlight;
   }
 
@@ -209,6 +212,13 @@ h1 {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+    }
+
+    .updateCourse {
+      font-size: 18px;
+      height: 36px;
+      margin-bottom: 3px;
+
     }
   }
 
@@ -230,6 +240,7 @@ h1 {
 
   form {
     margin: auto;
+    margin-bottom: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -268,14 +279,20 @@ h1 {
     }
   }
 
-  .user-list {
+  h4 {
+    margin: 0px;
+  }
+
+  .user-list, .user-list-enrolled {
+    margin-top: 3px;
     li {
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
+      padding-left: 6px;
 
       button {
-        width: 100px;
+        width: 70px;
         font-size: 16px;
       }
     }
@@ -289,7 +306,13 @@ h1 {
   justify-content: center;
   align-items: center;
 
+  h3 {
+    color: $color-text-highlight;
+    margin: 0;
+  }
+
   .quiz-list-container {
+    margin: 0;
     display: flex;
     justify-content: space-between;
     min-width: 300px;
@@ -318,6 +341,7 @@ h1 {
     display: flex;
     flex-direction: column;
     flex: 4;
+    margin: 10px 0;
 
     .listed-item {
       min-width: 300px;
@@ -545,7 +569,7 @@ h1 {
 }
 
 .lessonsContainer {
-  width: 400px;
+  width: 300px;
   margin: auto;
   h2 {
     text-align: center;
