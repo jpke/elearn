@@ -11,7 +11,7 @@ export default class Lessons extends Component {
     //download lesson, accessing by lesson id
     this.props.getPDF(event.target.id, this.props.token);
   }
-  
+
   render() {
     let lessons = this.props.lessons.map((lesson, index) => {
       return (
@@ -38,6 +38,9 @@ export default class Lessons extends Component {
                 <a href={this.props.preview} target="_blank">Preview</a>
               </div>
             : ""}
+
+              <input type="file" id="uploadPDFInput" name="uploadPDF" onChange={() => {this.props.uploadPDF()}}/>
+
           </div>
         :
           <h3>You must be <Link to='/' className="redirect">logged in</Link> to access this content</h3>}

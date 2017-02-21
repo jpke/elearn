@@ -3,8 +3,8 @@ import * as types from '../constants/actionTypes';
 import fetch from 'isomorphic-fetch';
 // import {browserHistory} from 'react-router';
 
-// const url = "http://localhost:8080/elearn/";
-const url = "https://portfolio-express.herokuapp.com/elearn/"
+const url = "http://localhost:8080/elearn/";
+// const url = "https://portfolio-express.herokuapp.com/elearn/"
 
 export function loading(item) {
   return {
@@ -653,4 +653,35 @@ export function getPDF(pdfId, token) {
       console.log("error response: ", error);
     }
   };
+}
+
+export function uploadPDF(token, courseID, file) {
+  return function(dispatch) {
+    dispatch(loading("uploading pdf"));
+      let formData = new FormData(file);
+      // formData.append("file", file);
+      fetch(url.concat('lessons/'), {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      })
+      .then(response => {
+        if(response.status != 201) throw response;
+        return response.json();
+      })
+      .then(response => {
+        return dispatch({
+          type: types.GET_LESSONS,
+          lessons: response.entries
+        });
+      })
+      .catch(error => {
+        dispatch(badResponse("Problem with uploading file"))
+        console.log("error response: ", error);
+      })
+  }
 }
