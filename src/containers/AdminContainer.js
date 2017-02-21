@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateCourse, updateEnrollable, editCourse, addUser, deleteUser, deleteUserFromCourse} from '../actions/eLearnActions';
+import {updateCourse, editCourse, addUser, deleteUser, deleteUserFromCourse} from '../actions/eLearnActions';
 import listUsers from '../utils/listUsers';
 import AdminView from '../components/AdminView';
 
@@ -59,7 +59,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateEnrollable: (token, course_id, email, admin) => {dispatch(updateEnrollable(token, course_id, email, admin))},
     updateCourse: (token, course) => {dispatch(updateCourse(token, course))},
     editCourse: (id, value) => {dispatch(editCourse(id, value))},
     addUser: (token, course_id, email, admin) => {dispatch(addUser(token, course_id, email, admin))},

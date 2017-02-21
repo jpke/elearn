@@ -1,9 +1,10 @@
 // import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
-import {browserHistory} from 'react-router';
+import fetch from 'isomorphic-fetch';
+// import {browserHistory} from 'react-router';
 
-const url = "http://localhost:8080/elearn/";
-// const url = "https://portfolio-express.herokuapp.com/elearn/"
+// const url = "http://localhost:8080/elearn/";
+const url = "https://portfolio-express.herokuapp.com/elearn/"
 
 export function loading(item) {
   return {
@@ -412,7 +413,8 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
       .then(response => response.json())
       .then((response) => {
         dispatch(loading(''));
-        browserHistory.push("/quiz");
+        // browserHistory.push("/quiz");
+        window.location.href="#/quiz";
         return dispatch({
           type: types.DELETE_QUIZ,
           courses: response.courses,
