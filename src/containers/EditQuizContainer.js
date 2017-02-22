@@ -5,7 +5,7 @@ import {toggleQuizView, editQuiz, deleteSavedQuiz, saveQuiz} from '../actions/eL
 import EditQuizItemView from '../components/EditQuizItemView';
 import EditQuizTitleView from '../components/EditQuizTitleView';
 
-export const EditQuizItemsContainer = (props) => {
+export const EditQuizContainer = (props) => {
 
   const editQuizItem = (event) => {
     event.preventDefault();
@@ -95,4 +95,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditQuizItemsContainer);
+)(EditQuizContainer);

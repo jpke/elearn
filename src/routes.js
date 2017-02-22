@@ -2,18 +2,18 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import AppContainer from './containers/AppContainer';
-import HomePage from './components/HomePage';
-import QuizLanding from './containers/QuizLanding';
-import EditQuizItemsContainer from './containers/EditQuizItemsContainer';
-import LessonsPage from './containers/LessonsPage';
+import AuthContainer from './containers/AuthContainer';
+import QuizLandingContainer from './containers/QuizLandingContainer';
+import EditQuizContainer from './containers/EditQuizContainer';
+import LessonsContainer from './containers/LessonsContainer';
 import AdminContainer from './containers/AdminContainer';
 
 export default (
   <Route path="/" component={AppContainer}>
-    <IndexRoute component={HomePage}/>
-    <Route path="quiz" component={QuizLanding}/>
-    <Route path="quiz/modify" component={EditQuizItemsContainer}/>
-    <Route path="lessons" component={LessonsPage}/>
+    <IndexRoute component={AuthContainer}/>
+    <Route path="quiz" component={QuizLandingContainer}/>
+    <Route path="quiz/modify" component={EditQuizContainer}/>
+    <Route path="lessons" component={LessonsContainer}/>
     <Route path="admin" component={AdminContainer}/>
   </Route>
 );

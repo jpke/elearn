@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import {badResponse} from '../actions/eLearnActions';
-import App from '../components/App';
+import AppView from '../components/AppView';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -17,7 +17,7 @@ class AppContainer extends Component {
 
   render() {
     return (
-        <App
+        <AppView
           errorMessage={this.props.errorMessage}
           clearErrorMessage={this.props.clearErrorMessage}
           userName={this.props.userName}
