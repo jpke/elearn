@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getLessons, getPDF, uploadPDF} from '../actions/eLearnActions';
-import Lessons from '../components/Lessons';
+import LessonsView from '../components/LessonsView';
 
-const LessonsPage = (props) => {
+const LessonsContainer = (props) => {
 
-  const uploadPDF = (event) => {
+  const uploadPDF = () => {
     // event.preventDefault();
     let files = document.getElementById("uploadPDFInput").files;
     console.log("event: ", files[0]);
@@ -13,7 +13,7 @@ const LessonsPage = (props) => {
   }
 
   return (
-    <Lessons getLessons={props.getLessons}
+    <LessonsView getLessons={props.getLessons}
       getPDF={props.getPDF}
       uploadPDF={uploadPDF}
       token={props.token}
@@ -47,4 +47,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LessonsPage);
+)(LessonsContainer);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 
-export default class Lessons extends Component {
+export default class LessonsView extends Component {
   constructor(props) {
     super(props);
     if(this.props.token) this.props.getLessons(this.props.token);

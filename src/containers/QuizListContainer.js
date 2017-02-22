@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import listCreator from '../utils/listCreator';
 import passedList from '../utils/passedList';
 import {selectQuiz, createQuiz, toggleQuizView} from '../actions/eLearnActions';
-import EditQuizItemsContainer from './EditQuizItemsContainer';
+import EditQuizContainer from './EditQuizContainer';
 import QuizListView from '../components/QuizListView';
 
 export const QuizListContainer = (props) => {
@@ -24,7 +24,7 @@ export const QuizListContainer = (props) => {
   return (
     <div>
     {props.viewQuizSelected && props.admin ?
-      <EditQuizItemsContainer />
+      <EditQuizContainer />
     :
       <QuizListView
         listCreator={listCreator}

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import QuizLandingView from '../components/QuizLandingView';
 
-const QuizLanding = (props) => {
+const QuizLandingContainer = (props) => {
   return (
       <QuizLandingView
         viewQuizSelected={props.viewQuizSelected}
@@ -24,4 +24,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps
-)(QuizLanding);
+)(QuizLandingContainer);
