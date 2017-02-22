@@ -365,8 +365,8 @@ export function logOut() {
   };
 }
 
-//sends async request to fetch pdf certification of completion of course
-//request will fail is user has not passed all course quizzes
+//sends async request to fetch pdf course completion certificate
+//request will fail if user has not passed all course quizzes
 //opens pdf certificate in new browser tab upon success
 //calls badResponse upon failure
 export function getCertificate(token, course) {
@@ -404,13 +404,14 @@ export function getCertificate(token, course) {
   };
 }
 
-
+//dispatches create quiz action to reducer
 export function createQuiz() {
   return {
     type: types.CREATE_QUIZ
   };
 }
 
+//dispatches edit quiz action to reducer
 export function editQuiz(itemIndex, itemName, value, subIndex) {
   return {
     type: types.UPDATE_QUIZ,
@@ -421,6 +422,10 @@ export function editQuiz(itemIndex, itemName, value, subIndex) {
   };
 }
 
+//sends async request to delete quiz and update course quiz list
+//must be course admin for request to succeed
+//dispatches delete quiz to reducer and sets view to quiz list upon success
+//calls badResponse upon failure
 export function deleteSavedQuiz(token, userId, courseID, quizId) {
   return function (dispatch) {
     dispatch(loading('deleteQuiz'));
@@ -458,6 +463,10 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
   }
 }
 
+//sends async request to create or update quiz, adding quiz to course quiz list when new quiz is created
+//must be course admin for request to succeed
+//dispatches save quiz to reducer upon success
+//calls badResponse upon failure
 export function saveQuiz(token, userId, courseID, quiz) {
   return function (dispatch) {
     dispatch(loading('saveQuiz'));
@@ -498,6 +507,9 @@ export function saveQuiz(token, userId, courseID, quiz) {
   }
 }
 
+//selects quiz from course quiz list
+//calls toggleQuizView to switch view from quiz list to quiz start or quiz edit
+//calls loadQuiz to fetch quiz data
 export function selectQuiz(token, quizId, userId) {
   return function(dispatch) {
     dispatch(toggleQuizView());
@@ -505,12 +517,18 @@ export function selectQuiz(token, quizId, userId) {
   }
 }
 
+//switches view from list of course quizzes to quiz start or quiz edit view
+//dispatches toggle quiz view to reducer
 export function toggleQuizView() {
   return {
     type: types.TOGGLE_QUIZ_VIEW
   };
 }
 
+//sends async request to fetch quiz data and any prior submissions of this quiz by this user
+//quiz id and user id must be given in request url
+//dispatches load quiz upon success
+//calls badResponse upon failure
 export function loadQuiz(token, quiz_Id, user_Id) {
   return function (dispatch) {
     dispatch(loading('loadQuiz'));
@@ -545,12 +563,16 @@ export function loadQuiz(token, quiz_Id, user_Id) {
   };
 }
 
+//starts quiz
+//dispatches start quiz to reducer
 export function startQuiz() {
   return {
     type: types.START_QUIZ
   };
 }
 
+//selects answer
+//dispatches select answer to reducer
 export function selectAnswer(answerSelected, idSelected, item) {
   return {
     type: types.SELECT_ANSWER,
@@ -560,18 +582,25 @@ export function selectAnswer(answerSelected, idSelected, item) {
   };
 }
 
+//advances quiz to next question
+//dispatches next question to reducer
 export function nextQuestion() {
   return {
     type: types.NEXT_QUESTION
   };
 }
 
+//moves back one question in quiz
+//dispatches previous question to reducer
 export function prevQuestion() {
   return {
     type: types.PREVIOUS_QUESTION
   };
 }
 
+//sends async request to submit quiz, which saves submission to database
+//dispatches submit quiz to reducer upon success
+//calls badResponse upon failure
 export function submitQuiz(quizData, quizId, _id, token) {
   return function (dispatch) {
     dispatch(loading('submitQuiz'));
@@ -613,6 +642,9 @@ export function submitQuiz(quizData, quizId, _id, token) {
   }
 }
 
+//sends async request to fetch list of course lessons
+//dispatches get lessons to reducer upon success
+//calls badResponse upon failure
 export function getLessons(token) {
   return function (dispatch) {
     dispatch(loading('lessons'));
@@ -645,6 +677,7 @@ export function getLessons(token) {
   };
 }
 
+//dispatches get pdf to reducer
 export function loadPreview(response) {
   return {
     type: types.GET_PDF,
@@ -652,6 +685,10 @@ export function loadPreview(response) {
   };
 }
 
+//sends async request to fetch BOX preview url for selected pdf
+//dispatches loadPreview prior to fetch to clear prior BOX preview url from store, if present (allows for UI display effect)
+//dispatches loadPreview with new url upon success
+//calls badResponse upon failure
 export function getPDF(pdfId, token) {
   return function (dispatch) {
     dispatch(loadPreview(""));
@@ -682,6 +719,10 @@ export function getPDF(pdfId, token) {
   };
 }
 
+//in progress---
+//will send async request to upload pdf file to BOX
+//will dispatch get lessons with updated course lesson list upon success
+//will call badResponse upon failure
 export function uploadPDF(token, courseID, file) {
   return function(dispatch) {
     dispatch(loading("uploading pdf"));

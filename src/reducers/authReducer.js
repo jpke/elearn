@@ -1,38 +1,19 @@
 import * as types from '../constants/actionTypes';
 
-let initialState;
-if(window.localStorage.userName) {
-    initialState = {
-      view: 'login',
-      userName: window.localStorage.userName,
-      userId: window.localStorage.user_Id,
-      course: "",
-      courses: JSON.parse(window.localStorage.courses),
-      passed: [],
-      token: window.localStorage.token,
-      loggedIn: false,
-      loading: false,
-      newUser: "",
-      enrollable: [],
-      enrolled: [],
-      message: ""
-    }
-  } else {
-    initialState = {
-      view: 'login',
-      userName: '',
-      userId: '',
-      course: "",
-      courses: [],
-      passed: [],
-      token: "",
-      loggedIn: false,
-      loading: false,
-      newUser: "",
-      enrollable: [],
-      enrolled: [],
-      message: ""
-    }
+const initialState = {
+    view: 'login',
+    userName: '',
+    userId: '',
+    course: "",
+    courses: [],
+    passed: [],
+    token: "",
+    loggedIn: false,
+    loading: false,
+    newUser: "",
+    enrollable: [],
+    enrolled: [],
+    message: ""
   }
 
 export default function authReducer(state = initialState, action) {
