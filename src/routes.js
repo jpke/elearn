@@ -8,6 +8,7 @@ import EditQuizContainer from './containers/EditQuizContainer';
 import LessonsContainer from './containers/LessonsContainer';
 import AdminContainer from './containers/AdminContainer';
 
+//define clientside navigation routes
 export default (
   <Route path="/" component={AppContainer}>
     <IndexRoute component={AuthContainer}/>
