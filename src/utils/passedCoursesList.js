@@ -1,5 +1,8 @@
 import React from 'react'
 
+//creates list of courses passed by user
+//compares number of course quizzes passed by user to total number of quizzes in course
+//if user passed course, list displays option to view and download course completion certificate
 export default function passedCoursesList(courses, passed) {
   let q;
   return courses.map((course, index) => {

@@ -2,17 +2,14 @@ export const LOADING = 'LOADING';
 export const BAD_RESPONSE = 'BAD_RESPONSE';
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
-export const EMAIL_USED = 'EMAIL_USED';
 
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const EDIT_COURSE = 'EDIT_COURSE';
 export const ADD_USER = 'ADD_USER';
-export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_ENROLLABLE = 'UPDATE_ENROLLABLE';
 export const UPDATE_ENROLLED = 'UPDATE_ENROLLED';
 export const UPDATE_COURSE = 'UPDATE_COURSE';
 
-export const SELECT_QUIZ = 'SELECT_QUIZ';
 export const LOAD_QUIZ = 'LOAD_QUIZ';
 export const TOGGLE_QUIZ_VIEW = 'TOGGLE_QUIZ_VIEW';
 

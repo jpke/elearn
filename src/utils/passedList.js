@@ -1,7 +1,9 @@
 import React from 'react'
 
+//creates list of quizzes passed by user
+//displays check mark icon by quizzes user has passed
 export default function passedList(quizzes, passed) {
-  if(!quizzes) return <li></li>; 
+  if(!quizzes) return <li></li>;
   let p;
   return quizzes.map((quiz, index) => {
     p = passed ? passed.filter((item) => {

@@ -56,17 +56,7 @@ export function register(userName, email, password) {
         })
       })
       .then(response => {
-        if(response.status < 200 || response.status >= 300) {
-          if(response.body.message === 'email already associated with an account') {
-            return dispatch({
-              type: types.EMAIL_USED,
-              email
-            });
-          } else {
-            let error = response;
-            throw error;
-          }
-        }
+        if(response.status !=201) throw response;
         return response.json()
       })
       .then(response => {
@@ -74,6 +64,10 @@ export function register(userName, email, password) {
         dispatch(loggedIn(response));
       })
     } catch(error) {
+      if(error.status === 400) {
+        //provides more specific error message
+        return dispatch(badResponse("Email already in use"));
+      }
       console.log("error response: ", error);
       dispatch(badResponse("Problem with registration"))
     }
@@ -632,7 +626,8 @@ export function submitQuiz(quizData, quizId, _id, token) {
         return dispatch({
           type: types.SUBMIT_QUIZ,
           score: response.score,
-          attempt: response.attempt
+          attempt: response.attempt,
+          passed: response.passed
         });
         })
     } catch(error) {

@@ -1,5 +1,6 @@
 import * as types from '../constants/actionTypes';
 
+//initialize authReducer state
 const initialState = {
     view: 'login',
     userName: '',
@@ -16,20 +17,30 @@ const initialState = {
     message: ""
   }
 
+//define authReducer
 export default function authReducer(state = initialState, action) {
+  //declare variables used in reducer
   let courses, course, enrollable, index, i, passed;
+
+  //switch block to define behavior for each case
   switch(action.type) {
+
+    //sets loading status, will eventually use for loading icon
     case types.LOADING:
       return {
         ...state,
         loading: !state.loading,
         loadingItem: action.item
       };
+
+    //sets errorMessage status, which prompts user alert
     case types.BAD_RESPONSE:
       return {
         ...state,
         errorMessage: action.message
       };
+
+    //sets user info upon successful login
     case types.LOG_IN:
       return {
         ...state,
@@ -42,12 +53,8 @@ export default function authReducer(state = initialState, action) {
         loggedIn: true,
         url: action.url
       };
-    case types.EMAIL_USED:
-      return {
-        ...state,
-        emailUsed: true,
-        email: action.email
-      };
+
+    //resets user information to log user out of client side
     case types.LOG_OUT:
       return {
         ...state,
@@ -56,13 +63,19 @@ export default function authReducer(state = initialState, action) {
         token: "",
         loggedIn: false
       };
+
+    //updates state with course selected by user
     case types.SELECT_COURSE:
       return {
         ...state,
         course: action.course,
         message: ""
       };
+
+    //updates selected course title in state
+    //this will allow updated course title to be sent in updateCourse fetch request
     case types.EDIT_COURSE:
+      //immutable course deep copy
       course = JSON.parse(JSON.stringify(state.course));
       if(action.id === "course-title") {
         course.name = action.value;
@@ -72,32 +85,38 @@ export default function authReducer(state = initialState, action) {
         course: course,
         message: ""
       };
+
+    //adds unregistered user email to list of enrollable users for course
     case types.ADD_USER:
+      //immutable enrollable deep copy
       enrollable = JSON.parse(JSON.stringify(state.enrollable));
       enrollable.push(action.user);
       return {
         ...state,
         enrollable: enrollable
       };
-    case types.DELETE_USER:
-      course = JSON.parse(JSON.stringify(state.course));
-      course.enrollable = course.enrollable.slice(0, action.index).concat(course.enrollable.slice(action.index + 1, course.enrollable.length));
-      return {
-        ...state,
-        course: course
-      };
+
+    //updates list of unregistered user emails that are enrollable in course
+    //called upon success of getEnrollable, addUser or deleteUser fetch requests
     case types.UPDATE_ENROLLABLE:
       return {
         ...state,
         enrollable: action.enrollable,
       };
+
+    //updates list of registered users currently enrolled in course
+    //called upon success of getEnrollable fetch request
     case types.UPDATE_ENROLLED:
       return {
         ...state,
         enrolled: action.enrolled
       }
+
+    //updates course list and selected course with updated course content
+    //called upon success of updateCourse fetch request
     case types.UPDATE_COURSE:
       if(!action.course) return state;
+      //immutable course deep copy
       courses = JSON.parse(JSON.stringify(state.courses));
       index = 0;
       i = 0
@@ -111,6 +130,9 @@ export default function authReducer(state = initialState, action) {
         courses: courses,
         message: "Course saved!"
       };
+
+    //updates array of user submissions of selected quiz that passed the minimum score requirement of the quiz
+    //only updates array if new submission passed minimum score requirement
     case types.SUBMIT_QUIZ:
       if(action.passed) {
         passed = JSON.parse(JSON.stringify(state.passed)).concat({_id: action.attempt._id, of: action.attempt.of});
@@ -121,6 +143,9 @@ export default function authReducer(state = initialState, action) {
         ...state,
         passed: passed
       };
+
+    //deletes quiz from course quiz list clientside
+    //called upon success of deleteSavedQuiz fetch request, which deletes quiz and updates course quiz list serverside
     case types.DELETE_QUIZ:
       index = -1;
       i = 0;
@@ -132,6 +157,9 @@ export default function authReducer(state = initialState, action) {
         course: action.courses[index],
         courses: action.courses
       };
+
+    //saves quiz in course quiz list clientside
+    //called upon success of saveQuiz fetch request, which saves quiz and updates course quiz list serverside
     case types.SAVE_QUIZ:
       if(!action.course) return state;
       courses = JSON.parse(JSON.stringify(state.courses));

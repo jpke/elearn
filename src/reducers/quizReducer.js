@@ -4,6 +4,7 @@ import evaluateSelection from '../utils/evaluateSelection';
 import calcPassed from '../utils/calcPassed';
 import seedItem from '../utils/seedItem';
 
+//initialize quizReducer state
 const initialState = {
   quizzes: [],
   quizSelected: false,
@@ -21,20 +22,23 @@ const initialState = {
   quiz: seedItem
 };
 
+//define quizReducer
 export default function quizReducer(state = initialState, action) {
+  //declare variables used in reducer
   let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, index, updatedCurrentQuestion, attempts, quiz, itemName, quizIteration;
+
+  //switch block to define behvaior for each case
   switch(action.type) {
-    case types.SELECT_COURSE:
-      return {
-        ...state,
-        quizzes: action.quizzes
-      }
-    case types.SELECT_QUIZ:
-      return {
-       ...state,
-       quizSelected: action.quizName,
-       quizSelectedId: action.quiz_Id,
-       };
+
+    //
+    // case types.SELECT_COURSE:
+    //   return {
+    //     ...state,
+    //     quizzes: action.quizzes
+    //   }
+
+    //toggles quiz view between quiz list and quiz start/edit
+    //clears any message left from edit quiz
     case types.TOGGLE_QUIZ_VIEW: {
       return {
         ...state,
@@ -42,12 +46,18 @@ export default function quizReducer(state = initialState, action) {
         message: ""
       };
     }
+
+    //creates new quiz, setting quiz to seedItem (default quiz template)
     case types.CREATE_QUIZ:
       return {
         ...state,
         quiz: seedItem
       };
+
+    //updates quiz state with changes made by user via form input in edit quiz view
+    //only updates appropriate area of quiz
     case types.UPDATE_QUIZ: {
+      //immutable quiz deep copy
       quiz = JSON.parse(JSON.stringify(state.quiz));
       itemName = action.itemName.toString();
       if(itemName === "title"){
@@ -83,21 +93,33 @@ export default function quizReducer(state = initialState, action) {
         message: ""
       };
     }
+
+    //deletes quiz from state by reseting quiz to seedItem
+    //also clears any prior message in quiz view
     case types.DELETE_QUIZ:
       return {
         ...state,
         quiz: seedItem,
         message: ""
       };
+
+    //updates state with saved quiz, displays confirmation message
+    //called upon success of saveQuiz fetch request, which saves quiz and updates course quiz list serverside
     case types.SAVE_QUIZ:
       return {
         ...state,
         quiz: action.quiz,
         message: "Quiz saved!"
       };
+
+    //updates state with quiz data and prior submissions of quiz selected by user
+    //called upon success of loadQuiz fetch request, which pulls data from database
     case types.LOAD_QUIZ:
+      //immutable quiz deep copy, to randomize this quiz attempt
       quizIteration = JSON.parse(JSON.stringify(action.quizData.items));
+      //randomizes quiz question order and answers
       quizIteration = quizDataRamdomizer(quizIteration);
+      //determines if any prior submissions of quiz passed minimum score required
       passed = calcPassed(action.attempts, action.quizData.minimumScore);
       return {
         ...state,
@@ -111,8 +133,12 @@ export default function quizReducer(state = initialState, action) {
         attempts: action.attempts,
         minimumScore: action.quizData.minimumScore,
       };
+
+    //starts quiz, reinitializing quiz attempt data, and randomizing quiz question order and answers for attempt
     case types.START_QUIZ:
+      //immutable quiz deep copy, to allow this attempt to be randomized without affecting underlying data
       updateQuizData = JSON.parse(JSON.stringify(state.quiz.items));
+      //randomizes quiz question order and answers
       quizIteration = quizDataRamdomizer(updateQuizData);
       return {
         ...state,
@@ -123,13 +149,20 @@ export default function quizReducer(state = initialState, action) {
         score: 0,
         quizInProgress: true
       };
+
+    //updates state to reflect quiz answer currently selected by user
     case types.SELECT_ANSWER:
       index = state.currentQuestionIndex;
+      //determines if current answer selection is correct
       correct = evaluateSelection(action.idSelected, state.currentQuestion);
+      //immutable deep copy of current question
       updatedCurrentQuestion = JSON.parse(JSON.stringify(state.currentQuestion));
+
+      //updates current question with current answer selection, whether it is correct and the id and answer text selected
       updatedCurrentQuestion.correct = correct;
       updatedCurrentQuestion.idSelected = action.idSelected;
       updatedCurrentQuestion.itemSelected = action.itemSelected;
+
       updateQuizData = state.quizData.slice(0, index).concat(updatedCurrentQuestion).concat(state.quizData.slice(index + 1, state.quizData.length));
       return {
         ...state,
@@ -137,6 +170,8 @@ export default function quizReducer(state = initialState, action) {
         currentQuestion: updatedCurrentQuestion,
         idSelected: action.idSelected
       };
+
+    //sets currently visible question to next question in quiz attempt
     case types.NEXT_QUESTION:
       currentQuestionIndex = state.currentQuestionIndex + 1;
       currentQuestion = state.quizData[currentQuestionIndex];
@@ -145,6 +180,8 @@ export default function quizReducer(state = initialState, action) {
         currentQuestion: currentQuestion,
         currentQuestionIndex: currentQuestionIndex
       };
+
+    //sets currently visible question to previous question in quiz attempt
     case types.PREVIOUS_QUESTION:
       currentQuestionIndex = state.currentQuestionIndex - 1;
       currentQuestion = state.quizData[currentQuestionIndex];
@@ -153,6 +190,9 @@ export default function quizReducer(state = initialState, action) {
         currentQuestion: currentQuestion,
         currentQuestionIndex: currentQuestionIndex
       };
+
+    //updates state with new attempt, and whether quiz was passed in any attempts by user
+    //called upon success of submitQuiz fetch request, which grades and saves attempt to database
     case types.SUBMIT_QUIZ:
       if(state.attempts) {
           attempts = JSON.parse(JSON.stringify(state.attempts)).concat(action.attempt);
