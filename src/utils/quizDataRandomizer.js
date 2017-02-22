@@ -1,4 +1,4 @@
-//shuffle question order
+//shuffles quiz question order and answer choices
 export default function quizQuestionRamdomizer(quizData) {
   for(let question in quizData) {
     quizData[question].answers = shuffle(quizData[question].answers)

@@ -1,4 +1,5 @@
-//shuffle question order
+//determines if selected answer is correct
+//returns boolean value
 export default function evaluateSelection(answerSelected, currentQuestion) {
   function findAnswer(id, answers) {
     return answers.filter((answer) => {

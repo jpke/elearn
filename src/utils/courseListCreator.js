@@ -1,5 +1,8 @@
 import React from 'react'
 
+//creates list of courses available to user
+//compares number of course quizzes passed by user to total number of quizzes in course
+//if user has met all requirements for course, allows user to select option to view and download course completion certificate
 export default function courseListCreator(items, selectFunction, passed, token, url) {
   return items.map((item, index) => {
     let q, qSum;

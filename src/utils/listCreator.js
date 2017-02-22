@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router'
 
+//creates list of quizzes available to user
+//if admin, displays option to go to edit quiz
 export default function listCreator(items, selectFunction, admin, editQuiz) {
   if(!items) return <li>No Quizzes</li>;
   if(admin) {

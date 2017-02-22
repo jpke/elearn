@@ -1,3 +1,4 @@
+//data to seed edit quiz template for new quiz
 const seedItem = {
   title: "new quiz",
   courses: ["undefined"],

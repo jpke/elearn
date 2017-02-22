@@ -1,5 +1,7 @@
 import React from 'react'
 
+//creates list of users enrollable or enrolled in course
+//includes option to delete selected user
 export default function listUsers(users, deleteUser) {
   if(users) {
     return users.map((user, index) => {
