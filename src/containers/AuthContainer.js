@@ -4,11 +4,14 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/eLearnActions';
 import AuthView from '../components/AuthView';
 
+//container for AuthView, adds necessary data to event calls triggered by AdminView
+//allows user to register, log in or out and select course
 class AuthContainer extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {login: true};
   }
+  //toggles between login and register views
   toggleView() {
     this.setState({login: !this.state.login});
   }
@@ -24,6 +27,7 @@ class AuthContainer extends Component {
   }
 
   selectCourse(course) {
+    //pull down enrollable and enrolled users in course if authenticated user is admin for selected course
     if(course.admin) return this.props.actions.getEnrollable(this.props.token, course);
     else return this.props.actions.selectCourse(course);
   }
@@ -34,7 +38,7 @@ class AuthContainer extends Component {
           toggleView={this.toggleView.bind(this)}
           register={this.register.bind(this)}
           logIn={this.logIn.bind(this)}
-          isLoggedIn={this.state.login}
+          viewLogin={this.state.login}
           selectCourse={this.selectCourse.bind(this)}
           logOut={this.props.actions.logOut}
           courses={this.props.courses}

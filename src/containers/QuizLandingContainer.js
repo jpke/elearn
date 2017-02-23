@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import QuizLandingView from '../components/QuizLandingView';
 
+//container for QuizLandingView
+//called by routes to "/quiz" endpoint
 const QuizLandingContainer = (props) => {
   return (
       <QuizLandingView

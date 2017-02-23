@@ -1,5 +1,7 @@
 import React from 'react';
 
+//view called by AdminView when viewLogin is true for unauthenticated user
+//displays form for user to enter email and password to login
 const Login = (props) => {
   return (
     <div className="loginContainer">

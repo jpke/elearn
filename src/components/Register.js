@@ -1,5 +1,7 @@
 import React from 'react';
 
+//view called by AdminView when viewLogin is false for unauthenticated user
+//displays form for new user to enter username email and password to register and log in
 const Register = (props) => {
   return (
     <div className="registerContainer">

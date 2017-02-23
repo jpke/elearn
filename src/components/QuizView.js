@@ -1,6 +1,10 @@
 import React from 'react';
-import ListItems from './ListItems';
+import AnswerList from './AnswerList';
 
+//view for QuizContainer
+//displays quiz title, question, answers, and buttons to advance or go back
+//calls AnswerList to construct list items of answer choices
+//displays submit button and total unanswered questions if last question in set is being displayed
 const QuizView = (props) => (
   <div className="quizInProgress">
     <h3 className="title">{props.title}</h3>
@@ -8,7 +12,7 @@ const QuizView = (props) => (
     <p>{props.question}</p>
     <h3 className="answers">Answers</h3>
     <ul className="item-list">
-      <ListItems
+      <AnswerList
         idSelected={props.idSelected}
         itemSelected={props.itemSelected}
         answers={props.answers}

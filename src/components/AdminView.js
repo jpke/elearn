@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+//view for AdminContainer
+//displays course title, enrollable unregistered emails and enrolled users
+//allows user to edit course title, add or delete user from enrollable or enrolled lists for course
 const AdminView = (props) => (
   <div className="admin-container">
     <Link to="/" className="toggleView">
