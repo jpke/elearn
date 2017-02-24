@@ -8,6 +8,7 @@ const QuizLandingContainer = (props) => {
   return (
       <QuizLandingView
         viewQuizSelected={props.viewQuizSelected}
+        courseName={props.courseName}
         quizInProgress={props.quizInProgress}
         token={props.token}
       />
@@ -19,6 +20,7 @@ const QuizLandingContainer = (props) => {
 function mapStateToProps(state) {
   return {
     token: state.authReducer.token,
+    courseName: state.authReducer.course.name,
     quizInProgress: state.quizReducer.quizInProgress,
     viewQuizSelected: state.quizReducer.viewQuizSelected
   }

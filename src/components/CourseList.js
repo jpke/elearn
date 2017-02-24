@@ -8,7 +8,7 @@ import {Link} from 'react-router';
 const CourseList = (props) => {
   return (
     <div className="course-list">
-      <h2>Select course</h2>
+      {props.course ? <h2>{props.course.name}</h2> : <h2>Select course</h2>}
       <ul>
         {props.courses}
       </ul>

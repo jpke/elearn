@@ -19,6 +19,8 @@ const LessonsContainer = (props) => {
       getPDF={props.getPDF}
       uploadPDF={uploadPDF}
       token={props.token}
+      courseName={props.courseName}
+      admin={props.admin}
       lessons={props.lessons}
       loading={props.loading}
       preview={props.preview}
@@ -30,8 +32,10 @@ const LessonsContainer = (props) => {
 function mapStateToProps(state) {
   return {
     token: state.authReducer.token,
+    courseName: state.authReducer.course.name,
     courseID: state.authReducer.course._id,
     lessons: state.lessonReducer.lessons,
+    admin: state.authReducer.course.admin,
     loading: state.authReducer.loadingItem,
     preview: state.lessonReducer.selectedPdf.preview,
     loggedIn: state.authReducer.loggedIn
