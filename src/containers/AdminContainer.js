@@ -4,26 +4,24 @@ import {updateCourse, editCourse, addUser, deleteUser, deleteUserFromCourse} fro
 import listUsers from '../utils/listUsers';
 import AdminView from '../components/AdminView';
 
+//container for AdminView
+//prevents default form submission of forms calling editcourse and addUser
+//adds necessary jwt token and selected course id data necessary for async calls triggered by addUser, deleteUser and deleteUserFromCourse
 export const AdminContainer = (props) => {
-
   const editCourse = (event) => {
     event.preventDefault();
     props.editCourse(event.target.id, event.target.value);
   }
-
   const addUser = (event) => {
     event.preventDefault();
     props.addUser(props.token, props.course._id, event.target.elements.newUser.value, event.target.elements.admin.checked);
   }
-
   const deleteUser = (email) => {
     props.deleteUser(props.token, props.course._id, email)
   }
-
   const deleteUserFromCourse = (email) => {
     props.deleteUserFromCourse(props.token, props.course._id, email)
   }
-
   return (
       <AdminView
         editCourse={editCourse}

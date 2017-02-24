@@ -4,7 +4,12 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/eLearnActions';
 import QuizView from '../components/QuizView';
 
-export const QuizViewContainer = (props) => {
+//container for QuizView
+//called when user has started quiz
+//calculates current unanswered questions, sending result into QuizView
+//sends quiz data, id, user id and jwt token to async action to submit quiz to server
+export const QuizContainer = (props) => {
+  //gets the length of the current quiz, subtracting for each question with an answer selected
   let unansweredQuestionCount = props.quizData.length;
   props.quizData.forEach(question => {
     if(question.idSelected != null) unansweredQuestionCount--
@@ -63,4 +68,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(QuizViewContainer);
+)(QuizContainer);

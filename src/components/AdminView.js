@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+//view for AdminContainer
+//displays course title, enrollable unregistered emails and enrolled users
+//allows user to edit course title, add or delete user from enrollable or enrolled lists for course
 const AdminView = (props) => (
   <div className="admin-container">
     <Link to="/" className="toggleView">
@@ -38,12 +41,14 @@ const AdminView = (props) => (
       <h4>Users who can enroll</h4>
       <ul className="user-list">
         {props.listUsers(props.enrollable, props.deleteUser)}
+
       </ul>
     </div>
     <div className="enrolled-users">
       <h4>Enrolled users</h4>
       <ul className="user-list-enrolled">
         {props.listUsers(props.enrolled, props.deleteUserFromCourse)}
+
       </ul>
     </div>
   </div>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+//displays quiz title and minimum score to pass in editable input elements
+//creates delete and save buttons with corresponding functionality
 const EditQuizTitleView = (props) =>  {
 return (
     <div className="editQuizTitle">

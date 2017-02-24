@@ -25,7 +25,7 @@ const initialState = {
 //define quizReducer
 export default function quizReducer(state = initialState, action) {
   //declare variables used in reducer
-  let updateQuizData, currentQuestionIndex, currentQuestion, correct, passed, index, updatedCurrentQuestion, attempts, quiz, itemName, quizIteration;
+  let updateQuizData, currentQuestionIndex, currentQuestion, answers, correct, passed, index, updatedCurrentQuestion, attempts, quiz, itemName, quizIteration;
 
   //switch block to define behvaior for each case
   switch(action.type) {
@@ -75,15 +75,24 @@ export default function quizReducer(state = initialState, action) {
         });
       } else if(itemName === "deleteItem") {
           if(quiz.items.length > 1) {
-            quiz.items = quiz.items.slice(0,action.itemIndex).concat(quiz.items.slice(action.itemIndex + 1, quiz.items.length));
+            quiz.items = quiz.items.slice(0,action.itemIndex).concat(quiz.items.slice(parseInt(action.itemIndex) + 1, quiz.items.length));
           } else return {
             ...state,
             message: "Quiz must have at least one question."
           };
-      } else if(itemName === "addAnswer") {
-        quiz.items[action.itemIndex].answers.push(seedItem.items[0].answers[0]);
       } else if(itemName === "addItem") {
         quiz.items.push(seedItem.items[0]);
+      } else if(itemName === "deleteAnswer") {
+          answers = quiz.items[action.itemIndex].answers;
+          if(answers.length > 2) {
+            quiz.items[action.itemIndex].answers = answers.slice(0, action.subIndex).concat(answers
+              .slice(parseInt(action.subIndex) + 1, answers.length))
+          } else return {
+            ...state,
+            message: "Question must have at least two answer choices."
+          };
+      } else if(itemName === "addAnswer") {
+        quiz.items[action.itemIndex].answers.push(seedItem.items[0].answers[1]);
       } else if(itemName === 'deleteQuiz') {
         quiz = seedItem;
       }

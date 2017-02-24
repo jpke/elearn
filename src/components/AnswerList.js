@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 
-export default class ListItems extends Component {
+//stateful component which creates list of answer choices for quiz question
+//assigns "highlight" to a selected answer, allowing CSS to highlight this choice
+//updates highlighted answer when another answer choice is selected
+//calls selectAnswer action when list item is clicked
+export default class AnswerList extends Component {
+  //constructs initial state, creating an answerArray mapped to the answers listed for the question
+  //if itemSelected is present, the corresponding answer choice receives "highlight" class
   constructor(props) {
     super(props);
     let answerArray = this.props.answers.map(() => {
@@ -11,7 +17,7 @@ export default class ListItems extends Component {
     currentSelected[this.props.itemSelected] = "highlight" : ""
     this.state = Object.assign({}, {answerClasses: currentSelected}, {reset: answerArray});
   }
-
+  //prop updates will update current answer selected with "highlight" class
   componentWillUpdate(nextProps) {
     if(this.props != nextProps) {
       let currentSelected = this.state.reset.slice();
@@ -19,12 +25,14 @@ export default class ListItems extends Component {
       this.setState({answerClasses: currentSelected});
     }
   }
-
+  //ends item data into selectAnswer action
+  //called when user clicks on answer choices
   click(event, index) {
     this.props.selectAnswer(event.target.textContent, event.target.id, index);
   }
 
   render() {
+    //iterate through answer choices, creating list item for each
     let answers = this.props.answers.map((answer, index) => {
       return (
           <li className={this.state.answerClasses[index]} key={index} id={answer._id} onClick={(event) => this.click(event, index)}>{answer.answer}</li>

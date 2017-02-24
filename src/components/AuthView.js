@@ -1,18 +1,23 @@
 import React from 'react';
-import courseListCreator from '../utils/courseListCreator'
+import CourseListCreator from '../components/CourseListCreator'
 import CourseList from '../components/CourseList';
 import Register from '../components/Register';
 import Login from '../components/Login';
 
+//view for authContainer
+//will call login or register views when user is not logged in
+//will call list of courses available to user when user is logged in
 const AuthView = (props) => {
   let courses;
   if(props.courses) {
-    courses = courseListCreator(props.courses, props.selectCourse, props.passed, props.token, props.url);
+    courses = CourseListCreator(props.courses, props.selectCourse, props.passed, props.token, props.url);
   }
   return (
     <div className="authContainer">
 
       {props.token ?
+        //token present, indicating user is logged in
+        //display courses accessible to user
         <div className="course-list-container">
           <CourseList
             courses={courses}
@@ -21,7 +26,9 @@ const AuthView = (props) => {
           />
         </div>
       :
-        props.isLoggedIn === true ?
+        //token is not present, indicating user is not logged in
+        //toggle between login and registration views
+        props.viewLogin === true ?
         <div className="authFormContainer">
           <h2>Welcome</h2>
           <h4>You must login or </h4>

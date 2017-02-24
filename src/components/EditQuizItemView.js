@@ -1,7 +1,17 @@
 import React from 'react';
 
+//view called by EditQuizContainer
+//called for each quiz item
+//creates a panel to edit quiz item data
+//displays question and answer choices in editable input elements
+//allows user to select one answer choice as correct
+//allows user to add and delete answer choices
+//allows user to delete entire quiz item
 const EditQuizItemView = (props) => {
-
+  //iterates through answer choices
+  //creates editable input element
+  //creates button indicating if answer is true or false
+  //creates button to delete answer choice
   let answers = props.answers.map((itemAnswer, idx) => {
     return (
       <div key={props.index + " answer " + idx} id={props.index + " answerDiv " + idx} className="answer-container">

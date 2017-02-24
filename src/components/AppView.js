@@ -1,42 +1,25 @@
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
 import { Link, IndexLink } from 'react-router';
 
-// This is a class-based component because the current
-// version of hot reloading won't hot reload a stateless
-// component at the top-level.
-export default class AppView extends Component {
-  static propTypes = {
-    children: PropTypes.element
-  }
-
-  constructor(props) {
-    super(props);
-  }
-
-  componentWillReceiveProps(newProps) {
-    if(newProps.errorMessage) {
-      alert(newProps.errorMessage.concat(", please try again, or contact your instructor for help"));
-      this.props.clearErrorMessage();
-    }
-  }
-
-  render() {
-    return (
+//view component, receives props from AppContainer
+//returns background app view nav and header
+//calls child components passed in as props
+const AppView = (props) => (
+  <div>
+    <div className="header">
       <div>
-        <div className="header">
-          <div>
-            <IndexLink to="/">Home</IndexLink>
-            {' | '}
-            <Link to="/quiz">Quiz</Link>
-            {' | '}
-            <Link to="/lessons">Lessons</Link>
-          </div>
-          {this.props.token ? <div className="user-name"><p>Logged in as &nbsp;</p><p>{this.props.userName}</p></div> : ""}
-        </div>
-          <br/>
-          <h1>Learn Online</h1>
-          {this.props.children}
+        <IndexLink to="/">Home</IndexLink>
+        {' | '}
+        <Link to="/quiz">Quiz</Link>
+        {' | '}
+        <Link to="/lessons">Lessons</Link>
       </div>
-    );
-  }
-}
+      {props.token ? <div className="user-name"><p>Logged in as &nbsp;</p><p>{props.userName}</p></div> : ""}
+    </div>
+      <br/>
+      <h1>Learn Online</h1>
+      {props.children}
+  </div>
+);
+
+export default AppView;
