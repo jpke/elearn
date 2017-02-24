@@ -6,8 +6,8 @@ import QuizView from '../components/QuizView';
 
 //container for QuizView
 //called when user has started quiz
-//calculates current unanswered questions, sending this into QuizView
-//sends quiz data, id, and user id and jwt token to async action to submit quiz to server
+//calculates current unanswered questions, sending result into QuizView
+//sends quiz data, id, user id and jwt token to async action to submit quiz to server
 export const QuizContainer = (props) => {
   //gets the length of the current quiz, subtracting for each question with an answer selected
   let unansweredQuestionCount = props.quizData.length;

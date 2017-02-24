@@ -1,5 +1,5 @@
 import React from 'react';
-import courseListCreator from '../utils/courseListCreator'
+import CourseListCreator from '../components/CourseListCreator'
 import CourseList from '../components/CourseList';
 import Register from '../components/Register';
 import Login from '../components/Login';
@@ -10,7 +10,7 @@ import Login from '../components/Login';
 const AuthView = (props) => {
   let courses;
   if(props.courses) {
-    courses = courseListCreator(props.courses, props.selectCourse, props.passed, props.token, props.url);
+    courses = CourseListCreator(props.courses, props.selectCourse, props.passed, props.token, props.url);
   }
   return (
     <div className="authContainer">

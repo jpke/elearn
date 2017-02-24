@@ -4,23 +4,18 @@ import {connect} from 'react-redux';
 import {startQuiz, toggleQuizView} from '../actions/eLearnActions';
 import QuizStartView from '../components/QuizStartView';
 
-export const QuizStartContainer = (props) => {
-
-  const startQuiz = () => {
-    props.startQuiz();
-  }
-
-  return (
-      <QuizStartView
-        startQuiz={startQuiz}
-        viewQuizzes={props.toggleQuizView}
-        passed={props.passed}
-        score={props.score}
-        attempts={props.attempts}
-        title={props.title}
-      />
-  );
-};
+//container for QuizStartView
+//called by QuizLandingView when quiz has been selected but is not in progress
+export const QuizStartContainer = (props) => (
+    <QuizStartView
+      startQuiz={props.startQuiz}
+      viewQuizzes={props.toggleQuizView}
+      passed={props.passed}
+      score={props.score}
+      attempts={props.attempts}
+      title={props.title}
+    />
+);
 
 // QuizPage.propTypes
 

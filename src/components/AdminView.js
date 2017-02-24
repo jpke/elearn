@@ -41,12 +41,14 @@ const AdminView = (props) => (
       <h4>Users who can enroll</h4>
       <ul className="user-list">
         {props.listUsers(props.enrollable, props.deleteUser)}
+
       </ul>
     </div>
     <div className="enrolled-users">
       <h4>Enrolled users</h4>
       <ul className="user-list-enrolled">
         {props.listUsers(props.enrolled, props.deleteUserFromCourse)}
+
       </ul>
     </div>
   </div>

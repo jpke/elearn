@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import {getLessons, getPDF, uploadPDF} from '../actions/eLearnActions';
 import LessonsView from '../components/LessonsView';
 
+//container for LessonsView
+//displays course lessons available
 const LessonsContainer = (props) => {
-
+  //non-functional at present, will be used to trigger async action uploading pdf to server
   const uploadPDF = () => {
     // event.preventDefault();
     let files = document.getElementById("uploadPDFInput").files;

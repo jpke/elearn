@@ -5,8 +5,17 @@ import {toggleQuizView, editQuiz, deleteSavedQuiz, saveQuiz} from '../actions/eL
 import EditQuizItemView from '../components/EditQuizItemView';
 import EditQuizTitleView from '../components/EditQuizTitleView';
 
+//container for EditQuizItemView and EditQuizTitleView
+  //could separte this into non html container and a html containing EditQuizView component
+//creates a view displaying all quiz content in editable input elements
+//displays message near top when quiz update successful
+//editQuizItem called whenever an input element is changed, maps change to redux store
+//deleteQuiz called to delete displayed quiz
+//saveQuiz called to update or create displayed quiz
 export const EditQuizContainer = (props) => {
-
+  //called whenever an input element value changes
+  //formats input element id into separate variables, which will be used to save updated value into proper leaf in redux store (see quizReducer case for types.UPDATE_QUIZ)
+  //calls editQuiz action with input element value and formatted id
   const editQuizItem = (event) => {
     event.preventDefault();
     const target = event.target.id.split(" ");
@@ -16,8 +25,12 @@ export const EditQuizContainer = (props) => {
     const subIndex = target[2];
     props.editQuiz(itemIndex, itemName, value, subIndex)
   };
-
+  //called to delete quiz
+  //creates alert prompting user to confirm intention to delete quiz
+  //if quiz is newly created (not pulled from server) quiz data just deleted from redux store by calling editQuiz action
+  //if quiz was pulled from server, calls deleteSavedQuiz action with user token and id, course id, and quiz id to create async request for server to delete quiz from database
   const deleteQuiz = () => {
+    //quiz is not deleted if user fails to confirm at prompt
     let result = confirm("Confirm to delete quiz. This cannot be undone.")
     if(result) {
       if(props.quizSelectedId) {
@@ -25,11 +38,13 @@ export const EditQuizContainer = (props) => {
       } else props.editQuiz(0, "deleteQuiz");
     }
   }
-
+  //saves quiz
+  //calls savequiz action, passing user token, id and course id and quiz data for async request for server to save quiz to database
   const saveQuiz = () => {
     props.saveQuiz(props.token, props.userId, props.courseId, props.quiz)
   }
-
+  //iterates through quiz items (questions with answer choices) calling EditQuizItemView on each
+  //results in an editable set of input elements for each quiz item
   let items = props.items.map((item, index) => {
     return (
       <EditQuizItemView

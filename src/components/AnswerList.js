@@ -25,12 +25,14 @@ export default class AnswerList extends Component {
       this.setState({answerClasses: currentSelected});
     }
   }
-  //user click on answer choice will call this function, which sends item data into selectAnswer action
+  //ends item data into selectAnswer action
+  //called when user clicks on answer choices
   click(event, index) {
     this.props.selectAnswer(event.target.textContent, event.target.id, index);
   }
 
   render() {
+    //iterate through answer choices, creating list item for each
     let answers = this.props.answers.map((answer, index) => {
       return (
           <li className={this.state.answerClasses[index]} key={index} id={answer._id} onClick={(event) => this.click(event, index)}>{answer.answer}</li>
