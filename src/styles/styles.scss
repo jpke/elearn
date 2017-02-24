@@ -1,9 +1,13 @@
-$color-background: #dbdbb8;
-$color-primary: #dbb8db;
-$color-raised: #dbcab8;
-$color-text: #9A6667;
+// background color
+$color-background: #F9FBF7;
+//button background color
+$color-button: #69AF3A;
+//text color
+$color-text: #B22049;
+//button text, list border and list item text with hover
 $color-text-highlight: #414137;
-$color-highlight: #b8dbdb;
+//list item background with hover
+$color-highlight: #548BC5;
 
 @import url('https://fonts.googleapis.com/css?family=Contrail+One|Open+Sans');
 
@@ -53,7 +57,7 @@ button {
   width: 100%;
   padding: 5px;
   border-radius: 5px;
-  background-color: $color-raised;
+  background-color: $color-button;
   border: 3px solid $color-background;
   font-size: 1.3em;
   color: $color-text-highlight;
@@ -335,6 +339,9 @@ h1 {
       flex-direction: column;
       justify-content: center;
     }
+    li:hover {
+      background-color: $color-background;
+    }
   }
 
   .quiz-list {
@@ -361,6 +368,14 @@ h1 {
         font-size: 18px;
         width: 60px;
         border-radius: 10px;
+      }
+    }
+    .listed-item:hover {
+      button {
+        border: 3px solid $color-highlight;
+      }
+      button:hover {
+        border: 3px solid $color-text;
       }
     }
   }
@@ -463,7 +478,7 @@ h1 {
 
   .editQuiz-item {
     width: 100%;
-    border: 1px solid $color-raised;
+    border: 1px solid $color-button;
 
     h3 {
       margin: 6px auto 6px 10px;

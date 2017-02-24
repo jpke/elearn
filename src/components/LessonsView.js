@@ -32,7 +32,11 @@ export default class LessonsView extends Component {
 
     return (
       <div className="lessonsContainer">
-        <h2>Lessons</h2>
+        <h2>{this.props.courseName ?
+              this.props.courseName + " Lessons"
+              :
+              "Lessons"}
+        </h2>
         {this.props.token ?
           <div>
             <h3>pdfs</h3>
@@ -44,8 +48,7 @@ export default class LessonsView extends Component {
                 <a href={this.props.preview} target="_blank">Preview</a>
               </div>
             : ""}
-
-              <input type="file" id="uploadPDFInput" name="uploadPDF" onChange={() => {this.props.uploadPDF()}}/>
+              {this.props.admin && <input type="file" id="uploadPDFInput" name="uploadPDF" onChange={() => {this.props.uploadPDF()}}/>}
 
           </div>
         :

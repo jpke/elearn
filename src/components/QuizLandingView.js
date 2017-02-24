@@ -12,7 +12,7 @@ import QuizListContainer from '../containers/QuizListContainer';
 const QuizLandingView = (props) => {
   return (
     <div className="quizContainer">
-      <h2>Quiz</h2>
+      <h2>{props.courseName ? props.courseName + " Quizzes" : "Quizzes"}</h2>
       {props.token ?
         //if user is authenticated check for if quiz is in progress
       (
