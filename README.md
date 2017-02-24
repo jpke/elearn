@@ -2,9 +2,14 @@
 
 eLearn is a simple online learning platform, offering the ability to reach students with lessons and multiple choice quizzes. Passing all quizzes for a course enables a student to download a certificate of completion for the course.
 
+<img src="./eLearnLogin.jpg" width="440px" />
+
 ##Features
 
 1. **Courses**
+
+<img src="./eLearnCourseList.jpg" width="440px" />
+<img src="./eLearnCourseAdmin.jpg" width="440px" />
   - Each course has an independent list of quizzes
   - Student can be pre-enrolled in course, before student even registers (student email needed)
   - Student can be enrolled in multiple courses
@@ -13,6 +18,9 @@ eLearn is a simple online learning platform, offering the ability to reach stude
   - Student can download certificate of completion upon passing course
 
 2. **Multiple choice quizzes**
+
+<img src="./eLearnQuiz.jpg" width="440px" />
+<img src="./eLearnEditQuiz.jpg" width="440px" />
   - Course admin can edit quiz
   - Quiz is automatically graded upon submission
   - Course admin sets minimum score needed to pass quiz
@@ -21,20 +29,22 @@ eLearn is a simple online learning platform, offering the ability to reach stude
   - Student can see list of course quizzes, and which ones they have passed
 
 3. **Lessons**
+
+<img src="./eLearnLessons.jpg" width="440px" />
   - PDF lessons are listed for course
   - Lessons are stored in BOX currently (provides document version control)
   - Authenticated users can easily preview and download PDF lessons
-
-
-<!-- [![React Slingshot Production Build](https://img.youtube.com/vi/qlfDLsX-J0U/0.jpg)](https://www.youtube.com/watch?v=qlfDLsX-J0U) -->
-
 
 
 ##Technologies
 
 | **Tech** | **Description** |
 |----------|-------|
-|  Packages will go here  |   Short description will go here    |
+|  React  |   Javascript framework for single page apps   |
+|  Redux  |   Application state management for react    |
+|  Express  |   Server framework for Node   |
+|  MongoDB  |   No-SQL database    |
+|  BOX  |   Cloud fileserver   |
 
 
 ## ToDo:

@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import QuizListCreator from '../components/QuizListCreator';
 import passedQuizList from '../utils/passedQuizList';
 import {selectQuiz, createQuiz, toggleQuizView} from '../actions/eLearnActions';
-import EditQuizContainer from './EditQuizContainer';
 import QuizListView from '../components/QuizListView';
 
 //container for QuizListView
