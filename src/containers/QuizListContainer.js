@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import QuizListCreator from '../components/QuizListCreator';
-import passedList from '../utils/passedList';
+import passedQuizList from '../utils/passedQuizList';
 import {selectQuiz, createQuiz, toggleQuizView} from '../actions/eLearnActions';
 import EditQuizContainer from './EditQuizContainer';
 import QuizListView from '../components/QuizListView';
@@ -30,7 +30,7 @@ export const QuizListContainer = (props) => {
       <QuizListView
         listCreator={QuizListCreator}
         quizzes={props.quizzes}
-        passedList={passedList}
+        passedQuizList={passedQuizList}
         passed={props.passed}
         admin={props.admin}
         selectQuiz={selectQuiz}

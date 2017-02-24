@@ -14,7 +14,7 @@ const QuizListView = (props) => (
         {props.listCreator(props.quizzes, props.selectQuiz, props.admin, props.editQuiz, props.passed)}
       </ul>
       <ul className="passed">
-        {props.quizzes && props.passedList(props.quizzes, props.passed)}
+        {props.quizzes && props.passedQuizList(props.quizzes, props.passed)}
       </ul>
     </div>
     {props.admin && <Link to="/quiz/modify"><button className= "create-quiz" onClick={() => {props.editQuiz()}}>Create Quiz</button></Link>}
