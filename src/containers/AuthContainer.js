@@ -46,6 +46,7 @@ class AuthContainer extends Component {
           passed={this.props.passed}
           token={this.props.token}
           url={this.props.url}
+          demo={this.props.actions.logIn}
         />
     );
   }

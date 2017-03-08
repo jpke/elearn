@@ -33,7 +33,7 @@ const AuthView = (props) => {
           <h2>Welcome</h2>
           <h4>You must login or </h4>
           <button className="toggleLogin" onClick={props.toggleView}>Register</button>
-          <Login logIn={props.logIn} />
+          <Login logIn={props.logIn} demo={props.demo}/>
         </div>
         :
         <div className="authFormContainer">

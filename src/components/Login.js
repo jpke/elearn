@@ -11,6 +11,7 @@ const Login = (props) => {
         <input type="password" id="password" className="auth" placeholder="password" />
         <button className="authButton" type="submit">Login</button>
       </form>
+      <button className="authButton" onClick={() => {props.demo("demo@email.com", "password")}}>Demo</button>
     </div>
   )
 };
