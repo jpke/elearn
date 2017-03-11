@@ -48,7 +48,10 @@ export default class LessonsView extends Component {
                 <a href={this.props.preview} target="_blank">Preview</a>
               </div>
             : ""}
-              {this.props.admin && <input type="file" id="uploadPDFInput" name="uploadPDF" onChange={() => {this.props.uploadPDF()}}/>}
+              {this.props.admin &&
+
+                  <input type="file" id="uploadPDFInput" name="uploadPDF" onChange={() => {this.props.uploadPDF()}}/>
+}
 
           </div>
         :

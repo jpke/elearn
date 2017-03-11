@@ -1,4 +1,4 @@
-// import cookie from 'react-cookie'
+import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
 import fetch from 'isomorphic-fetch';
 // import {browserHistory} from 'react-router';
@@ -25,6 +25,7 @@ export function badResponse(message) {
 
 //dispatches user info to reducer; called upon successful registration or login
 function loggedIn(response) {
+  cookie.save("token", response.token)
   return {
     type: types.LOG_IN,
     userName: response.name,
@@ -275,6 +276,7 @@ export function getEnrollable(token, course) {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': `Bearer ${token}`,
+          'Credentials': 'include'
         }
       })
       .then(response => {
@@ -720,27 +722,32 @@ export function getPDF(pdfId, token) {
 //will call badResponse upon failure
 export function uploadPDF(token, courseID, file) {
   return function(dispatch) {
-    dispatch(loading("uploading pdf"));
-      let formData = new FormData(file);
-      // formData.append("file", file);
+    dispatch(loading("uploading pdf: ", file));
+      let formData = new FormData();
+      formData.append("file", file[0]);
+      formData.append('user', 'me');
+      console.log("file to upload: ", file[0]);
+      for(var pair of formData.entries()) {
+       console.log(pair[0]+ ', '+ pair[1]);
+      }
       fetch(url.concat('lessons/'), {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/pdf',
           'Authorization': `Bearer ${token}`
         },
         body: formData
       })
       .then(response => {
-        if(response.status != 201) throw response;
+        if(response.status != 200) throw response;
         return response.json();
       })
       .then(response => {
-        return dispatch({
-          type: types.GET_LESSONS,
-          lessons: response.entries
-        });
+        console.log("running here")
+        // return dispatch({
+        //   type: types.GET_LESSONS,
+        //   lessons: response.entries
+        // });
       })
       .catch(error => {
         dispatch(badResponse("Problem with uploading file"))
