@@ -725,11 +725,6 @@ export function uploadPDF(token, courseID, file) {
     dispatch(loading("uploading pdf: ", file));
       let formData = new FormData();
       formData.append("file", file[0]);
-      formData.append('user', 'me');
-      console.log("file to upload: ", file[0]);
-      for(var pair of formData.entries()) {
-       console.log(pair[0]+ ', '+ pair[1]);
-      }
       fetch(url.concat('lessons/'), {
         method: 'POST',
         headers: {
@@ -743,15 +738,38 @@ export function uploadPDF(token, courseID, file) {
         return response.json();
       })
       .then(response => {
-        console.log("running here")
-        // return dispatch({
-        //   type: types.GET_LESSONS,
-        //   lessons: response.entries
-        // });
+        return dispatch(getLessons(token))
       })
       .catch(error => {
         dispatch(badResponse("Problem with uploading file"))
         console.log("error response: ", error);
       })
+  }
+}
+
+export function deletePDF(token, courseID, lessonID) {
+  return function(dispatch) {
+    dispatch(loading("deleting file..."));
+    fetch(url.concat('lessons/', courseID, "/", lessonID), {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      if(response.status !== 200) {
+        throw response;
+      }
+      return response.json()
+    })
+    .then(response => {
+      dispatch(loading(''));
+      return dispatch(getLessons(token))
+    })
+    .catch(error => {
+      dispatch(badResponse("Problem with deleting file"))
+      console.log("error response: ", error);
+    })
   }
 }
