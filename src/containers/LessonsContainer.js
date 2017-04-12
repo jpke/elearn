@@ -1,16 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getLessons, getPDF, uploadPDF} from '../actions/eLearnActions';
+import {getLessons, getPDF, uploadPDF, deletePDF} from '../actions/eLearnActions';
 import LessonsView from '../components/LessonsView';
 
 //container for LessonsView
 //displays course lessons available
 const LessonsContainer = (props) => {
-  //non-functional at present, will be used to trigger async action uploading pdf to server
+  //used to trigger async action uploading pdf to server
   const uploadPDF = () => {
-    // event.preventDefault();
     let files = document.getElementById("uploadPDFInput").files;
-    console.log("event: ", files[0]);
     props.uploadPDF(props.token, props.courseID, files)
   }
 
@@ -18,8 +16,10 @@ const LessonsContainer = (props) => {
     <LessonsView getLessons={props.getLessons}
       getPDF={props.getPDF}
       uploadPDF={uploadPDF}
+      deletePDF={props.deletePDF}
       token={props.token}
       courseName={props.courseName}
+      courseID={props.courseID}
       admin={props.admin}
       lessons={props.lessons}
       loading={props.loading}
@@ -46,7 +46,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getLessons: (token) => dispatch(getLessons(token)),
     getPDF: (id, token) => dispatch(getPDF(id, token)),
-    uploadPDF: (token, courseID, file) => dispatch(uploadPDF(token, courseID, file))
+    uploadPDF: (token, courseID, file) => dispatch(uploadPDF(token, courseID, file)),
+    deletePDF: (token, courseID, lessonID) => dispatch(deletePDF(token, courseID, lessonID))
   }
 }
 

@@ -24,9 +24,12 @@ export default class LessonsView extends Component {
   render() {
     let lessons = this.props.lessons.map((lesson, index) => {
       return (
-        <li key={index} id={lesson.id} onClick={this.click.bind(this)}>
-          {lesson.name}
-        </li>
+        <div key={index}>
+          <li key={index} id={lesson.id} onClick={this.click.bind(this)}>
+            {lesson.name}
+          </li>
+          {this.props.admin && <button onClick={() => {this.props.deletePDF(this.props.token, this.props.courseID, lesson.id)}}>Delete</button>}
+        </div>
       );
     });
 
@@ -48,7 +51,10 @@ export default class LessonsView extends Component {
                 <a href={this.props.preview} target="_blank">Preview</a>
               </div>
             : ""}
-              {this.props.admin && <input type="file" id="uploadPDFInput" name="uploadPDF" onChange={() => {this.props.uploadPDF()}}/>}
+              {this.props.admin &&
+
+                  <input type="file" id="uploadPDFInput" name="uploadPDF" onChange={() => {this.props.uploadPDF()}}/>
+}
 
           </div>
         :
