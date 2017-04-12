@@ -4,12 +4,12 @@ import { Provider } from 'react-redux';
 import configureStore from '../store/configureStore';
 const store = configureStore();
 
-import AdminContainer from './AdminContainer';
+import QuizLandingContainer from './QuizLandingContainer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
     <Provider store={store}>
-      <AdminContainer />
+      <QuizLandingContainer />
     </Provider>
   ).toJSON();
   expect(tree).toMatchSnapshot();

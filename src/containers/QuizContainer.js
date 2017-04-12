@@ -46,7 +46,7 @@ export const QuizContainer = (props) => {
 function mapStateToProps(state) {
   return {
       title: state.quizReducer.quiz.title,
-      question: state.quizReducer.currentQuestion.question || "",
+      question: state.quizReducer.currentQuestion.question,
       answers: state.quizReducer.currentQuestion.answers,
       idSelected: state.quizReducer.currentQuestion.idSelected,
       itemSelected: state.quizReducer.currentQuestion.itemSelected,

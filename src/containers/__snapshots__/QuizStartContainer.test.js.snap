@@ -1,0 +1,21 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="quiz-start">
+  <h3>
+    You have not yet attempted this quiz
+  </h3>
+  <div
+    className="quiz-start-button-container">
+    <button
+      className="quiz-start-button"
+      onClick={[Function]}>
+       Start Quiz 
+    </button>
+    <button
+      className="quiz-start-button"
+      onClick={[Function]}>
+      Back to Quiz List
+    </button>
+  </div>
+</div>
+`;

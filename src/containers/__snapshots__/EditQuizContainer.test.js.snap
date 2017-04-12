@@ -1,0 +1,215 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="editQuiz-container">
+  <div
+    className="backToQuizList">
+    <div />
+    <button
+      className="toggleQuizView"
+      id="toggleQuizView"
+      onClick={[Function]}>
+      Back to Quizzes
+    </button>
+    <div>
+      <h3 />
+    </div>
+  </div>
+  <div
+    className="editQuizTitle">
+    <h3>
+      Title
+    </h3>
+    <input
+      className="edit-quiz-item"
+      id="0 title"
+      name="title"
+      onChange={[Function]}
+      type="text"
+      value="new quiz" />
+    <section>
+      <div
+        className="delete">
+        <button
+          className="deleteQuiz"
+          id="deleteQuiz"
+          onClick={[Function]}>
+          Delete
+        </button>
+      </div>
+      <div>
+        <div
+          className="passing-score">
+          <h3>
+            Passing Score
+          </h3>
+          <input
+            className="edit-minimumScore"
+            id="0 minimumScore"
+            name="minimumScore"
+            onChange={[Function]}
+            type="number"
+            value={0} />
+        </div>
+      </div>
+      <div
+        className="save">
+        <button
+          className="updateQuiz"
+          id="updateQuiz"
+          onClick={[Function]}>
+          Save
+        </button>
+      </div>
+    </section>
+  </div>
+  <div
+    className="editQuiz-item">
+    <h3>
+      Question
+    </h3>
+    <div
+      className="question-container">
+      <textarea
+        className="edit-question"
+        id="0 question"
+        name="itemQuestion"
+        onChange={[Function]}
+        type="text"
+        value="enter question here" />
+    </div>
+    <h3
+      className="answers">
+      Answers
+    </h3>
+    <div
+      className="answer-container"
+      id="0 answerDiv 0">
+      <textarea
+        className="edit-quiz-item"
+        id="0 answer 0"
+        name="itemAnswer"
+        onChange={[Function]}
+        type="text"
+        value="enter answer here" />
+      <div
+        className="buttons-container">
+        <button
+          className="modify-answers"
+          id="0 answerCorrect 0"
+          onClick={[Function]}>
+          True
+        </button>
+        <button
+          className="modify-answers"
+          id="0 deleteAnswer 0"
+          onClick={[Function]}>
+          Delete
+        </button>
+      </div>
+    </div>
+    <div
+      className="answer-container"
+      id="0 answerDiv 1">
+      <textarea
+        className="edit-quiz-item"
+        id="0 answer 1"
+        name="itemAnswer"
+        onChange={[Function]}
+        type="text"
+        value="enter answer here" />
+      <div
+        className="buttons-container">
+        <button
+          className="modify-answers"
+          id="0 answerCorrect 1"
+          onClick={[Function]}>
+          False
+        </button>
+        <button
+          className="modify-answers"
+          id="0 deleteAnswer 1"
+          onClick={[Function]}>
+          Delete
+        </button>
+      </div>
+    </div>
+    <div
+      className="answer-container"
+      id="0 answerDiv 2">
+      <textarea
+        className="edit-quiz-item"
+        id="0 answer 2"
+        name="itemAnswer"
+        onChange={[Function]}
+        type="text"
+        value="enter answer here" />
+      <div
+        className="buttons-container">
+        <button
+          className="modify-answers"
+          id="0 answerCorrect 2"
+          onClick={[Function]}>
+          False
+        </button>
+        <button
+          className="modify-answers"
+          id="0 deleteAnswer 2"
+          onClick={[Function]}>
+          Delete
+        </button>
+      </div>
+    </div>
+    <div
+      className="answer-container"
+      id="0 answerDiv 3">
+      <textarea
+        className="edit-quiz-item"
+        id="0 answer 3"
+        name="itemAnswer"
+        onChange={[Function]}
+        type="text"
+        value="enter answer here" />
+      <div
+        className="buttons-container">
+        <button
+          className="modify-answers"
+          id="0 answerCorrect 3"
+          onClick={[Function]}>
+          False
+        </button>
+        <button
+          className="modify-answers"
+          id="0 deleteAnswer 3"
+          onClick={[Function]}>
+          Delete
+        </button>
+      </div>
+    </div>
+    <div
+      className="item-buttons">
+      <button
+        className="modify-answers"
+        id="0 addAnswer"
+        onClick={[Function]}>
+        Add Answer
+      </button>
+      <button
+        className="modify-answers"
+        id="0 deleteItem"
+        onClick={[Function]}>
+        Delete Question
+      </button>
+    </div>
+  </div>
+  <div
+    className="addItem">
+    <button
+      className="addItem-button"
+      id="0 addItem"
+      name="0 addItem"
+      onClick={[Function]}>
+      Add Question
+    </button>
+  </div>
+</div>
+`;

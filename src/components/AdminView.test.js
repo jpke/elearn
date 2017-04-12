@@ -1,17 +1,47 @@
-// import React from 'react';
-// // import ReactNative from 'react-native';
-// import renderer from 'react-test-renderer';
-// import { Provider } from 'react-redux';
-// import configureStore from '../store/configureStore';
-// const store = configureStore();
-//
-// import AdminView from './AdminView.js';
-//
-// it('renders correctly', () => {
-//   const tree = renderer.create(
-//     <Provider store={store}>
-//       <AdminView />
-//     </Provider>
-//   ).toJSON();
-//   expect(tree).toMatchSnapshot();
-// })
+import React from 'react';
+import renderer from 'react-test-renderer';
+
+import AdminView from './AdminView';
+import listUsers from '../utils/listUsers';
+
+it('renders correctly initally', () => {
+  const tree = renderer.create(
+    <AdminView
+      editCourse={jest.fn()}
+      addUser={jest.fn()}
+      deleteUser={jest.fn()}
+      deleteUserFromCourse={jest.fn()}
+      message={""}
+      updateCourse={jest.fn()}
+      listUsers={listUsers}
+      newUser={""}
+      course={""}
+      enrollable={[]}
+      enrolled={[]}
+      _id={""}
+      token={""}
+      />
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
+it('renders correctly initally', () => {
+  const tree = renderer.create(
+    <AdminView
+      editCourse={jest.fn()}
+      addUser={jest.fn()}
+      deleteUser={jest.fn()}
+      deleteUserFromCourse={jest.fn()}
+      message={""}
+      updateCourse={jest.fn()}
+      listUsers={listUsers}
+      newUser={"testNew"}
+      course={"someCourse"}
+      enrollable={[{email: "new@email.com"}]}
+      enrolled={[{email: "enrolled@email.com"}]}
+      _id={"00000"}
+      token={"someToken"}
+      />
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+})
