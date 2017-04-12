@@ -737,7 +737,7 @@ export function uploadPDF(token, courseID, file) {
         if(response.status != 200) throw response;
         return response.json();
       })
-      .then(response => {
+      .then(() => {
         return dispatch(getLessons(token))
       })
       .catch(error => {
@@ -763,7 +763,7 @@ export function deletePDF(token, courseID, lessonID) {
       }
       return response.json()
     })
-    .then(response => {
+    .then(() => {
       dispatch(loading(''));
       return dispatch(getLessons(token))
     })
