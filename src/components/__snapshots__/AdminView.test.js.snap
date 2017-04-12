@@ -96,7 +96,7 @@ exports[`test renders correctly initally 1`] = `
 </div>
 `;
 
-exports[`test renders correctly initally 2`] = `
+exports[`test renders correctly with enrolled users 1`] = `
 <div
   className="admin-container">
   <a

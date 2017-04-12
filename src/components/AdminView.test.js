@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import React from 'react';
 import renderer from 'react-test-renderer';
 
@@ -25,7 +27,7 @@ it('renders correctly initally', () => {
   expect(tree).toMatchSnapshot();
 })
 
-it('renders correctly initally', () => {
+it('renders correctly with enrolled users', () => {
   const tree = renderer.create(
     <AdminView
       editCourse={jest.fn()}
