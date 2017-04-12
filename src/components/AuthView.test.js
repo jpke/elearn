@@ -6,6 +6,27 @@ import renderer from 'react-test-renderer';
 
 import AuthView from './AuthView';
 
+let courses, passed;
+beforeAll(() => {
+  courses = [{
+    name: "example course",
+    id: "00000",
+    enrollable: [{email: "new@email.com"}],
+    quizzes: [
+      {
+        _id: "1111",
+        title: "example Quiz"
+      }
+    ],
+    admin: false
+  }];
+
+  passed = [{
+    _id: "2222",
+    of: "1111"
+  }];
+})
+
 it('renders correctly when logged out', () => {
   const tree = renderer.create(
     <AuthView
@@ -15,34 +36,9 @@ it('renders correctly when logged out', () => {
       viewLogin={false}
       selectCourse={jest.fn()}
       logOut={jest.fn()}
-      courses={[{
-        name: "example course",
-        id: "00000",
-        enrollable: [{email: "new@email.com"}],
-        quizzes: [
-          {
-            _id: "1111",
-            title: "example Quiz"
-          }
-        ],
-        admin: false
-      }]}
-      course={[{
-        name: "example course",
-        id: "00000",
-        enrollable: [{email: "new@email.com"}],
-        quizzes: [
-          {
-            _id: "1111",
-            title: "example Quiz"
-          }
-        ],
-        admin: false
-      }]}
-      passed={[{
-        _id: "2222",
-        of: "1111"
-      }]}
+      courses={courses}
+      course={courses[0]}
+      passed={passed}
       token={""}
       url={"urlAddress"}
       demo={jest.fn()}
@@ -51,7 +47,8 @@ it('renders correctly when logged out', () => {
   expect(tree).toMatchSnapshot();
 })
 
-it('renders correctly when logged in not as admin with no course selected', () => {
+it('renders correctly when logged in and non-admin course unselected', () => {
+  courses[0].admin = false;
   const tree = renderer.create(
     <AuthView
       toggleView={jest.fn()}
@@ -60,23 +57,9 @@ it('renders correctly when logged in not as admin with no course selected', () =
       viewLogin={false}
       selectCourse={jest.fn()}
       logOut={jest.fn()}
-      courses={[{
-        name: "example course",
-        id: "00000",
-        enrollable: [{email: "new@email.com"}],
-        quizzes: [
-          {
-            _id: "1111",
-            title: "example Quiz"
-          }
-        ],
-        admin: false
-      }]}
+      courses={courses}
       course={""}
-      passed={[{
-        _id: "2222",
-        of: "1111"
-      }]}
+      passed={passed}
       token={"000000"}
       url={"urlAddress"}
       demo={jest.fn()}
@@ -85,7 +68,8 @@ it('renders correctly when logged in not as admin with no course selected', () =
   expect(tree).toMatchSnapshot();
 })
 
-it('renders correctly when logged in not as admin with course selected', () => {
+it('renders correctly when logged in and non-admin course selected', () => {
+  courses[0].admin = false;
   const tree = renderer.create(
     <AuthView
       toggleView={jest.fn()}
@@ -94,34 +78,9 @@ it('renders correctly when logged in not as admin with course selected', () => {
       viewLogin={false}
       selectCourse={jest.fn()}
       logOut={jest.fn()}
-      courses={[{
-        name: "example course",
-        id: "00000",
-        enrollable: [{email: "new@email.com"}],
-        quizzes: [
-          {
-            _id: "1111",
-            title: "example Quiz"
-          }
-        ],
-        admin: false
-      }]}
-      course={[{
-        name: "example course",
-        id: "00000",
-        enrollable: [{email: "new@email.com"}],
-        quizzes: [
-          {
-            _id: "1111",
-            title: "example Quiz"
-          }
-        ],
-        admin: false
-      }]}
-      passed={[{
-        _id: "2222",
-        of: "1111"
-      }]}
+      courses={courses}
+      course={courses[0]}
+      passed={passed}
       token={"000000"}
       url={"urlAddress"}
       demo={jest.fn()}
@@ -130,7 +89,8 @@ it('renders correctly when logged in not as admin with course selected', () => {
   expect(tree).toMatchSnapshot();
 })
 
-it('renders correctly when logged in as admin with no course selected', () => {
+it('renders correctly when logged in and admin course unselected', () => {
+  courses[0].admin = true;
   const tree = renderer.create(
     <AuthView
       toggleView={jest.fn()}
@@ -139,23 +99,9 @@ it('renders correctly when logged in as admin with no course selected', () => {
       viewLogin={false}
       selectCourse={jest.fn()}
       logOut={jest.fn()}
-      courses={[{
-        name: "example course",
-        id: "00000",
-        enrollable: [{email: "new@email.com"}],
-        quizzes: [
-          {
-            _id: "1111",
-            title: "example Quiz"
-          }
-        ],
-        admin: false
-      }]}
+      courses={courses}
       course={""}
-      passed={[{
-        _id: "2222",
-        of: "1111"
-      }]}
+      passed={passed}
       token={"000000"}
       url={"urlAddress"}
       demo={jest.fn()}
@@ -164,7 +110,8 @@ it('renders correctly when logged in as admin with no course selected', () => {
   expect(tree).toMatchSnapshot();
 })
 
-it('renders correctly when logged in as admin with course selected', () => {
+it('renders correctly when logged in and admin course selected', () => {
+  courses[0].admin = true;
   const tree = renderer.create(
     <AuthView
       toggleView={jest.fn()}
@@ -173,34 +120,9 @@ it('renders correctly when logged in as admin with course selected', () => {
       viewLogin={false}
       selectCourse={jest.fn()}
       logOut={jest.fn()}
-      courses={[{
-        name: "example course",
-        id: "00000",
-        enrollable: [{email: "new@email.com"}],
-        quizzes: [
-          {
-            _id: "1111",
-            title: "example Quiz"
-          }
-        ],
-        admin: false
-      }]}
-      course={[{
-        name: "example course",
-        id: "00000",
-        enrollable: [{email: "new@email.com"}],
-        quizzes: [
-          {
-            _id: "1111",
-            title: "example Quiz"
-          }
-        ],
-        admin: true
-      }]}
-      passed={[{
-        _id: "2222",
-        of: "1111"
-      }]}
+      courses={courses}
+      course={courses[0]}
+      passed={passed}
       token={"000000"}
       url={"urlAddress"}
       demo={jest.fn()}

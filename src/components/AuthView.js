@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseListCreator from '../components/CourseListCreator'
+import CourseListCreator from '../utils/CourseListCreator'
 import CourseList from '../components/CourseList';
 import Register from '../components/Register';
 import Login from '../components/Login';

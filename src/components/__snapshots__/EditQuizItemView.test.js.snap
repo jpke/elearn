@@ -1,0 +1,89 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="editQuiz-item">
+  <h3>
+    Question
+  </h3>
+  <div
+    className="question-container">
+    <textarea
+      className="edit-question"
+      id="1 question"
+      name="itemQuestion"
+      onChange={[Function]}
+      type="text"
+      value="no current question" />
+  </div>
+  <h3
+    className="answers">
+    Answers
+  </h3>
+  <div
+    className="answer-container"
+    id="1 answerDiv 0">
+    <textarea
+      className="edit-quiz-item"
+      id="1 answer 0"
+      name="itemAnswer"
+      onChange={[Function]}
+      type="text"
+      value="no current answer" />
+    <div
+      className="buttons-container">
+      <button
+        className="modify-answers"
+        id="1 answerCorrect 0"
+        onClick={[Function]}>
+        False
+      </button>
+      <button
+        className="modify-answers"
+        id="1 deleteAnswer 0"
+        onClick={[Function]}>
+        Delete
+      </button>
+    </div>
+  </div>
+  <div
+    className="answer-container"
+    id="1 answerDiv 1">
+    <textarea
+      className="edit-quiz-item"
+      id="1 answer 1"
+      name="itemAnswer"
+      onChange={[Function]}
+      type="text"
+      value="no current answer true" />
+    <div
+      className="buttons-container">
+      <button
+        className="modify-answers"
+        id="1 answerCorrect 1"
+        onClick={[Function]}>
+        True
+      </button>
+      <button
+        className="modify-answers"
+        id="1 deleteAnswer 1"
+        onClick={[Function]}>
+        Delete
+      </button>
+    </div>
+  </div>
+  <div
+    className="item-buttons">
+    <button
+      className="modify-answers"
+      id="1 addAnswer"
+      onClick={[Function]}>
+      Add Answer
+    </button>
+    <button
+      className="modify-answers"
+      id="1 deleteItem"
+      onClick={[Function]}>
+      Delete Question
+    </button>
+  </div>
+</div>
+`;

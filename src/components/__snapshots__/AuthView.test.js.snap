@@ -1,11 +1,13 @@
-exports[`test renders correctly when logged in as admin with course selected 1`] = `
+exports[`test renders correctly when logged in and admin course selected 1`] = `
 <div
   className="authContainer">
   <div
     className="course-list-container">
     <div
       className="course-list">
-      <h2 />
+      <h2>
+        example course
+      </h2>
       <ul>
         <li
           onClick={[Function]}>
@@ -42,6 +44,20 @@ exports[`test renders correctly when logged in as admin with course selected 1`]
           </a>
            to access course content
         </p>
+        <div>
+          <p>
+            Admin:
+          </p>
+          <a
+            className="redirect"
+            onClick={[Function]}
+            style={Object {}}>
+            <button
+              className="manageUsers">
+              Manage Course
+            </button>
+          </a>
+        </div>
       </div>
       <button
         onClick={[Function]}>
@@ -52,7 +68,7 @@ exports[`test renders correctly when logged in as admin with course selected 1`]
 </div>
 `;
 
-exports[`test renders correctly when logged in as admin with no course selected 1`] = `
+exports[`test renders correctly when logged in and admin course unselected 1`] = `
 <div
   className="authContainer">
   <div
@@ -90,14 +106,16 @@ exports[`test renders correctly when logged in as admin with no course selected 
 </div>
 `;
 
-exports[`test renders correctly when logged in not as admin with course selected 1`] = `
+exports[`test renders correctly when logged in and non-admin course selected 1`] = `
 <div
   className="authContainer">
   <div
     className="course-list-container">
     <div
       className="course-list">
-      <h2 />
+      <h2>
+        example course
+      </h2>
       <ul>
         <li
           onClick={[Function]}>
@@ -144,7 +162,7 @@ exports[`test renders correctly when logged in not as admin with course selected
 </div>
 `;
 
-exports[`test renders correctly when logged in not as admin with no course selected 1`] = `
+exports[`test renders correctly when logged in and non-admin course unselected 1`] = `
 <div
   className="authContainer">
   <div
