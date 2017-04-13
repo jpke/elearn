@@ -1,0 +1,89 @@
+exports[`test renders correctly quiz question with a selected answer 1`] = `
+<div
+  className="quizInProgress">
+  <h3
+    className="title">
+    sample quiz title
+  </h3>
+  <h3>
+    Question 
+    1
+  </h3>
+  <p>
+    a quiz question here
+  </p>
+  <h3
+    className="answers">
+    Answers
+  </h3>
+  <ul
+    className="item-list">
+    <div>
+      <li
+        className="highlight"
+        id={undefined}
+        onClick={[Function]}>
+        false current answer
+      </li>
+      <li
+        className="none"
+        id={undefined}
+        onClick={[Function]}>
+        true current answer
+      </li>
+    </div>
+  </ul>
+  <div
+    className="quizNav-buttons">
+    <button
+      onClick={[Function]}>
+      Next Question
+    </button>
+  </div>
+</div>
+`;
+
+exports[`test renders correctly quiz question without a selected answer 1`] = `
+<div
+  className="quizInProgress">
+  <h3
+    className="title">
+    sample quiz title
+  </h3>
+  <h3>
+    Question 
+    1
+  </h3>
+  <p>
+    a quiz question here
+  </p>
+  <h3
+    className="answers">
+    Answers
+  </h3>
+  <ul
+    className="item-list">
+    <div>
+      <li
+        className="none"
+        id={undefined}
+        onClick={[Function]}>
+        false current answer
+      </li>
+      <li
+        className="none"
+        id={undefined}
+        onClick={[Function]}>
+        true current answer
+      </li>
+    </div>
+  </ul>
+  <div
+    className="quizNav-buttons">
+    <button
+      onClick={[Function]}>
+      Next Question
+    </button>
+  </div>
+</div>
+`;

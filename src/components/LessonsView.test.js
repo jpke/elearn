@@ -34,7 +34,45 @@ beforeAll(() => {
   }
 })
 
-it('renders correctly', () => {
+it('renders correctly for logged in non-admin user', () => {
+  const tree = renderer.create(
+    <LessonsView
+      getLessons={jest.fn()}
+      getPDF={jest.fn()}
+      uploadPDF={jest.fn()}
+      deletePDF={jest.fn()}
+      token={"0000"}
+      courseName={"example course"}
+      courseID={"0000"}
+      admin={false}
+      lessons={lessons}
+      loading={false}
+      preview={preview}
+    />
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
+it('renders correctly for logged in admin user', () => {
+  const tree = renderer.create(
+    <LessonsView
+      getLessons={jest.fn()}
+      getPDF={jest.fn()}
+      uploadPDF={jest.fn()}
+      deletePDF={jest.fn()}
+      token={"0000"}
+      courseName={"example course"}
+      courseID={"0000"}
+      admin={true}
+      lessons={lessons}
+      loading={false}
+      preview={preview}
+    />
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
+it('renders correctly for logged out user', () => {
   const tree = renderer.create(
     <LessonsView
       getLessons={jest.fn()}
@@ -48,7 +86,6 @@ it('renders correctly', () => {
       lessons={lessons}
       loading={false}
       preview={preview}
-      loggedIn={true}
     />
   ).toJSON();
   expect(tree).toMatchSnapshot();

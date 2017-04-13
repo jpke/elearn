@@ -1,0 +1,124 @@
+exports[`test renders correctly for logged in user with selected quiz not started 1`] = `
+<div
+  className="quizContainer">
+  <h2>
+    sample course name Quizzes
+  </h2>
+  <div
+    className="quiz-start">
+    <h3>
+      You have not yet attempted this quiz
+    </h3>
+    <div
+      className="quiz-start-button-container">
+      <button
+        className="quiz-start-button"
+        onClick={[Function]}>
+         Start Quiz 
+      </button>
+      <button
+        className="quiz-start-button"
+        onClick={[Function]}>
+        Back to Quiz List
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`test renders correctly for logged in user with selected quiz started 1`] = `
+<div
+  className="quizContainer">
+  <h2>
+    sample course name Quizzes
+  </h2>
+  <div
+    className="quizInProgress">
+    <h3
+      className="title">
+      new quiz
+    </h3>
+    <h3>
+      Question 
+      1
+    </h3>
+    <p>
+      no current question
+    </p>
+    <h3
+      className="answers">
+      Answers
+    </h3>
+    <ul
+      className="item-list">
+      <div>
+        <li
+          className="none"
+          id={undefined}
+          onClick={[Function]}>
+          no current answer
+        </li>
+        <li
+          className="none"
+          id={undefined}
+          onClick={[Function]}>
+          no current answer true
+        </li>
+      </div>
+    </ul>
+    <div
+      className="quizNav-buttons">
+      <button
+        onClick={[Function]}>
+        Next Question
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`test renders correctly for logged in user with unselected quiz 1`] = `
+<div
+  className="quizContainer">
+  <h2>
+    sample course name Quizzes
+  </h2>
+  <div>
+    <h3>
+      Select quiz
+    </h3>
+    <div
+      className="quiz-list-container">
+      <ul
+        className="quiz-list">
+        <li>
+          No quizzes listed 
+          <br />
+           Have you selected a course?
+        </li>
+      </ul>
+      <ul
+        className="passed" />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`test renders correctly for logged out user 1`] = `
+<div
+  className="quizContainer">
+  <h2>
+    sample course name Quizzes
+  </h2>
+  <h3>
+    You must be 
+    <a
+      className="redirect"
+      onClick={[Function]}
+      style={Object {}}>
+      logged in
+    </a>
+     to access this content
+  </h3>
+</div>
+`;
