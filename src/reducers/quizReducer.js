@@ -9,8 +9,22 @@ const initialState = {
   quizzes: [],
   quizSelected: false,
   viewQuizSelected: false,
-  quizData: 0,
-  currentQuestion: undefined,
+  quizData: [{question: "no current question"}],
+  currentQuestion:
+    {
+      question: "no current question",
+      answers:
+      [
+        {
+          answer: "no current answer",
+          correct: false
+        },
+        {
+          answer: "no current answer true",
+          correct: true
+        }
+      ]
+    },
   currentQuestionIndex: null,
   score: 0,
   minimumScore: 3,

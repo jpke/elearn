@@ -1,0 +1,123 @@
+exports[`test renders correctly for logged in admin user 1`] = `
+<div
+  className="lessonsContainer">
+  <h2>
+    example course Lessons
+  </h2>
+  <div>
+    <h3>
+      pdfs
+    </h3>
+    <ul
+      className="item-list">
+      <div>
+        <li
+          id="130861063664"
+          onClick={[Function]}>
+          Example PDF.pdf
+        </li>
+        <button
+          onClick={[Function]}>
+          Delete
+        </button>
+      </div>
+      <div>
+        <li
+          id="130861063665"
+          onClick={[Function]}>
+          Example 2 PDF.pdf
+        </li>
+        <button
+          onClick={[Function]}>
+          Delete
+        </button>
+      </div>
+    </ul>
+    <div
+      className="preview">
+      <a
+        href={
+          Object {
+            "download": "fileDownloadUrl",
+            "id": "130861063664",
+            "name": "Example PDF.pdf",
+            "preview": "previewUrl",
+          }
+        }
+        target="_blank">
+        Preview
+      </a>
+    </div>
+    <input
+      id="uploadPDFInput"
+      name="uploadPDF"
+      onChange={[Function]}
+      type="file" />
+  </div>
+</div>
+`;
+
+exports[`test renders correctly for logged in non-admin user 1`] = `
+<div
+  className="lessonsContainer">
+  <h2>
+    example course Lessons
+  </h2>
+  <div>
+    <h3>
+      pdfs
+    </h3>
+    <ul
+      className="item-list">
+      <div>
+        <li
+          id="130861063664"
+          onClick={[Function]}>
+          Example PDF.pdf
+        </li>
+      </div>
+      <div>
+        <li
+          id="130861063665"
+          onClick={[Function]}>
+          Example 2 PDF.pdf
+        </li>
+      </div>
+    </ul>
+    <div
+      className="preview">
+      <a
+        href={
+          Object {
+            "download": "fileDownloadUrl",
+            "id": "130861063664",
+            "name": "Example PDF.pdf",
+            "preview": "previewUrl",
+          }
+        }
+        target="_blank">
+        Preview
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`test renders correctly for logged out user 1`] = `
+<div
+  className="lessonsContainer">
+  <h2>
+    example course Lessons
+  </h2>
+  <h3>
+    You must be 
+    <a
+      className="redirect"
+      onClick={[Function]}
+      style={Object {}}>
+      logged in
+    </a>
+     to access this content
+  </h3>
+</div>
+`;

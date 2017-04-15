@@ -1,0 +1,16 @@
+exports[`test renders correctly 1`] = `
+<div>
+  <li
+    className="none"
+    id={undefined}
+    onClick={[Function]}>
+    no current answer
+  </li>
+  <li
+    className="none"
+    id={undefined}
+    onClick={[Function]}>
+    no current answer true
+  </li>
+</div>
+`;

@@ -4,7 +4,7 @@ eLearn is a simple online learning platform, offering the ability to reach stude
 
 <img src="./eLearnLogin.jpg" width="440px" />
 
-##Features
+## Features
 
 **Courses**
   - Each course has an independent list of quizzes

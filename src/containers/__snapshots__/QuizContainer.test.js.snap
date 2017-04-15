@@ -1,0 +1,44 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="quizInProgress">
+  <h3
+    className="title">
+    new quiz
+  </h3>
+  <h3>
+    Question 
+    1
+  </h3>
+  <p>
+    no current question
+  </p>
+  <h3
+    className="answers">
+    Answers
+  </h3>
+  <ul
+    className="item-list">
+    <div>
+      <li
+        className="none"
+        id={undefined}
+        onClick={[Function]}>
+        no current answer
+      </li>
+      <li
+        className="none"
+        id={undefined}
+        onClick={[Function]}>
+        no current answer true
+      </li>
+    </div>
+  </ul>
+  <div
+    className="quizNav-buttons">
+    <button
+      onClick={[Function]}>
+      Next Question
+    </button>
+  </div>
+</div>
+`;

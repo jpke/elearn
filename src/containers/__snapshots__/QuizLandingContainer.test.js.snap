@@ -1,0 +1,18 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="quizContainer">
+  <h2>
+    Quizzes
+  </h2>
+  <h3>
+    You must be 
+    <a
+      className="redirect"
+      onClick={[Function]}
+      style={Object {}}>
+      logged in
+    </a>
+     to access this content
+  </h3>
+</div>
+`;

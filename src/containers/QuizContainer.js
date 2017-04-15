@@ -32,11 +32,6 @@ export const QuizContainer = (props) => {
         currentQuestionIndex={props.currentQuestionIndex}
         questionCount={props.questionCount}
         unansweredQuestions={unansweredQuestionCount}
-        quizId={props.quizId}
-        quizData={props.quizData}
-        user_id={props.user_id}
-        token={props.token}
-
       />
   );
 };
@@ -46,7 +41,7 @@ export const QuizContainer = (props) => {
 function mapStateToProps(state) {
   return {
       title: state.quizReducer.quiz.title,
-      question: state.quizReducer.currentQuestion.question || "",
+      question: state.quizReducer.currentQuestion.question,
       answers: state.quizReducer.currentQuestion.answers,
       idSelected: state.quizReducer.currentQuestion.idSelected,
       itemSelected: state.quizReducer.currentQuestion.itemSelected,

@@ -1,0 +1,97 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="admin-container">
+  <a
+    className="toggleView"
+    onClick={[Function]}
+    style={Object {}}>
+    <button
+      className="toggleView"
+      id="toggleView">
+      Back to Courses
+    </button>
+  </a>
+  <div>
+    <h3
+      className="message">
+      
+    </h3>
+  </div>
+  <div
+    className="edit-course-header">
+    <div />
+    <div
+      className="title">
+      <h3>
+        Title
+      </h3>
+      <input
+        className="edit-course-title"
+        id="course-title"
+        name="course-title"
+        onChange={[Function]}
+        type="text"
+        value={undefined} />
+    </div>
+    <div
+      className="save">
+      <button
+        className="updateCourse"
+        id="updateCourse"
+        onClick={[Function]}>
+        Save
+      </button>
+    </div>
+  </div>
+  <div>
+    <h3>
+      Email addresses of students who can register for the course
+    </h3>
+  </div>
+  <form
+    name="newUserForm"
+    onSubmit={[Function]}>
+    <div>
+      <input
+        className="edit-new-user"
+        defaultValue=""
+        id="new-user"
+        name="newUser"
+        placeholder="newUser@email.com"
+        type="email" />
+      <div
+        className="admin-checkbox">
+        <label>
+          Admin:   
+        </label>
+        <input
+          className="edit-new-user-admin"
+          id="new-user-admin"
+          name="admin"
+          type="checkbox" />
+      </div>
+    </div>
+    <button
+      className="add-student"
+      type="submit">
+      Add Student
+    </button>
+  </form>
+  <div
+    className="enrollable-users">
+    <h4>
+      Users who can enroll
+    </h4>
+    <ul
+      className="user-list" />
+  </div>
+  <div
+    className="enrolled-users">
+    <h4>
+      Enrolled users
+    </h4>
+    <ul
+      className="user-list-enrolled" />
+  </div>
+</div>
+`;

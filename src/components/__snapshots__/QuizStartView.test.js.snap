@@ -1,0 +1,81 @@
+exports[`test renders correctly for non passed quiz 1`] = `
+<div
+  className="quiz-start">
+  <div>
+    <h2>
+      sample quiz title
+    </h2>
+    <h4>
+      Last score: 
+      1
+    </h4>
+    <h4>
+      Best score: 
+      2
+    </h4>
+    <h4>
+      Attempts: 
+      3
+    </h4>
+    <h3>
+      You have 
+      not
+       passed this quiz
+    </h3>
+  </div>
+  <div
+    className="quiz-start-button-container">
+    <button
+      className="quiz-start-button"
+      onClick={[Function]}>
+       Start Quiz 
+    </button>
+    <button
+      className="quiz-start-button"
+      onClick={[Function]}>
+      Back to Quiz List
+    </button>
+  </div>
+</div>
+`;
+
+exports[`test renders correctly for passed quiz 1`] = `
+<div
+  className="quiz-start">
+  <div>
+    <h2>
+      sample quiz title
+    </h2>
+    <h4>
+      Last score: 
+      1
+    </h4>
+    <h4>
+      Best score: 
+      2
+    </h4>
+    <h4>
+      Attempts: 
+      3
+    </h4>
+    <h3>
+      You have 
+      
+       passed this quiz
+    </h3>
+  </div>
+  <div
+    className="quiz-start-button-container">
+    <button
+      className="quiz-start-button"
+      onClick={[Function]}>
+       Start Quiz 
+    </button>
+    <button
+      className="quiz-start-button"
+      onClick={[Function]}>
+      Back to Quiz List
+    </button>
+  </div>
+</div>
+`;

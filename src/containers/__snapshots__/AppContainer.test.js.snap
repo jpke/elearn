@@ -1,0 +1,31 @@
+exports[`test renders correctly 1`] = `
+<div>
+  <div
+    className="header">
+    <div>
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        Home
+      </a>
+       | 
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        Quiz
+      </a>
+       | 
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        Lessons
+      </a>
+    </div>
+    
+  </div>
+  <br />
+  <h1>
+    Learn Online
+  </h1>
+</div>
+`;
