@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import QuizListCreator from '../components/QuizListCreator';
+import QuizListCreator from '../utils/QuizListCreator';
 import passedQuizList from '../utils/passedQuizList';
 import {selectQuiz, createQuiz, toggleQuizView} from '../actions/eLearnActions';
 import QuizListView from '../components/QuizListView';

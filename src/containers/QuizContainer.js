@@ -32,11 +32,6 @@ export const QuizContainer = (props) => {
         currentQuestionIndex={props.currentQuestionIndex}
         questionCount={props.questionCount}
         unansweredQuestions={unansweredQuestionCount}
-        quizId={props.quizId}
-        quizData={props.quizData}
-        user_id={props.user_id}
-        token={props.token}
-
       />
   );
 };

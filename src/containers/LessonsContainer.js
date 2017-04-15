@@ -24,7 +24,6 @@ const LessonsContainer = (props) => {
       lessons={props.lessons}
       loading={props.loading}
       preview={props.preview}
-      loggedIn={props.loggedIn}
     />
   );
 };
@@ -37,8 +36,7 @@ function mapStateToProps(state) {
     lessons: state.lessonReducer.lessons,
     admin: state.authReducer.course.admin,
     loading: state.authReducer.loadingItem,
-    preview: state.lessonReducer.selectedPdf.preview,
-    loggedIn: state.authReducer.loggedIn
+    preview: state.lessonReducer.selectedPdf.preview
   }
 }
 

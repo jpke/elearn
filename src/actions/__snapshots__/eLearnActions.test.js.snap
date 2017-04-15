@@ -1,0 +1,106 @@
+exports[`test should create an action to advance to next question of quiz 1`] = `
+Object {
+  "type": "NEXT_QUESTION",
+}
+`;
+
+exports[`test should create an action to call async endpoint creating or updating a quiz in the database 1`] = `[Function]`;
+
+exports[`test should create an action to create a new quiz on client side 1`] = `
+Object {
+  "type": "CREATE_QUIZ",
+}
+`;
+
+exports[`test should create an action to edit course title 1`] = `
+Object {
+  "id": "000",
+  "type": "EDIT_COURSE",
+  "value": "updated course title",
+}
+`;
+
+exports[`test should create an action to edit selected quiz clientside 1`] = `
+Object {
+  "itemIndex": "1",
+  "itemName": "quiz item to edit",
+  "subIndex": "a",
+  "type": "UPDATE_QUIZ",
+  "value": "updated value",
+}
+`;
+
+exports[`test should create an action to load link to view pdf lesson 1`] = `
+Object {
+  "selectedPdf": "",
+  "type": "GET_PDF",
+}
+`;
+
+exports[`test should create an action to log user out of client side 1`] = `
+Object {
+  "type": "LOG_OUT",
+}
+`;
+
+exports[`test should create an action to record user selection of answer to quiz question 1`] = `
+Object {
+  "answerSelected": "answer selected",
+  "idSelected": "id of answer selected",
+  "itemSelected": NaN,
+  "type": "SELECT_ANSWER",
+}
+`;
+
+exports[`test should create an action to return to prior question of quiz 1`] = `
+Object {
+  "type": "PREVIOUS_QUESTION",
+}
+`;
+
+exports[`test should create an action to select a course from courses available to the user 1`] = `
+Object {
+  "course": "Selected Course",
+  "type": "SELECT_COURSE",
+}
+`;
+
+exports[`test should create an action to start quiz 1`] = `
+Object {
+  "type": "START_QUIZ",
+}
+`;
+
+exports[`test should create an action to toggle view between list of available quizzes and quiz start or quiz edit page 1`] = `
+Object {
+  "type": "TOGGLE_QUIZ_VIEW",
+}
+`;
+
+exports[`test should create an action to trigger error alert to user 1`] = `
+Object {
+  "message": "sample problem occurred message",
+  "type": "BAD_RESPONSE",
+}
+`;
+
+exports[`test should create an action to update loading status upon async call 1`] = `
+Object {
+  "item": "sample async call",
+  "type": "LOADING",
+}
+`;
+
+exports[`test should create an action to update loading status upon async call 2`] = `
+Object {
+  "item": "sample async call",
+  "type": "LOADING",
+}
+`;
+
+exports[`test should create an action to update loading status upon async completion 1`] = `
+Object {
+  "item": "",
+  "type": "LOADING",
+}
+`;
