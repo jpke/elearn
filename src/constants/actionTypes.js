@@ -5,7 +5,6 @@ export const LOG_OUT = 'LOG_OUT';
 
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const EDIT_COURSE = 'EDIT_COURSE';
-export const ADD_USER = 'ADD_USER';
 export const UPDATE_ENROLLABLE = 'UPDATE_ENROLLABLE';
 export const UPDATE_ENROLLED = 'UPDATE_ENROLLED';
 export const UPDATE_COURSE = 'UPDATE_COURSE';

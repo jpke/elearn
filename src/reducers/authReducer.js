@@ -15,7 +15,9 @@ const initialState = {
     enrollable: [],
     enrolled: [],
     message: ""
-  }
+  };
+
+export {initialState};
 
 //define authReducer
 export default function authReducer(state = initialState, action) {
@@ -84,16 +86,6 @@ export default function authReducer(state = initialState, action) {
         ...state,
         course: course,
         message: ""
-      };
-
-    //adds unregistered user email to list of enrollable users for course
-    case types.ADD_USER:
-      //immutable enrollable deep copy
-      enrollable = JSON.parse(JSON.stringify(state.enrollable));
-      enrollable.push(action.user);
-      return {
-        ...state,
-        enrollable: enrollable
       };
 
     //updates list of unregistered user emails that are enrollable in course

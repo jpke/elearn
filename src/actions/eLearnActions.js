@@ -24,7 +24,7 @@ export function badResponse(message) {
 }
 
 //dispatches user info to reducer; called upon successful registration or login
-function loggedIn(response) {
+export function loggedIn(response) {
   cookie.save("token", response.token)
   return {
     type: types.LOG_IN,

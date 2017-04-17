@@ -1,0 +1,360 @@
+exports[`test should handle BAD_RESPONSE 1`] = `
+Object {
+  "course": "",
+  "courses": Array [],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "errorMessage": "sample error message",
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle EDIT_COURSE 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "updated sample course title",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one",
+      },
+    ],
+  },
+  "courses": Array [],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle LOADING 1`] = `
+Object {
+  "course": "",
+  "courses": Array [],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": true,
+  "loadingItem": "sample item being loaded",
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle LOG_IN 1`] = `
+Object {
+  "course": "",
+  "courses": Array [
+    Object {
+      "_id": "0000",
+      "enrollable": "someUser@email.com",
+      "name": "sample course",
+      "quizzes": Array [
+        Object {
+          "_id": "1111",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+  ],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": true,
+  "message": "",
+  "newUser": "",
+  "passed": undefined,
+  "token": undefined,
+  "url": "https://portfolio-express.herokuapp.com/elearn/",
+  "userId": "0000",
+  "userName": "sample user",
+  "view": "login",
+}
+`;
+
+exports[`test should handle LOG_OUT 1`] = `
+Object {
+  "course": "",
+  "courses": Array [],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle SELECT_COURSE 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "sample course",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one",
+      },
+    ],
+  },
+  "courses": Array [],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle UPDATE_COURSE 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "updated sample course",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one",
+      },
+    ],
+  },
+  "courses": Array [
+    Object {
+      "_id": "0000",
+      "enrollable": "someUser@email.com",
+      "name": "updated sample course",
+      "quizzes": Array [
+        Object {
+          "_id": "1111",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+    Object {
+      "_id": "0001",
+      "enrollable": "someUser@email.com",
+      "name": "sample course two",
+      "quizzes": Array [
+        Object {
+          "_id": "1112",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+  ],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "Course saved!",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle UPDATE_ENROLLABLE 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "sample course",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one",
+      },
+    ],
+  },
+  "courses": Array [],
+  "enrollable": Array [
+    "sampleUser@email.com",
+  ],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle UPDATE_ENROLLED 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "sample course",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one",
+      },
+    ],
+  },
+  "courses": Array [],
+  "enrollable": Array [],
+  "enrolled": Array [
+    "sampleUser@email.com",
+  ],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle non-passing SUBMIT_QUIZ 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "sample course",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one",
+      },
+    ],
+  },
+  "courses": Array [
+    Object {
+      "_id": "0000",
+      "enrollable": "someUser@email.com",
+      "name": "sample course",
+      "quizzes": Array [
+        Object {
+          "_id": "1111",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+    Object {
+      "_id": "0001",
+      "enrollable": "someUser@email.com",
+      "name": "sample course two",
+      "quizzes": Array [
+        Object {
+          "_id": "1112",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+  ],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle passing SUBMIT_QUIZ 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "sample course",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one",
+      },
+    ],
+  },
+  "courses": Array [
+    Object {
+      "_id": "0000",
+      "enrollable": "someUser@email.com",
+      "name": "sample course",
+      "quizzes": Array [
+        Object {
+          "_id": "1111",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+    Object {
+      "_id": "0001",
+      "enrollable": "someUser@email.com",
+      "name": "sample course two",
+      "quizzes": Array [
+        Object {
+          "_id": "1112",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+  ],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [
+    Object {
+      "_id": "1111",
+      "of": "0000",
+    },
+  ],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
