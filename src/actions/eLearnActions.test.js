@@ -1,4 +1,7 @@
-import * as types from '../constants/actionTypes';
+/* eslint-disable no-undef */
+/* eslint-disable import/no-named-as-default */
+
+// import * as types from '../constants/actionTypes';
 import * as actions from './eLearnActions';
 
 it('should create an action to update loading status upon async call', () => {

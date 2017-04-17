@@ -6,6 +6,8 @@ const initialState = {
   selectedPdf: {}
 };
 
+export {initialState};
+
 //define lessonReducer
 export default function lessonReducer(state = initialState, action) {
 

@@ -7,22 +7,24 @@ import {initialState} from './authReducer';
 import * as types from '../constants/actionTypes';
 import * as actions from '../actions/eLearnActions';
 
+let state;
+beforeEach(() => {
+  state = JSON.parse(JSON.stringify(initialState));
+})
+
 it('should handle LOADING', () => {
-  let state = initialState;
   expect(authReducer(state, actions.loading(
     "sample item being loaded"
   ))).toMatchSnapshot();
 })
 
 it('should handle BAD_RESPONSE', () => {
-  let state = initialState;
   expect(authReducer(state, actions.badResponse(
     "sample error message"
   ))).toMatchSnapshot();
 })
 
 it('should handle LOG_IN', () => {
-  let state = initialState;
   expect(authReducer(state, actions.loggedIn(
     {
       name: "sample user",
@@ -47,13 +49,11 @@ it('should handle LOG_IN', () => {
 })
 
 it('should handle LOG_OUT', () => {
-  let state = initialState;
   expect(authReducer(state, actions.logOut()
   )).toMatchSnapshot();
 })
 
 it('should handle SELECT_COURSE', () => {
-  let state = initialState;
   expect(authReducer(state, actions.selectCourse({
     _id: "0000",
     name: "sample course",
@@ -69,7 +69,6 @@ it('should handle SELECT_COURSE', () => {
 })
 
 it('should handle EDIT_COURSE', () => {
-  let state = initialState;
   state.course = {
     _id: "0000",
     name: "sample course",
@@ -86,7 +85,6 @@ it('should handle EDIT_COURSE', () => {
 })
 
 it('should handle UPDATE_ENROLLABLE', () => {
-  let state = initialState;
   expect(authReducer(state, {
     type: types.UPDATE_ENROLLABLE,
     enrollable: ["sampleUser@email.com"]
@@ -95,7 +93,6 @@ it('should handle UPDATE_ENROLLABLE', () => {
 })
 
 it('should handle UPDATE_ENROLLED', () => {
-  let state = initialState;
   expect(authReducer(state, {
     type: types.UPDATE_ENROLLED,
     enrolled: ["sampleUser@email.com"]
@@ -104,7 +101,6 @@ it('should handle UPDATE_ENROLLED', () => {
 })
 
 it('should handle UPDATE_COURSE', () => {
-  let state = initialState;
   state.courses = [
     {
       _id: "0000",
@@ -147,7 +143,6 @@ it('should handle UPDATE_COURSE', () => {
 })
 
 it('should handle passing SUBMIT_QUIZ', () => {
-  let state = initialState;
   expect(authReducer(state, {
     type: types.SUBMIT_QUIZ,
     score: 3,
@@ -225,7 +220,6 @@ it('should handle passing SUBMIT_QUIZ', () => {
 })
 
 it('should handle non-passing SUBMIT_QUIZ', () => {
-  let state = initialState;
   expect(authReducer(state, {
     type: types.SUBMIT_QUIZ,
     score: 1,
@@ -300,7 +294,6 @@ it('should handle non-passing SUBMIT_QUIZ', () => {
 })
 
 it('should handle DELETE_QUIZ', () => {
-  let state = initialState;
   expect(authReducer(state, {
     type: types.DELETE_QUIZ,
     courses: [
@@ -333,7 +326,6 @@ it('should handle DELETE_QUIZ', () => {
 })
 
 it('should handle SAVE_QUIZ', () => {
-  let state = initialState;
   state.courses = [
     {
       _id: "0000",
