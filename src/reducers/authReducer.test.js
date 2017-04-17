@@ -298,3 +298,79 @@ it('should handle non-passing SUBMIT_QUIZ', () => {
   }
   )).toMatchSnapshot();
 })
+
+it('should handle DELETE_QUIZ', () => {
+  let state = initialState;
+  expect(authReducer(state, {
+    type: types.DELETE_QUIZ,
+    courses: [
+      {
+        _id: "0000",
+        name: "sample course",
+        enrollable: "someUser@email.com",
+        quizzes: [
+          {
+            _id: "1111",
+            title: "sample quiz one"
+          }
+        ]
+      },
+      {
+        _id: "0001",
+        name: "sample course two",
+        enrollable: "someUser@email.com",
+        quizzes: [
+          {
+            _id: "1112",
+            title: "sample quiz one"
+          }
+        ]
+      }
+    ],
+    courseID: "0000"
+  }
+  )).toMatchSnapshot();
+})
+
+it('should handle SAVE_QUIZ', () => {
+  let state = initialState;
+  state.courses = [
+    {
+      _id: "0000",
+      name: "sample course",
+      enrollable: "someUser@email.com",
+      quizzes: [
+        {
+          _id: "1111",
+          title: "sample quiz one"
+        }
+      ]
+    },
+    {
+      _id: "0001",
+      name: "sample course two",
+      enrollable: "someUser@email.com",
+      quizzes: [
+        {
+          _id: "1112",
+          title: "sample quiz one"
+        }
+      ]
+    }
+  ];
+  expect(authReducer(state, {
+    type: types.SAVE_QUIZ,
+    course: {
+        _id: "0000",
+        name: "sample course",
+        enrollable: "someUser@email.com",
+        quizzes: [
+          {
+            _id: "1111",
+            title: "sample quiz one updated"
+          }
+        ]
+    }
+  }
+  )).toMatchSnapshot();
+})

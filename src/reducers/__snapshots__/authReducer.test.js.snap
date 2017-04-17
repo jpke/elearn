@@ -17,6 +17,57 @@ Object {
 }
 `;
 
+exports[`test should handle DELETE_QUIZ 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "sample course",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one",
+      },
+    ],
+  },
+  "courses": Array [
+    Object {
+      "_id": "0000",
+      "enrollable": "someUser@email.com",
+      "name": "sample course",
+      "quizzes": Array [
+        Object {
+          "_id": "1111",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+    Object {
+      "_id": "0001",
+      "enrollable": "someUser@email.com",
+      "name": "sample course two",
+      "quizzes": Array [
+        Object {
+          "_id": "1112",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+  ],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
 exports[`test should handle EDIT_COURSE 1`] = `
 Object {
   "course": Object {
@@ -99,6 +150,57 @@ exports[`test should handle LOG_OUT 1`] = `
 Object {
   "course": "",
   "courses": Array [],
+  "enrollable": Array [],
+  "enrolled": Array [],
+  "loading": false,
+  "loggedIn": false,
+  "message": "",
+  "newUser": "",
+  "passed": Array [],
+  "token": "",
+  "userId": "",
+  "userName": "",
+  "view": "login",
+}
+`;
+
+exports[`test should handle SAVE_QUIZ 1`] = `
+Object {
+  "course": Object {
+    "_id": "0000",
+    "enrollable": "someUser@email.com",
+    "name": "sample course",
+    "quizzes": Array [
+      Object {
+        "_id": "1111",
+        "title": "sample quiz one updated",
+      },
+    ],
+  },
+  "courses": Array [
+    Object {
+      "_id": "0000",
+      "enrollable": "someUser@email.com",
+      "name": "sample course",
+      "quizzes": Array [
+        Object {
+          "_id": "1111",
+          "title": "sample quiz one updated",
+        },
+      ],
+    },
+    Object {
+      "_id": "0001",
+      "enrollable": "someUser@email.com",
+      "name": "sample course two",
+      "quizzes": Array [
+        Object {
+          "_id": "1112",
+          "title": "sample quiz one",
+        },
+      ],
+    },
+  ],
   "enrollable": Array [],
   "enrolled": Array [],
   "loading": false,
