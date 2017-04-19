@@ -6,7 +6,6 @@ import {Link} from 'react-router';
 //allows user to edit course title, add or delete user from enrollable or enrolled lists for course
 const AdminView = (props) => (
   <div className="admin-container">
-    {console.log("course name ", props.course)}
     <Link to="/" className="toggleView">
       <button id="toggleView" className="toggleView">Back to Courses
       </button>
