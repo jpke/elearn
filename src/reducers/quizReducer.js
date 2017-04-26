@@ -12,7 +12,7 @@ const initialState = {
   quizData: [{question: "no current question"}],
   currentQuestion:
     {
-      question: "no current question.",
+      question: "no current question",
       answers:
       [
         {
