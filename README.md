@@ -2,7 +2,7 @@
 
 eLearn is a simple online learning platform, offering the ability to reach students with lessons and multiple choice quizzes. Passing all quizzes for a course enables a student to download a certificate of completion for the course.
 
-<img src="./eLearnLogin.jpg" width="440px" />
+<img src="./readmeAssets/eLearnLogin.jpg" width="440px" />
 
 ## Features
 
@@ -16,8 +16,8 @@ eLearn is a simple online learning platform, offering the ability to reach stude
 
 **Multiple choice quizzes**
 
-<img src="./eLearnQuiz.jpg" width="440px" />
-<img src="./eLearnEditQuiz.jpg" width="440px" />
+<img src="./readmeAssets/eLearnQuiz.jpg" width="440px" />
+<img src="./readmeAssets/eLearnEditQuiz.jpg" width="440px" />
   - Course admin can edit quiz
   - Quiz is automatically graded upon submission
   - Course admin sets minimum score needed to pass quiz
@@ -27,7 +27,7 @@ eLearn is a simple online learning platform, offering the ability to reach stude
 
 **Lessons**
 
-<img src="./eLearnLessons.jpg" width="440px" />
+<img src="./readmeAssets/eLearnLessons.jpg" width="440px" />
   - PDF lessons are listed for course
   - Lessons are stored in BOX currently (provides document version control)
   - Authenticated users can easily preview and download PDF lessons
@@ -102,10 +102,17 @@ GET /lessons/:BOXFileId :: get BOX preview and download url of lesson pdf
 POST /lessons :: uploads lesson to course
  - not yet implmented
 
+## Development
+- clone repo
+- npm install
+- npm start -s starts dev server
+- npm run build builds production bundle and starts build server
+- add '/elearn' to script and link tags in dist/index.html
+- node server.js starts production server
+
 ## ToDo:
 This app is under construction.
 * High priority
-  * Enable course admin to create, update and delete course files
   * Enable course admin to view enrolled students quiz attempts and scores
 
 * Enable site admin to create and delete courses (currently done through server code)

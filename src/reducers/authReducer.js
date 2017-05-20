@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import * as types from '../constants/actionTypes';
 
 //initialize authReducer state

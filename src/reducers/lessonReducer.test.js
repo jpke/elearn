@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/no-named-as-default */
+/* eslint-disable no-unused-vars */
 
 import React from 'react';
 import lessonReducer from './lessonReducer';
