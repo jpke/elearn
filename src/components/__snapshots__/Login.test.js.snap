@@ -24,10 +24,5 @@ exports[`test renders correctly 1`] = `
       Login
     </button>
   </form>
-  <button
-    className="authButton"
-    onClick={[Function]}>
-    Demo
-  </button>
 </div>
 `;

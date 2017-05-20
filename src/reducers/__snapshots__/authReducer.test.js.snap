@@ -139,7 +139,7 @@ Object {
   "newUser": "",
   "passed": undefined,
   "token": undefined,
-  "url": "https://portfolio-express.herokuapp.com/elearn/",
+  "url": "http://localhost:8080/elearn/",
   "userId": "0000",
   "userName": "sample user",
   "view": "login",

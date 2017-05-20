@@ -18,7 +18,6 @@ app.use('/elearn', eLearn)
 //serves client side assests, html, css and js
 //enables react-router to navigate in client-side app
 app.get('*', function(req, res) {
-  console.log("hit -------");
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 

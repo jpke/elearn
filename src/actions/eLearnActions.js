@@ -4,8 +4,8 @@ import fetch from 'isomorphic-fetch';
 // import {browserHistory} from 'react-router';
 
 //toggle dev and production url
-// const url = "http://localhost:8080/elearn/";
-const url = "https://portfolio-express.herokuapp.com/elearn/"
+const url = "http://localhost:8080/elearn/";
+// const url = "https://portfolio-express.herokuapp.com/elearn/"
 
 //dispatches loading message to reducer
 export function loading(item) {
