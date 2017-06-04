@@ -44,7 +44,8 @@ it('should handle LOG_IN', () => {
         }
       ],
       lessonFolder: [],
-      admin: false
+      admin: false,
+      token: "sampleRandomToken"
     }
   ))).toMatchSnapshot();
 })

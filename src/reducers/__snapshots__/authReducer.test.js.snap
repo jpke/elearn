@@ -138,7 +138,7 @@ Object {
   "message": "",
   "newUser": "",
   "passed": undefined,
-  "token": undefined,
+  "token": "sampleRandomToken",
   "url": "http://localhost:8080/elearn/",
   "userId": "0000",
   "userName": "sample user",

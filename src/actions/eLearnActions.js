@@ -1,4 +1,4 @@
-import cookie from 'react-cookie'
+// import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
 import fetch from 'isomorphic-fetch';
 // import {browserHistory} from 'react-router';
@@ -25,7 +25,6 @@ export function badResponse(message) {
 
 //dispatches user info to reducer; called upon successful registration or login
 export function loggedIn(response) {
-  cookie.save("token", response.token)
   return {
     type: types.LOG_IN,
     userName: response.name,
