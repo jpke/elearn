@@ -5,4 +5,12 @@ COPY . .
 
 EXPOSE 8080
 
+USER node
+
 CMD ["node", "server.js"]
+
+# build this container with:
+# docker build -t elearn-docker .
+
+# start this container with:
+# docker run -p 8080:8080 -it --rm elearn-docker

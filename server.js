@@ -38,3 +38,7 @@ mongoose
   .catch(function(error) {
     console.log('Server error: ', error);
   });
+
+process.on('SIGINT', function() {
+  process.exit();
+});
