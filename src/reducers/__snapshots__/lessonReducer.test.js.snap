@@ -1,0 +1,38 @@
+exports[`test should handle GET_LESSONS 1`] = `
+Object {
+  "lessons": Array [
+    Object {
+      "etag": "1",
+      "id": "0000",
+      "modified_at": "2017-02-02T12:29:25-08:00",
+      "name": "Example Lesson File.pdf",
+      "size": 15342,
+      "type": "file",
+    },
+    Object {
+      "etag": "1",
+      "id": "0001",
+      "modified_at": "2017-02-02T12:29:25-08:00",
+      "name": "Example Lesson File Two.pdf",
+      "size": 15342,
+      "type": "file",
+    },
+    Object {
+      "etag": "1",
+      "id": "0002",
+      "modified_at": "2017-02-02T12:29:25-08:00",
+      "name": "Example Lesson File Three.pdf",
+      "size": 15342,
+      "type": "file",
+    },
+  ],
+  "selectedPdf": Object {},
+}
+`;
+
+exports[`test should handle GET_PDF 1`] = `
+Object {
+  "lessons": undefined,
+  "selectedPdf": Object {},
+}
+`;

@@ -2,13 +2,13 @@ exports[`test renders correctly 1`] = `
 <div>
   <li
     className="none"
-    id={undefined}
+    id="0001"
     onClick={[Function]}>
     no current answer
   </li>
   <li
     className="none"
-    id={undefined}
+    id="0002"
     onClick={[Function]}>
     no current answer true
   </li>

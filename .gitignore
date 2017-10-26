@@ -2,6 +2,11 @@
 logs
 *.log*
 
+# Environment variables
+.env
+private_key.pem
+public_key.pem
+
 # Runtime data
 pids
 *.pid

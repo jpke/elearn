@@ -1,11 +1,12 @@
-import cookie from 'react-cookie'
+// import cookie from 'react-cookie'
 import * as types from '../constants/actionTypes';
 import fetch from 'isomorphic-fetch';
 // import {browserHistory} from 'react-router';
 
 //toggle dev and production url
-// const url = "http://localhost:8080/elearn/";
-const url = "https://portfolio-express.herokuapp.com/elearn/"
+// const url = 'http://localhost:8080/elearn/';
+const url = 'http://54.161.172.165/elearn/';
+// const url = "https://portfolio-express.herokuapp.com/elearn/"
 
 //dispatches loading message to reducer
 export function loading(item) {
@@ -24,8 +25,7 @@ export function badResponse(message) {
 }
 
 //dispatches user info to reducer; called upon successful registration or login
-function loggedIn(response) {
-  cookie.save("token", response.token)
+export function loggedIn(response) {
   return {
     type: types.LOG_IN,
     userName: response.name,
@@ -37,18 +37,25 @@ function loggedIn(response) {
   };
 }
 
+export function passwordUpdated(notify = true) {
+  return {
+    type: types.PASSWORD_UPDATED,
+    notify
+  };
+}
+
 //sends async request to register new user
 //calls loggedIn upon success
 //calls badReponse upon failure
 export function register(userName, email, password) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('register'));
     try {
       fetch(url.concat('users'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          Accept: 'application/json'
         },
         body: JSON.stringify({
           name: userName,
@@ -56,22 +63,57 @@ export function register(userName, email, password) {
           password: password
         })
       })
-      .then(response => {
-        if(response.status !=201) throw response;
-        return response.json()
-      })
-      .then(response => {
-        dispatch(loading(''));
-        dispatch(loggedIn(response));
-      })
-    } catch(error) {
-      if(error.status === 400) {
+        .then(response => {
+          if (response.status != 201) throw response;
+          return response.json();
+        })
+        .then(response => {
+          dispatch(loading(''));
+          dispatch(loggedIn(response));
+        });
+    } catch (error) {
+      if (error.status === 400) {
         //provides more specific error message
-        return dispatch(badResponse("Email already in use"));
+        return dispatch(badResponse('Email already in use'));
       }
-      console.log("error response: ", error);
-      dispatch(badResponse("Problem with registration"))
+      console.log('error response: ', error);
+      dispatch(badResponse('Problem with registration'));
     }
+  };
+}
+
+export function updatePassword(token, userId, oldPassword, password) {
+  return function(dispatch) {
+    dispatch(loading('update password'));
+    fetch(url.concat('users/auth'), {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        userId,
+        oldPassword: oldPassword,
+        newPassword: password
+      })
+    })
+      .then(response => {
+        if (response.status != 201) throw response;
+        return response.json();
+      })
+      .then(() => {
+        dispatch(loading(''));
+        dispatch(passwordUpdated(true));
+
+        //notify user of success through alert
+        dispatch(badResponse('Password updated'));
+      })
+      .catch(error => {
+        if (error.status === 400) {
+          return dispatch(badResponse('Invalid current password'));
+        }
+      });
   };
 }
 
@@ -89,27 +131,27 @@ export function editCourse(id, value) {
 //dispatches updated enrollable list to reducer upon success
 //calls badResponse upon failure
 export function addUser(token, course_id, email, admin) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('update Course'));
 
-      fetch(url.concat('course/enrollable'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          email: email,
-          course_id: course_id,
-          admin: admin
-        })
+    fetch(url.concat('course/enrollable'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        email: email,
+        course_id: course_id,
+        admin: admin
       })
+    })
       .then(response => {
-        if(response.status != 201) {
+        if (response.status != 201) {
           throw response;
         }
-        return response.json()
+        return response.json();
       })
       .then(response => {
         dispatch(loading(''));
@@ -118,11 +160,11 @@ export function addUser(token, course_id, email, admin) {
           enrollable: response.enrollable
         });
       })
-      .catch((response) => {
+      .catch(response => {
         dispatch(loading(''));
-        console.log("error response: ", response);
-        dispatch(badResponse("Problem with adding user"))
-    })
+        console.log('error response: ', response);
+        dispatch(badResponse('Problem with adding user'));
+      });
   };
 }
 
@@ -131,26 +173,26 @@ export function addUser(token, course_id, email, admin) {
 //dispatches updated enrollable list to reducer upon success
 //calls badResponse upon failure
 export function deleteUser(token, course_id, email) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('update Course'));
 
-      fetch(url.concat('course/enrollable'), {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          email: email,
-          course_id: course_id
-        })
+    fetch(url.concat('course/enrollable'), {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        email: email,
+        course_id: course_id
       })
+    })
       .then(response => {
-        if(response.status != 200) {
+        if (response.status != 200) {
           throw response;
         }
-        return response.json()
+        return response.json();
       })
       .then(response => {
         dispatch(loading(''));
@@ -159,11 +201,11 @@ export function deleteUser(token, course_id, email) {
           enrollable: response.enrollable
         });
       })
-      .catch((response) => {
+      .catch(response => {
         dispatch(loading(''));
-        console.log("error response: ", response);
-        dispatch(badResponse("Problem with deleting user"))
-    })
+        console.log('error response: ', response);
+        dispatch(badResponse('Problem with deleting user'));
+      });
   };
 }
 
@@ -172,25 +214,25 @@ export function deleteUser(token, course_id, email) {
 //dispatches updated course data to reducer upon success
 //calls badResponse upon failure
 export function updateCourse(token, course) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('update Course'));
 
-      fetch(url.concat('course'), {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          course
-        })
+    fetch(url.concat('course'), {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        course
       })
+    })
       .then(response => {
-        if(response.status != 200) {
+        if (response.status != 200) {
           throw response;
         }
-        return response.json()
+        return response.json();
       })
       .then(response => {
         dispatch(loading(''));
@@ -199,11 +241,11 @@ export function updateCourse(token, course) {
           course: response.course
         });
       })
-      .catch((response) => {
+      .catch(response => {
         dispatch(loading(''));
-        console.log("error response: ", response);
-        dispatch(badResponse("Problem with updating course"))
-    })
+        console.log('error response: ', response);
+        dispatch(badResponse('Problem with updating course'));
+      });
   };
 }
 
@@ -211,26 +253,26 @@ export function updateCourse(token, course) {
 //dispatches new json web token upon success
 //calls badResponse upon failure
 export function logIn(email, password) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('logIn'));
 
-      fetch(url.concat('login'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        withCredentials: true,
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
+    fetch(url.concat('login'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      withCredentials: true,
+      body: JSON.stringify({
+        email: email,
+        password: password
       })
+    })
       .then(response => {
-        if(response.status != 200) {
+        if (response.status != 200) {
           throw response;
         }
-        return response.json()
+        return response.json();
       })
       .then(response => {
         // console.log("set-cookie: ", response)
@@ -242,23 +284,23 @@ export function logIn(email, password) {
         dispatch(loading(''));
         dispatch(loggedIn(response));
       })
-      .catch((response) => {
+      .catch(response => {
         dispatch(loading(''));
-        if(response.status === 400) {
+        if (response.status === 400) {
           //provides more specific info in alert message
-          return dispatch(badResponse("Incorrect Password"));
+          return dispatch(badResponse('Incorrect Password'));
         }
-      dispatch(badResponse("Problem with login"))
-      console.log("error response: ", response);
-    })
+        dispatch(badResponse('Problem with login'));
+        console.log('error response: ', response);
+      });
   };
 }
 
 //dispatches selected course to reducer
 export function selectCourse(course) {
   return {
-      type: types.SELECT_COURSE,
-      course
+    type: types.SELECT_COURSE,
+    course
   };
 }
 
@@ -267,40 +309,42 @@ export function selectCourse(course) {
 //dispatches enrolled and enrollable users to reducer upon success
 //calls badResponse upon failure
 export function getEnrollable(token, course) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('update Course'));
     dispatch(selectCourse(course));
-      fetch(url.concat('course/enrollable/', course._id), {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          'Credentials': 'include'
-        }
-      })
+    fetch(url.concat('course/enrollable/', course._id), {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+        Credentials: 'include'
+      }
+    })
       .then(response => {
-        if(response.status != 200) {
+        if (response.status != 200) {
           throw response;
         }
-        return response.json()
+        return response.json();
       })
       .then(response => {
         dispatch(loading(''));
         dispatch({
           type: types.UPDATE_ENROLLABLE,
-          enrollable: response.enrollable,
+          enrollable: response.enrollable
         });
         dispatch({
           type: types.UPDATE_ENROLLED,
           enrolled: response.enrolled
         });
       })
-      .catch((response) => {
+      .catch(response => {
         dispatch(loading(''));
-        console.log("error response: ", response);
-        dispatch(badResponse("Problem with retrieving enrollable and enrolled users"))
-    })
+        console.log('error response: ', response);
+        dispatch(
+          badResponse('Problem with retrieving enrollable and enrolled users')
+        );
+      });
   };
 }
 
@@ -310,25 +354,25 @@ export function getEnrollable(token, course) {
 //dispatches updated enrolled users to reducer upon success
 //calls badResponse upon failure
 export function deleteUserFromCourse(token, course_id, email) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('update Course'));
-      fetch(url.concat('users'), {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          course_id: course_id,
-          email: email
-        })
+    fetch(url.concat('users'), {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        course_id: course_id,
+        email: email
       })
+    })
       .then(response => {
-        if(response.status != 200) {
+        if (response.status != 200) {
           throw response;
         }
-        return response.json()
+        return response.json();
       })
       .then(response => {
         dispatch(loading(''));
@@ -337,18 +381,18 @@ export function deleteUserFromCourse(token, course_id, email) {
           enrolled: response.enrolled
         });
       })
-      .catch((response) => {
+      .catch(response => {
         dispatch(loading(''));
-        console.log("error response: ", response);
-        return response.json()
+        console.log('error response: ', response);
+        return response.json();
       })
       .then(function(response) {
-        if(response.message === 'Unable to delete site admin from course') {
-          dispatch(badResponse('Unable to delete site admin from course'))
+        if (response.message === 'Unable to delete site admin from course') {
+          dispatch(badResponse('Unable to delete site admin from course'));
         } else {
-          dispatch(badResponse("Problem with deleting user. "))
+          dispatch(badResponse('Problem with deleting user. '));
         }
-      })
+      });
   };
 }
 
@@ -366,7 +410,7 @@ export function logOut() {
 //opens pdf certificate in new browser tab upon success
 //calls badResponse upon failure
 export function getCertificate(token, course) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('getCertificate'));
     //pull down quiz questions, then
     try {
@@ -374,28 +418,28 @@ export function getCertificate(token, course) {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          'responseType': 'arraybuffer'
+          Authorization: `Bearer ${token}`,
+          responseType: 'arraybuffer'
         }
       })
-      .then(response => {
-        if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
-        }
-        return response
-      })
-      .then(response => {
-        var windowUrl = window.URL || window.webkitURL;
-        var blob = new Blob([response.body], {type: "application/pdf"});
-        var url = windowUrl.createObjectURL(blob);
-        // saveAs(blob, "certificate.pdf")
-        window.open(url, "_target")
-        dispatch(loading(''));
+        .then(response => {
+          if (response.status < 200 || response.status >= 300) {
+            let error = response;
+            throw error;
+          }
+          return response;
         })
-    } catch(error) {
-      dispatch(badResponse("Problem with loading certificate"))
-      console.log("error response: ", error);
+        .then(response => {
+          let windowUrl = window.URL || window.webkitURL;
+          let blob = new Blob([response.body], { type: 'application/pdf' });
+          let url = windowUrl.createObjectURL(blob);
+          // saveAs(blob, "certificate.pdf")
+          window.open(url, '_target');
+          dispatch(loading(''));
+        });
+    } catch (error) {
+      dispatch(badResponse('Problem with loading certificate'));
+      console.log('error response: ', error);
     }
   };
 }
@@ -423,40 +467,40 @@ export function editQuiz(itemIndex, itemName, value, subIndex) {
 //dispatches delete quiz to reducer and sets view to quiz list upon success
 //calls badResponse upon failure
 export function deleteSavedQuiz(token, userId, courseID, quizId) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('deleteQuiz'));
     try {
-      fetch(url.concat('quiz/').concat(quizId + "/" + courseID), {
+      fetch(url.concat('quiz/').concat(quizId + '/' + courseID), {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      })
-      .then(response => {
-        if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
-        } else {
-          return response;
+          Authorization: `Bearer ${token}`
         }
       })
-      .then(response => response.json())
-      .then((response) => {
-        dispatch(loading(''));
-        // browserHistory.push("/quiz");
-        window.location.href="#/quiz";
-        return dispatch({
-          type: types.DELETE_QUIZ,
-          courses: response.courses,
-          courseID: courseID
+        .then(response => {
+          if (response.status < 200 || response.status >= 300) {
+            let error = response;
+            throw error;
+          } else {
+            return response;
+          }
+        })
+        .then(response => response.json())
+        .then(response => {
+          dispatch(loading(''));
+          // browserHistory.push("/quiz");
+          window.location.href = '#/quiz';
+          return dispatch({
+            type: types.DELETE_QUIZ,
+            courses: response.courses,
+            courseID: courseID
+          });
         });
-      })
-    } catch(error) {
-      dispatch(badResponse("Problem with deleting quiz"))
-      console.log("error response: ", error);
+    } catch (error) {
+      dispatch(badResponse('Problem with deleting quiz'));
+      console.log('error response: ', error);
     }
-  }
+  };
 }
 
 //sends async request to create or update quiz, adding quiz to course quiz list when new quiz is created
@@ -464,14 +508,14 @@ export function deleteSavedQuiz(token, userId, courseID, quizId) {
 //dispatches save quiz to reducer upon success
 //calls badResponse upon failure
 export function saveQuiz(token, userId, courseID, quiz) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('saveQuiz'));
     try {
       fetch(url.concat('quiz/'), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           userId,
@@ -479,28 +523,28 @@ export function saveQuiz(token, userId, courseID, quiz) {
           quiz
         })
       })
-      .then(response => {
-        if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
-        } else {
-          return response;
-        }
-      })
-      .then(response => response.json())
-      .then((response) => {
-        dispatch(loading(''));
-        return dispatch({
-          type: types.SAVE_QUIZ,
-          quiz: response[0],
-          course: response[1]
+        .then(response => {
+          if (response.status < 200 || response.status >= 300) {
+            let error = response;
+            throw error;
+          } else {
+            return response;
+          }
+        })
+        .then(response => response.json())
+        .then(response => {
+          dispatch(loading(''));
+          return dispatch({
+            type: types.SAVE_QUIZ,
+            quiz: response[0],
+            course: response[1]
+          });
         });
-      })
-    } catch(error) {
-      dispatch(badResponse("Problem with saving quiz"))
-      console.log("error response: ", error);
+    } catch (error) {
+      dispatch(badResponse('Problem with saving quiz'));
+      console.log('error response: ', error);
     }
-  }
+  };
 }
 
 //selects quiz from course quiz list
@@ -510,7 +554,7 @@ export function selectQuiz(token, quizId, userId) {
   return function(dispatch) {
     dispatch(toggleQuizView());
     dispatch(loadQuiz(token, quizId, userId));
-  }
+  };
 }
 
 //switches view from list of course quizzes to quiz start or quiz edit view
@@ -526,35 +570,35 @@ export function toggleQuizView() {
 //dispatches load quiz upon success
 //calls badResponse upon failure
 export function loadQuiz(token, quiz_Id, user_Id) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('loadQuiz'));
     //pull down quiz questions, then
     try {
-      fetch(url.concat('quiz/',quiz_Id,"/",user_Id), {
+      fetch(url.concat('quiz/', quiz_Id, '/', user_Id), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
       })
-      .then(response => {
-        if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
-        }
-        return response.json()
-      })
-      .then(response => {
-        dispatch(loading(''));
-        return dispatch({
-          type: types.LOAD_QUIZ,
-          quizData: response[0][0],
-          attempts: response[1]
-        });
+        .then(response => {
+          if (response.status < 200 || response.status >= 300) {
+            let error = response;
+            throw error;
+          }
+          return response.json();
         })
-    } catch(error) {
-      dispatch(badResponse("Problem with loading quiz"))
-      console.log("error response: ", error);
+        .then(response => {
+          dispatch(loading(''));
+          return dispatch({
+            type: types.LOAD_QUIZ,
+            quizData: response[0][0],
+            attempts: response[1]
+          });
+        });
+    } catch (error) {
+      dispatch(badResponse('Problem with loading quiz'));
+      console.log('error response: ', error);
     }
   };
 }
@@ -598,14 +642,14 @@ export function prevQuestion() {
 //dispatches submit quiz to reducer upon success
 //calls badResponse upon failure
 export function submitQuiz(quizData, quizId, _id, token) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('submitQuiz'));
     try {
       fetch(url.concat('quiz/submit'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           quizData: quizData,
@@ -613,63 +657,63 @@ export function submitQuiz(quizData, quizId, _id, token) {
           user_Id: _id
         })
       })
-      .then(response => {
-        if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
-        } else {
-          return response;
-        }
-      })
-      .then(response => response.json())
-      .then((response) => {
-        dispatch(loading(''));
-        // dispatch(viewQuizzes());
-        return dispatch({
-          type: types.SUBMIT_QUIZ,
-          score: response.score,
-          attempt: response.attempt,
-          passed: response.passed
-        });
+        .then(response => {
+          if (response.status < 200 || response.status >= 300) {
+            let error = response;
+            throw error;
+          } else {
+            return response;
+          }
         })
-    } catch(error) {
-      dispatch(badResponse("Problem with submitting quiz"))
-      console.log("error response: ", error);
+        .then(response => response.json())
+        .then(response => {
+          dispatch(loading(''));
+          // dispatch(viewQuizzes());
+          return dispatch({
+            type: types.SUBMIT_QUIZ,
+            score: response.score,
+            attempt: response.attempt,
+            passed: response.passed
+          });
+        });
+    } catch (error) {
+      dispatch(badResponse('Problem with submitting quiz'));
+      console.log('error response: ', error);
     }
-  }
+  };
 }
 
 //sends async request to fetch list of course lessons
 //dispatches get lessons to reducer upon success
 //calls badResponse upon failure
 export function getLessons(token) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(loading('lessons'));
     try {
       fetch(url.concat('lessons'), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      })
-      .then(response => {
-        if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
+          Authorization: `Bearer ${token}`
         }
-        return response.json()
       })
-      .then(response => {
-        dispatch(loading(''));
-        return dispatch({
-          type: types.GET_LESSONS,
-          lessons: response.entries
-        });
+        .then(response => {
+          if (response.status < 200 || response.status >= 300) {
+            let error = response;
+            throw error;
+          }
+          return response.json();
         })
-    } catch(error) {
-      dispatch(badResponse("Problem with loading lessons"))
-      console.log("error response: ", error);
+        .then(response => {
+          dispatch(loading(''));
+          return dispatch({
+            type: types.GET_LESSONS,
+            lessons: response.entries
+          });
+        });
+    } catch (error) {
+      dispatch(badResponse('Problem with loading lessons'));
+      console.log('error response: ', error);
     }
   };
 }
@@ -678,7 +722,7 @@ export function getLessons(token) {
 export function loadPreview(response) {
   return {
     type: types.GET_PDF,
-    selectedPdf: response.selectedPdf || ""
+    selectedPdf: response.selectedPdf || ''
   };
 }
 
@@ -687,31 +731,31 @@ export function loadPreview(response) {
 //dispatches loadPreview with new url upon success
 //calls badResponse upon failure
 export function getPDF(pdfId, token) {
-  return function (dispatch) {
-    dispatch(loadPreview(""));
-    dispatch(loading("pdf"));
+  return function(dispatch) {
+    dispatch(loadPreview(''));
+    dispatch(loading('pdf'));
     try {
-      fetch(url.concat('lessons/',pdfId), {
+      fetch(url.concat('lessons/', pdfId), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      })
-      .then(response => {
-        if(response.status < 200 || response.status >= 300) {
-          let error = response;
-          throw error;
+          Authorization: `Bearer ${token}`
         }
-        return response.json()
       })
-      .then(response => {
-        dispatch(loading(""));
-          return dispatch(loadPreview(response));
+        .then(response => {
+          if (response.status < 200 || response.status >= 300) {
+            let error = response;
+            throw error;
+          }
+          return response.json();
         })
-    } catch(error) {
-      dispatch(badResponse("Problem with loading lesson"))
-      console.log("error response: ", error);
+        .then(response => {
+          dispatch(loading(''));
+          return dispatch(loadPreview(response));
+        });
+    } catch (error) {
+      dispatch(badResponse('Problem with loading lesson'));
+      console.log('error response: ', error);
     }
   };
 }
@@ -722,54 +766,54 @@ export function getPDF(pdfId, token) {
 //will call badResponse upon failure
 export function uploadPDF(token, courseID, file) {
   return function(dispatch) {
-    dispatch(loading("uploading pdf: ", file));
-      let formData = new FormData();
-      formData.append("file", file[0]);
-      fetch(url.concat('lessons/'), {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/pdf',
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData
-      })
+    dispatch(loading('uploading pdf: ', file));
+    let formData = new FormData();
+    formData.append('file', file[0]);
+    fetch(url.concat('lessons/'), {
+      method: 'POST',
+      headers: {
+        Accept: 'application/pdf',
+        Authorization: `Bearer ${token}`
+      },
+      body: formData
+    })
       .then(response => {
-        if(response.status != 200) throw response;
+        if (response.status != 200) throw response;
         return response.json();
       })
       .then(() => {
-        return dispatch(getLessons(token))
+        return dispatch(getLessons(token));
       })
       .catch(error => {
-        dispatch(badResponse("Problem with uploading file"))
-        console.log("error response: ", error);
-      })
-  }
+        dispatch(badResponse('Problem with uploading file'));
+        console.log('error response: ', error);
+      });
+  };
 }
 
 export function deletePDF(token, courseID, lessonID) {
   return function(dispatch) {
-    dispatch(loading("deleting file..."));
-    fetch(url.concat('lessons/', courseID, "/", lessonID), {
+    dispatch(loading('deleting file...'));
+    fetch(url.concat('lessons/', courseID, '/', lessonID), {
       method: 'DELETE',
       headers: {
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
       }
     })
-    .then(response => {
-      if(response.status !== 200) {
-        throw response;
-      }
-      return response.json()
-    })
-    .then(() => {
-      dispatch(loading(''));
-      return dispatch(getLessons(token))
-    })
-    .catch(error => {
-      dispatch(badResponse("Problem with deleting file"))
-      console.log("error response: ", error);
-    })
-  }
+      .then(response => {
+        if (response.status !== 200) {
+          throw response;
+        }
+        return response.json();
+      })
+      .then(() => {
+        dispatch(loading(''));
+        return dispatch(getLessons(token));
+      })
+      .catch(error => {
+        dispatch(badResponse('Problem with deleting file'));
+        console.log('error response: ', error);
+      });
+  };
 }

@@ -1,21 +1,25 @@
-import * as types from '../constants/actionTypes';
+/* eslint-disable no-unused-vars */
+
+import * as types from "../constants/actionTypes";
 
 //initialize authReducer state
 const initialState = {
-    view: 'login',
-    userName: '',
-    userId: '',
-    course: "",
-    courses: [],
-    passed: [],
-    token: "",
-    loggedIn: false,
-    loading: false,
-    newUser: "",
-    enrollable: [],
-    enrolled: [],
-    message: ""
-  }
+  view: "login",
+  userName: "",
+  userId: "",
+  course: "",
+  courses: [],
+  passed: [],
+  token: "",
+  loggedIn: false,
+  loading: false,
+  newUser: "",
+  enrollable: [],
+  enrolled: [],
+  message: ""
+};
+
+export { initialState };
 
 //define authReducer
 export default function authReducer(state = initialState, action) {
@@ -23,8 +27,7 @@ export default function authReducer(state = initialState, action) {
   let courses, course, enrollable, index, i, passed;
 
   //switch block to define behavior for each case
-  switch(action.type) {
-
+  switch (action.type) {
     //sets loading status, will eventually use for loading icon
     case types.LOADING:
       return {
@@ -64,6 +67,12 @@ export default function authReducer(state = initialState, action) {
         loggedIn: false
       };
 
+    case types.PASSWORD_UPDATED:
+      return {
+        ...state,
+        passwordUpdated: action.notify
+      };
+
     //updates state with course selected by user
     case types.SELECT_COURSE:
       return {
@@ -77,7 +86,7 @@ export default function authReducer(state = initialState, action) {
     case types.EDIT_COURSE:
       //immutable course deep copy
       course = JSON.parse(JSON.stringify(state.course));
-      if(action.id === "course-title") {
+      if (action.id === "course-title") {
         course.name = action.value;
       }
       return {
@@ -86,22 +95,12 @@ export default function authReducer(state = initialState, action) {
         message: ""
       };
 
-    //adds unregistered user email to list of enrollable users for course
-    case types.ADD_USER:
-      //immutable enrollable deep copy
-      enrollable = JSON.parse(JSON.stringify(state.enrollable));
-      enrollable.push(action.user);
-      return {
-        ...state,
-        enrollable: enrollable
-      };
-
     //updates list of unregistered user emails that are enrollable in course
     //called upon success of getEnrollable, addUser or deleteUser fetch requests
     case types.UPDATE_ENROLLABLE:
       return {
         ...state,
-        enrollable: action.enrollable,
+        enrollable: action.enrollable
       };
 
     //updates list of registered users currently enrolled in course
@@ -110,20 +109,22 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         enrolled: action.enrolled
-      }
+      };
 
     //updates course list and selected course with updated course content
     //called upon success of updateCourse fetch request
     case types.UPDATE_COURSE:
-      if(!action.course) return state;
+      if (!action.course) return state;
       //immutable course deep copy
       courses = JSON.parse(JSON.stringify(state.courses));
       index = 0;
-      i = 0
-      for(i; i < courses.length; i++) {
-        if(courses[i]._id === action.course._id) index = i;
+      i = 0;
+      for (i; i < courses.length; i++) {
+        if (courses[i]._id === action.course._id) index = i;
       }
-      courses = courses.slice(0, index).concat(action.course, courses.slice(index + 1, courses.length));
+      courses = courses
+        .slice(0, index)
+        .concat(action.course, courses.slice(index + 1, courses.length));
       return {
         ...state,
         course: action.course,
@@ -134,8 +135,11 @@ export default function authReducer(state = initialState, action) {
     //updates array of user submissions of selected quiz that passed the minimum score requirement of the quiz
     //only updates array if new submission passed minimum score requirement
     case types.SUBMIT_QUIZ:
-      if(action.passed) {
-        passed = JSON.parse(JSON.stringify(state.passed)).concat({_id: action.attempt._id, of: action.attempt.of});
+      if (action.passed) {
+        passed = JSON.parse(JSON.stringify(state.passed)).concat({
+          _id: action.attempt._id,
+          of: action.attempt.of
+        });
       } else {
         passed = state.passed;
       }
@@ -149,8 +153,8 @@ export default function authReducer(state = initialState, action) {
     case types.DELETE_QUIZ:
       index = -1;
       i = 0;
-      for(i; i < action.courses.length; i++) {
-        if(action.courses[i]._id === action.courseID) index = i;
+      for (i; i < action.courses.length; i++) {
+        if (action.courses[i]._id === action.courseID) index = i;
       }
       return {
         ...state,
@@ -161,20 +165,22 @@ export default function authReducer(state = initialState, action) {
     //saves quiz in course quiz list clientside
     //called upon success of saveQuiz fetch request, which saves quiz and updates course quiz list serverside
     case types.SAVE_QUIZ:
-      if(!action.course) return state;
+      if (!action.course) return state;
       courses = JSON.parse(JSON.stringify(state.courses));
       index = 0;
-      i = 0
-      for(i; i < courses.length; i++) {
-        if(courses[i]._id === action.course._id) index = i;
+      i = 0;
+      for (i; i < courses.length; i++) {
+        if (courses[i]._id === action.course._id) index = i;
       }
-      courses = courses.slice(0, index).concat(action.course, courses.slice(index + 1, courses.length));
+      courses = courses
+        .slice(0, index)
+        .concat(action.course, courses.slice(index + 1, courses.length));
       return {
         ...state,
         courses: courses,
         course: courses[index]
       };
     default:
-    return state;
+      return state;
   }
 }

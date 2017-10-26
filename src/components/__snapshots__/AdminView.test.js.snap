@@ -129,7 +129,7 @@ exports[`test renders correctly with enrolled users 1`] = `
         name="course-title"
         onChange={[Function]}
         type="text"
-        value={undefined} />
+        value="example course" />
     </div>
     <div
       className="save">
