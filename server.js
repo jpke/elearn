@@ -5,6 +5,7 @@ let cors = require('cors');
 let prettyjson = require('prettyjson');
 let path = require('path');
 let eLearn = require('./eLearn');
+let awsApi = require('./awsApi');
 
 require('dotenv').config({ silent: true });
 let DATABASE_URI = process.env.DATABASE_URI;
@@ -18,6 +19,7 @@ app.use('/test', (req, res, next) => {
   return res.json({ message: 'test successfull' });
   next();
 });
+app.use('/api', awsApi);
 
 //serves client side assests, html, css and js
 //enables react-router to navigate in client-side app

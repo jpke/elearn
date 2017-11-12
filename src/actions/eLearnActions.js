@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch';
 
 //toggle dev and production url
 // const url = 'http://localhost:8080/elearn/';
-const url = 'http://erudome.us-east-1.elasticbeanstalk.com/elearn/';
+const url = 'https://www.erudome.com/elearn/';
 // const url = "https://portfolio-express.herokuapp.com/elearn/"
 
 //dispatches loading message to reducer
