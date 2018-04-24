@@ -7,12 +7,13 @@ eLearn is a simple online learning platform, offering the ability to reach stude
 ## Features
 
 **Courses**
-  - Each course has an independent list of quizzes
-  - Student can be pre-enrolled in course, before student even registers (student email needed)
-  - Student can be enrolled in multiple courses
-  - Course admin can unenroll registered or unregistered (pre-enrolled) students
-  - Student can view list of all enrolled courses, and whether course has been passed
-  - Student can download certificate of completion upon passing course
+
+* Each course has an independent list of quizzes
+* Student can be pre-enrolled in course, before student even registers (student email needed)
+* Student can be enrolled in multiple courses
+* Course admin can unenroll registered or unregistered (pre-enrolled) students
+* Student can view list of all enrolled courses, and whether course has been passed
+* Student can download certificate of completion upon passing course
 
 **Multiple choice quizzes**
 
@@ -32,87 +33,105 @@ eLearn is a simple online learning platform, offering the ability to reach stude
   - Lessons are stored in BOX currently (provides document version control)
   - Authenticated users can easily preview and download PDF lessons
 
-
 ##Technologies
 
-| **Tech** | **Description** |
-|----------|-------|
-|  [React](https://facebook.github.io/react/)  |   Javascript framework for single page apps   |
-|  [Redux](http://redux.js.org/)  |   Application state management for react    |
-|  [Express](http://expressjs.com/)  |   Server framework for Node   |
-|  [MongoDB](https://www.mongodb.com/)  |   No-SQL database    |
-|  [BOX](https://docs.box.com/reference)  |   Cloud fileserver   |
+| **Tech**                                   | **Description**                           |
+| ------------------------------------------ | ----------------------------------------- |
+| [React](https://facebook.github.io/react/) | Javascript framework for single page apps |
+| [Redux](http://redux.js.org/)              | Application state management for react    |
+| [Express](http://expressjs.com/)           | Server framework for Node                 |
+| [MongoDB](https://www.mongodb.com/)        | No-SQL database                           |
+| [BOX](https://docs.box.com/reference)      | Cloud fileserver                          |
 
 ## API
+
 POST /users/currentuser :: register a new user, generates json web token valid for 24 hours
- - requires name, email and password in request body
+
+* requires name, email and password in request body
 
 PUT /users :: unroll a user from a course
- - must provide valid json web token through bearer strategy
- - must be course admin to submit request
- - requires user email and course id in request body
+
+* must provide valid json web token through bearer strategy
+* must be course admin to submit request
+* requires user email and course id in request body
 
 GET /users/certificate/:courseId/:jsonWebToken :: get certificate of completion for course
 
 POST /login :: logs in user, generates json web token valid for 24 hours
- - requires user email and password in request body
+
+* requires user email and password in request body
 
 GET /course/enrollable/:courseId :: gets enrolled and enrollable users of a course
- - must be course admin to make request
- - must provide valid json web token through bearer strategy
+
+* must be course admin to make request
+* must provide valid json web token through bearer strategy
 
 POST /course/enrollable :: adds unregistered user email to list of emails enrollable in a course
- - must be course admin to make request
- - requires course id, unregistered user email and admin boolean, indicating if user should be listed as a course admin, in request body
- - must provide valid json web token through bearer strategy
+
+* must be course admin to make request
+* requires course id, unregistered user email and admin boolean, indicating if user should be listed as a course admin, in request body
+* must provide valid json web token through bearer strategy
 
 DELETE /course/enrollable :: removes unregistered user email from list of emails enrollable in course
- - must be course admin to make request
- - requires course id, and unregistered user email in request body
- - must provide valid json web token through bearer strategy
+
+* must be course admin to make request
+* requires course id, and unregistered user email in request body
+* must provide valid json web token through bearer strategy
 
 PUT /course :: updates course
- - currently only supports updating course name
- - must be course admin to make request
- - requires course id and updated course name in request body
- - must provide valid json web token through bearer strategy
+
+* currently only supports updating course name
+* must be course admin to make request
+* requires course id and updated course name in request body
+* must provide valid json web token through bearer strategy
 
 GET /quiz/:quizId/:userId :: returns quiz and any submissions of quiz by user
-  - must provide valid json web token through bearer strategy
+
+* must provide valid json web token through bearer strategy
 
 PUT /quiz :: creates or updates quiz; new quiz is listed to course
- - must be course admin to make request
- - requires course id, quiz id, title, courses, items, and minimumScore in request body
- - must provide valid json web token through bearer strategy
+
+* must be course admin to make request
+* requires course id, quiz id, title, courses, items, and minimumScore in request body
+* must provide valid json web token through bearer strategy
 
 DELETE /quiz/:quizId/:courseId :: deletes quiz, and removes quiz listing from course
- - must be course admin to make request
- - must provide valid json web token through bearer strategy
+
+* must be course admin to make request
+* must provide valid json web token through bearer strategy
 
 POST /quiz/submit :: records quiz submission by user
- - requires quizData (quiz submision), quiz id, user id in request body
- - must provide valid json web token through bearer strategy
+
+* requires quizData (quiz submision), quiz id, user id in request body
+* must provide valid json web token through bearer strategy
 
 GET /lessons :: get lists of lessons in BOX folder (will make specific BOX folder for each course in future)
- - must provide valid json web token through bearer strategy
+
+* must provide valid json web token through bearer strategy
 
 GET /lessons/:BOXFileId :: get BOX preview and download url of lesson pdf
- - must provide valid json web token through bearer strategy
+
+* must provide valid json web token through bearer strategy
 
 POST /lessons :: uploads lesson to course
- - not yet implmented
+
+* not yet implmented
 
 ## Development
-- clone repo
-- npm install
-- npm start -s starts dev server
-- npm run build builds production bundle and starts build server
-- add '/elearn' to script and link tags in dist/index.html
-- node server.js starts production server
+
+* clone repo
+* npm install
+* npm start -s starts dev server
+* npm run build builds production bundle and starts build server
+* add '/elearn' to script and link tags in dist/index.html
+* node server.js starts production server
 
 ## ToDo:
+
 This app is under construction.
+
 * High priority
+
   * Enable course admin to view enrolled students quiz attempts and scores
 
 * Enable site admin to create and delete courses (currently done through server code)
@@ -121,6 +140,7 @@ This app is under construction.
 * Use cookies for authentication
 
 Longer term:
+
 * Create course sections, with discussion board for each section
 * Create discussion board for each lesson for each section
 * Enable alternative assessments, such as short answer, select all and matching questions
@@ -129,4 +149,5 @@ Longer term:
 * Display detailed student performance stats and assessment item analysis to course admin
 
 ##
-Copyright (c) 2017 JP Earnest
+
+Copyright (c) 2018 JP Earnest
